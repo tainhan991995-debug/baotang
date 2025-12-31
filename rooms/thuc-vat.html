@@ -19,16 +19,23 @@ html, body {
 }
 
 /* LOGO */
-.logo{
+.logo-circle{
   position: fixed;
   top: 14px;
   left: 16px;
-  height: 48px;
   z-index: 1000;
-  background: rgba(255,255,255,0.9);
-  padding: 6px 10px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  /* KHÔNG NỀN */
+  background: transparent;
+
+  /* nổi nhẹ trên ảnh */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 /* PANEL NỘI DUNG */
@@ -100,7 +107,8 @@ html, body {
 <body>
 
 <!-- LOGO -->
-<img src="../img/logo Bao tang.png" class="logo">
+<img src="../img/logo Bao tang.png" class="logo-circle" alt="Logo">
+
 
 <!-- SCENE 360 -->
 <a-scene
