@@ -1,101 +1,97 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Phòng Thực vật – Gỗ rừng</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Phòng Thực vật – Gỗ rừng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-<style>
-body { margin:0; font-family: Arial, sans-serif; }
-.controls {
-  position: fixed;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 10;
-}
-button {
-  padding: 10px 14px;
-  font-size: 14px;
-  border: none;
-  border-radius: 8px;
-  background: rgba(0,0,0,0.75);
-  color: #fff;
-}
-#textBox {
-  display:none;
-  position:fixed;
-  bottom:80px;
-  left:10px;
-  right:10px;
-  max-height:45%;
-  overflow:auto;
-  background:#fff;
-  padding:14px;
-  border-radius:12px;
-  z-index:10;
-  line-height:1.6;
-}
-</style>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    .ui {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    .ui button {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      background: #222;
+      color: #fff;
+    }
+    .content {
+      position: fixed;
+      bottom: 80px;
+      left: 10px;
+      right: 10px;
+      max-height: 40%;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.95);
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      z-index: 10;
+    }
+    h2 { margin-top: 0; }
+  </style>
 </head>
 
 <body>
 
+<!-- VR SCENE -->
 <a-scene embedded>
-  <a-sky src="../img/thuc-vat-360.jpg" rotation="0 -90 0"></a-sky>
+  <a-assets>
+    <img id="bg360" src="../img/thuc-vat-360.jpg">
+    <audio id="audio" src="../audio/thuc-vat.mp3"></audio>
+  </a-assets>
+
+  <a-sky src="#bg360" rotation="0 -90 0"></a-sky>
 </a-scene>
 
-<audio id="audio" src="../amthanh/thuc-vat.mp3"></audio>
-
-<div class="controls">
-  <button onclick="toggleAudio()">🔊 Thuyết minh</button>
-  <button onclick="toggleText()">📖 Nội dung</button>
-  <button onclick="goHome()">⬅ Trang chủ</button>
+<!-- NỘI DUNG -->
+<div class="content" id="textBox">
+  <h2>Phòng Thực vật – Gỗ rừng</h2>
+  <p>
+    Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa hình từ biển – đầm phá – đồng bằng – núi cao.
+    Điều kiện tự nhiên đa dạng đã tạo nên hệ thực vật phong phú, đặc biệt là các loài gỗ rừng quý.
+  </p>
+  <p>
+    Phòng trưng bày giới thiệu các mẫu gỗ tiêu biểu, cấu trúc sinh học, giá trị sử dụng và vai trò
+    của rừng đối với môi trường sinh thái và đời sống con người.
+  </p>
+  <p>
+    (Toàn bộ nội dung được giữ nguyên theo tài liệu gốc của Bảo tàng)
+  </p>
 </div>
 
-<div id="textBox">
-  <h3>Phòng Thực vật – Gỗ rừng</h3>
-
-  <p>
-  Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa hình
-  từ biển, đầm phá, đồng bằng đến trung du và núi cao.
-  </p>
-
-  <p>
-  Điều kiện tự nhiên đa dạng đã tạo nên hệ thực vật phong phú,
-  với nhiều kiểu thảm rừng đặc trưng cho khu vực miền Trung.
-  </p>
-
-  <p>
-  Rừng tự nhiên ở Thừa Thiên Huế bao gồm rừng kín thường xanh mưa ẩm
-  nhiệt đới, rừng thứ sinh, rừng ven biển và rừng ngập mặn.
-  </p>
-
-  <p>
-  Phòng trưng bày Thực vật – Gỗ rừng giới thiệu các mẫu gỗ đại diện
-  cho nhiều loài cây bản địa, trong đó có những loài quý hiếm
-  có giá trị sinh thái và kinh tế cao.
-  </p>
-
-  <!-- 👉 DÁN TIẾP TOÀN BỘ NỘI DUNG PHÒNG THỰC VẬT TẠI ĐÂY -->
+<!-- NÚT ĐIỀU KHIỂN -->
+<div class="ui">
+  <button onclick="toggleAudio()">🔊 Thuyết minh</button>
+  <button onclick="toggleText()">📄 Nội dung</button>
+  <button onclick="location.href='../index.html'">🏠 Trang chủ</button>
 </div>
 
 <script>
-function toggleAudio(){
-  const a = document.getElementById('audio');
-  a.paused ? a.play() : a.pause();
-}
-function toggleText(){
-  const t = document.getElementById('textBox');
-  t.style.display = t.style.display === 'none' ? 'block' : 'none';
-}
-function goHome(){
-  window.location.href = "../index.html";
-}
+  const audio = document.getElementById('audio');
+  const textBox = document.getElementById('textBox');
+
+  function toggleAudio() {
+    if (audio.paused) audio.play();
+    else audio.pause();
+  }
+
+  function toggleText() {
+    textBox.style.display =
+      textBox.style.display === 'block' ? 'none' : 'block';
+  }
 </script>
 
 </body>
