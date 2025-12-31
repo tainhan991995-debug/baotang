@@ -69,7 +69,7 @@ html, body {
     <img id="thucvat360" src="../img/thuc-vat-360.jpg">
   </a-assets>
 
-  <a-sky src="#thucvat360" rotation="0 -90 0"></a-sky>
+<a-sky id="sky" src="#thucvat360" rotation="0 -90 0"></a-sky>
 
   <a-camera
     look-controls="touchEnabled: true"
@@ -104,7 +104,7 @@ Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa 
 </div>
 
 <!-- AUDIO -->
-<audio id="audio" src="../audio/thuc-vat.mp3"></audio>
+<audio id="audio" src="../amthanh/thuc-vat.mp3"></audio>
 
 <script>
 function toggleAudio(){
@@ -118,6 +118,31 @@ function toggleText(){
   t.style.display = (t.style.display === 'none' || t.style.display === '') 
     ? 'block' : 'none';
 }
+</script>
+<script>
+let autoRotate = true;
+let sky = document.getElementById('sky');
+let rotationY = -90;
+
+// tốc độ quay (càng nhỏ càng chậm)
+const speed = 0.02;
+
+function rotateSky(){
+  if(autoRotate){
+    rotationY += speed;
+    sky.setAttribute('rotation', `0 ${rotationY} 0`);
+  }
+  requestAnimationFrame(rotateSky);
+}
+rotateSky();
+
+// khi người dùng chạm / vuốt → dừng quay
+document.addEventListener('touchstart', () => autoRotate = false);
+document.addEventListener('mousedown', () => autoRotate = false);
+
+// khi buông tay → quay lại
+document.addEventListener('touchend', () => autoRotate = true);
+document.addEventListener('mouseup', () => autoRotate = true);
 </script>
 
 </body>
