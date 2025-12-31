@@ -45,31 +45,104 @@
 </head>
 
 <body>
+  <!-- VR SCENE -->
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
 
-<!-- VR SCENE -->
-<a-scene embedded>
-  <a-assets>
-    <img id="bg360" src="../img/thuc-vat-360.jpg">
-    <audio id="audio" src="../audio/thuc-vat.mp3"></audio>
-  </a-assets>
+    <!-- Load ảnh 360 -->
+    <a-assets>
+      <img id="thucvat360" src="../img/thuc-vat-360.jpg">
+    </a-assets>
 
-  <a-sky src="#bg360" rotation="0 -90 0"></a-sky>
-</a-scene>
+    <!-- Gán ảnh 360 -->
+    <a-sky src="#thucvat360" rotation="0 -90 0"></a-sky>
+
+    <!-- Camera -->
+    <a-camera
+      look-controls="touchEnabled: true"
+      wasd-controls-enabled="false">
+    </a-camera>
+
+  </a-scene>
+
+  <!-- NÚT ĐIỀU KHIỂN -->
+  <div class="ui">
+    <button>🔊 Thuyết minh</button>
+    <button>📄 Nội dung</button>
+    <a href="../index.html">🏠 Trang chủ</a>
+  </div>
+</body>
+
 
 <!-- NỘI DUNG -->
 <div class="content" id="textBox">
-  <h2>Phòng Thực vật – Gỗ rừng</h2>
-  <p>
-    Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa hình từ biển – đầm phá – đồng bằng – núi cao.
-    Điều kiện tự nhiên đa dạng đã tạo nên hệ thực vật phong phú, đặc biệt là các loài gỗ rừng quý.
-  </p>
-  <p>
-    Phòng trưng bày giới thiệu các mẫu gỗ tiêu biểu, cấu trúc sinh học, giá trị sử dụng và vai trò
-    của rừng đối với môi trường sinh thái và đời sống con người.
-  </p>
-  <p>
-    (Toàn bộ nội dung được giữ nguyên theo tài liệu gốc của Bảo tàng)
-  </p>
+  <p align="center"><span style="font-size:larger;"><strong>PHÒNG THỰC VẬT &ndash; GỖ RỪNG</strong></span></p>
+
+<p><span style="font-size:larger;"><strong>Giới thiệu chung:&nbsp;</strong>Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa hình từ biển &ndash; đầm phá &ndash; đồng bằng &ndash; núi cao. Điều kiện khí hậu ẩm gió mùa cùng sự đa dạng sinh cảnh đã hình thành hệ thực vật rừng phong phú, nhiều tầng, mang giá trị cao về sinh học và bảo tồn.</span></p>
+
+<p><span style="font-size:larger;">Phòng trưng bày giới thiệu các nhóm thực vật quan trọng, tập trung vào <strong>gỗ quý</strong>, <strong>loài đặc hữu</strong>, <strong>loài nguy cấp</strong>, qua đó phản ánh sự giàu có của đa dạng sinh học địa phương.</span></p>
+
+<p><span style="font-size:larger;"><strong>I. Bộ mẫu gỗ rừng tiêu biểu</strong></span></p>
+
+<p><span style="font-size:larger;">Bộ mẫu gồm 34 loài gỗ lớn được thu thập tại Khu Bảo tồn Sao La (2015&ndash;2018) và một số khu rừng tự nhiên của Huế. Đây là những loài đại diện cho <strong>các hệ sinh thái rừng thường xanh, rừng nửa rụng lá và rừng hỗn giao tre nứa</strong>.</span></p>
+
+<p><span style="font-size:larger;">Trong số đó có nhiều loài <strong>gỗ nhóm I &ndash; quý hiếm</strong>, được pháp luật bảo vệ, có giá trị kinh tế và sinh thái cao. Bảo tàng đã xử lý và bảo quản 4 mẫu bằng kỹ thuật composite:</span></p>
+
+<p><span style="font-size:larger;"><strong>1. Gõ mật &ndash; <em>Sindora siamensis</em> (Họ Đậu)</strong></span></p>
+
+<p><span style="font-size:larger;">Gỗ cứng, vân đẹp; dùng cho đồ nội thất cao cấp.<br />
+Trạng thái bảo tồn: <strong>EN &ndash; Nguy cấp</strong> (Sách đỏ Việt Nam), <strong>Nhóm IIA</strong>.</span></p>
+
+<p><span style="font-size:larger;"><strong>2. Gõ lau &ndash; <em>Sindora tonkinensis</em> (Họ Đậu)</strong></span></p>
+
+<p><span style="font-size:larger;">Gỗ nâu thẫm, rất bền; phân bố rải rác ở Huế và các tỉnh Bắc &ndash; Trung Bộ.<br />
+Trạng thái: <strong>EN &ndash; Nguy cấp</strong>, <strong>Nhóm IIA</strong>.</span></p>
+
+<p><span style="font-size:larger;"><strong>3. Trai lý &ndash; <em>Fagraea fragrans</em> (Họ Long đởm)</strong></span></p>
+
+<p><span style="font-size:larger;">Loài cây gỗ nhỏ đến trung bình, phân bố vùng cát và rừng phục hồi; giá trị dược liệu và kinh tế.<br />
+Trạng thái: <strong>Nhóm IIA</strong>.</span></p>
+
+<p><span style="font-size:larger;"><strong>4. Re hương &ndash; <em>Cinnamomum parthenoxylon</em> (Họ Long não)</strong></span></p>
+
+<p><span style="font-size:larger;">Loài cho tinh dầu, gỗ tốt nhưng bị khai thác cạn kiệt; hiện rất hiếm gặp cây trưởng thành.<br />
+Trạng thái: <strong>CR &ndash; Rất nguy cấp</strong>, <strong>Nhóm IIA</strong>.</span></p>
+
+<p><span style="font-size:larger;"><strong>Giá trị đa dạng sinh học:</strong><br />
+Các loài gỗ lớn là trụ cột của hệ sinh thái rừng, duy trì cấu trúc tán cây, điều hòa khí hậu, lưu giữ carbon và là nơi cư trú của nhiều loài động vật. Sự suy giảm của nhóm loài này đe dọa nghiêm trọng đến cân bằng sinh thái.</span></p>
+
+<p><span style="font-size:larger;"><strong>II. Bộ mẫu thực vật ép</strong></span></p>
+
+<p><span style="font-size:larger;">Bộ mẫu được thu thập trong khuôn khổ Đề án &ldquo;Thu thập mẫu vật cho Bảo tàng Thiên nhiên duyên hải miền Trung đến năm 2030&rdquo;. Các loài được ép khô theo quy trình chuẩn, đại diện cho nhóm cây gỗ, cây bụi, loài phổ biến và loài ít gặp ở rừng núi thấp của Huế.</span></p>
+
+<p><span style="font-size:larger;">Một số loài tiêu biểu:</span></p>
+
+<p><span style="font-size:larger;"><strong>&ndash; Lài trâu &ndash; <em>Tabernaemontana bovina</em> (Họ Trúc đào)</strong></span></p>
+
+<p><span style="font-size:larger;">Cây bụi &ndash; gỗ nhỏ, hoa trắng, có mủ; phân bố rộng ở rừng thứ sinh.<br />
+Giá trị: dược liệu dân gian.<br />
+Trạng thái: <strong>LC &ndash; Ít quan ngại</strong>.</span></p>
+
+<p><span style="font-size:larger;"><strong>&ndash; Bồ cu vẽ &ndash; <em>Breynia fruticosa</em> (Họ Phyllanthaceae)</strong></span></p>
+
+<p><span style="font-size:larger;">Cây bụi &ndash; gỗ nhỏ, đặc trưng bởi dấu vết sâu vẽ trên lá; quả đen nhỏ.<br />
+Giá trị: dược liệu; phân bố vùng thấp và trung du.</span></p>
+
+<p><span style="font-size:larger;"><strong>&ndash; Chiếc chùm to &ndash; <em>Barringtonia macrostachya</em> (Họ Lé)</strong></span></p>
+
+<p><span style="font-size:larger;">Cây gỗ trung bình, hoa nở về đêm, mùi thơm mạnh; sinh trưởng trong rừng ẩm.<br />
+Giá trị: loài chỉ thị độ ẩm, góp phần duy trì hệ sinh thái thung lũng.</span></p>
+
+<p><span style="font-size:larger;"><strong>&ndash; Muồng truỗng &ndash; <em>Zanthoxylum avicennae</em> (Họ Cam)</strong></span></p>
+
+<p><span style="font-size:larger;">Thân mang gai; lá và vỏ dùng làm thuốc.<br />
+Giá trị: kinh tế &ndash; y học; loài ưu sáng, phổ biến ở vùng núi đá và rừng thứ sinh.</span></p>
+
+<p><span style="font-size:larger;"><strong>Ý nghĩa bộ mẫu ép:</strong><br />
+Giúp định danh, lưu trữ nguồn gen, phục vụ nghiên cứu hệ thực vật, hỗ trợ công tác bảo tồn và giáo dục môi trường. Đây cũng là bằng chứng khoa học về hiện trạng thực vật địa phương giai đoạn 2020&ndash;2030.</span></p>
+
 </div>
 
 <!-- NÚT ĐIỀU KHIỂN -->
