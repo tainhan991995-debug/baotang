@@ -2,38 +2,99 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phòng Thực vật – Gỗ rừng</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+
 <style>
-body { font-family: Arial; padding:15px; background:#f4f6f8; }
-img { width:100%; border-radius:12px; }
-h2 { margin-top:15px; }
-button { margin:10px 5px; padding:8px 12px; border:none; border-radius:8px; }
-#text { display:none; max-height:200px; overflow:auto; background:#fff; padding:10px; border-radius:8px; }
+body { margin:0; font-family: Arial, sans-serif; }
+.controls {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+button {
+  padding: 10px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+}
+#textBox {
+  display:none;
+  position:fixed;
+  bottom:80px;
+  left:10px;
+  right:10px;
+  max-height:45%;
+  overflow:auto;
+  background:#fff;
+  padding:14px;
+  border-radius:12px;
+  z-index:10;
+  line-height:1.6;
+}
 </style>
 </head>
+
 <body>
 
-<img src="../img/thuc-vat.jpg">
-<h2>Phòng Thực vật – Gỗ rừng</h2>
+<a-scene embedded>
+  <a-sky src="../img/thuc-vat-360.jpg" rotation="0 -90 0"></a-sky>
+</a-scene>
 
-<audio id="audio" controls src="../amthanh/1.mp3"></audio>
+<audio id="audio" src="../amthanh/thuc-vat.mp3"></audio>
 
-<div>
-<button onclick="toggleText()">Bật / Tắt chữ</button>
-<button onclick="scrollText()">Đọc tiếp</button>
+<div class="controls">
+  <button onclick="toggleAudio()">🔊 Thuyết minh</button>
+  <button onclick="toggleText()">📖 Nội dung</button>
+  <button onclick="goHome()">⬅ Trang chủ</button>
 </div>
 
-<div id="text">Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa hình từ biển – đầm phá – đồng bằng – núi cao...<br>(TOÀN BỘ NỘI DUNG PHÒNG THỰC VẬT được giữ nguyên theo tài liệu gốc)</div>
+<div id="textBox">
+  <h3>Phòng Thực vật – Gỗ rừng</h3>
+
+  <p>
+  Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa hình
+  từ biển, đầm phá, đồng bằng đến trung du và núi cao.
+  </p>
+
+  <p>
+  Điều kiện tự nhiên đa dạng đã tạo nên hệ thực vật phong phú,
+  với nhiều kiểu thảm rừng đặc trưng cho khu vực miền Trung.
+  </p>
+
+  <p>
+  Rừng tự nhiên ở Thừa Thiên Huế bao gồm rừng kín thường xanh mưa ẩm
+  nhiệt đới, rừng thứ sinh, rừng ven biển và rừng ngập mặn.
+  </p>
+
+  <p>
+  Phòng trưng bày Thực vật – Gỗ rừng giới thiệu các mẫu gỗ đại diện
+  cho nhiều loài cây bản địa, trong đó có những loài quý hiếm
+  có giá trị sinh thái và kinh tế cao.
+  </p>
+
+  <!-- 👉 DÁN TIẾP TOÀN BỘ NỘI DUNG PHÒNG THỰC VẬT TẠI ĐÂY -->
+</div>
 
 <script>
-function toggleText() {
-  let t = document.getElementById('text');
-  t.style.display = (t.style.display === 'none') ? 'block' : 'none';
+function toggleAudio(){
+  const a = document.getElementById('audio');
+  a.paused ? a.play() : a.pause();
 }
-function scrollText() {
-  let t = document.getElementById('text');
-  t.scrollTop += 150;
+function toggleText(){
+  const t = document.getElementById('textBox');
+  t.style.display = t.style.display === 'none' ? 'block' : 'none';
+}
+function goHome(){
+  window.location.href = "../index.html";
 }
 </script>
 
