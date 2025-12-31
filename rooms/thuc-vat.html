@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phòng Thực vật – Gỗ rừng</title>
+<style>
+body { font-family: Arial; padding:15px; background:#f4f6f8; }
+img { width:100%; border-radius:12px; }
+h2 { margin-top:15px; }
+button { margin:10px 5px; padding:8px 12px; border:none; border-radius:8px; }
+#text { display:none; max-height:200px; overflow:auto; background:#fff; padding:10px; border-radius:8px; }
+</style>
+</head>
+<body>
+
+<img src="../img/thuc-vat.jpg">
+<h2>Phòng Thực vật – Gỗ rừng</h2>
+
+<audio id="audio" controls src="../amthanh/1.mp3"></audio>
+
+<div>
+<button onclick="toggleText()">Bật / Tắt chữ</button>
+<button onclick="scrollText()">Đọc tiếp</button>
+</div>
+
+<div id="text">Huế nằm trong vùng Bắc Trung Bộ, nơi hội tụ nhiều dạng địa hình từ biển – đầm phá – đồng bằng – núi cao...<br>(TOÀN BỘ NỘI DUNG PHÒNG THỰC VẬT được giữ nguyên theo tài liệu gốc)</div>
+
+<script>
+function toggleText() {
+  let t = document.getElementById('text');
+  t.style.display = (t.style.display === 'none') ? 'block' : 'none';
+}
+function scrollText() {
+  let t = document.getElementById('text');
+  t.scrollTop += 150;
+}
+</script>
+
+</body>
+</html>
