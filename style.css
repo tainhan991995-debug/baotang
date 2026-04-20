@@ -232,3 +232,34 @@ audio {
     height: 180px;
   }
 }
+/* ===== BACKGROUND ART ===== */
+.bg-art {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* lớp gradient chính */
+.bg-art::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #4facfe, transparent 70%);
+  top: -150px;
+  left: -150px;
+  filter: blur(120px);
+}
+
+/* lớp phụ */
+.bg-art::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #00c6ff, transparent 70%);
+  bottom: -150px;
+  right: -150px;
+  filter: blur(120px);
+}
