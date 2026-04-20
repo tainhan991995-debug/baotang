@@ -227,24 +227,18 @@ audio {
   flex: 1;
 }
 
-/* ===== QR ===== */
-.qr-card {
-  text-align: center;
-}
+/* ===== QR FINAL PERFECT ===== */
 
-/* KHUNG */
 .qr-frame {
   width: 220px;
   height: 220px;
-  aspect-ratio: 1/1;
-
-  margin: 15px auto;
-  background: white;
-  border-radius: 20px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background: white;
+  border-radius: 20px;
 
   position: relative;
   overflow: hidden;
@@ -254,7 +248,6 @@ audio {
 #qrcode {
   width: 160px;
   height: 160px;
-  aspect-ratio: 1/1;
 
   position: relative;
 
@@ -263,21 +256,20 @@ audio {
   justify-content: center;
 }
 
-/* ép QR */
-#qrcode img,
-#qrcode canvas {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain;
+/* ép QR vuông tuyệt đối */
+#qrcode canvas,
+#qrcode img {
+  width: 160px !important;
+  height: 160px !important;
   display: block;
 }
 
-/* LOGO CENTER */
+/* LOGO CHUẨN TỶ LỆ */
 .qr-logo {
   position: absolute;
 
-  width: 28px;
-  height: 28px;
+  width: 22px;   /* 👈 chuẩn theo guideline */
+  height: 22px;
 
   top: 50%;
   left: 50%;
@@ -285,11 +277,8 @@ audio {
 
   background: white;
   border-radius: 50%;
-  padding: 4px;
-
-  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  padding: 3px;
 }
-
 /* BUTTON */
 .download-btn {
   width: 100%;
