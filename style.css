@@ -245,40 +245,66 @@ audio {
 }
 
 /* ===== QR ===== */
+/* ===== QR CARD ===== */
 .qr-card {
   text-align: center;
 }
 
+/* KHUNG QR */
 .qr-frame {
-  width: 220px;
-  height: 220px;
-  margin: 10px auto;
-  border: 2px dashed #bbb;
+  width: 240px;
+  height: 240px;
+  margin: 15px auto;
+
+  background: white;
   border-radius: 20px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   position: relative;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
+/* container QR */
 #qrcode {
   width: 180px;
   height: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
 }
 
-/* LOGO */
+/* ép QR đúng size */
+#qrcode img,
+#qrcode canvas {
+  width: 180px !important;
+  height: 180px !important;
+  display: block;
+}
+
+/* LOGO CHÍNH GIỮA */
 .qr-logo {
-  width: 45px;
-  height: 45px;
   position: absolute;
+
+  width: 44px;
+  height: 44px;
+
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   background: white;
   border-radius: 50%;
   padding: 5px;
-}
 
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
 /* BUTTON */
 .download-btn {
   width: 100%;
