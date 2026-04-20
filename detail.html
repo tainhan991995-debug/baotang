@@ -23,12 +23,11 @@
 
       <h1 class="title" id="title"></h1>
 
-      <img id="image" class="main-img">
-
+<img id="image" class="main-img" alt="Hình địa điểm">
       <!-- TAB -->
       <div class="tabs">
-  <button class="tab active" id="tab-vi">Tiếng Việt</button>
-  <button class="tab" id="tab-en">English</button>
+  <button class="tab active" id="tab-vi" type="button">Tiếng Việt</button>
+  <button class="tab" id="tab-en" type="button">English</button>
 </div>
 
       <!-- CONTENT -->
@@ -117,16 +116,20 @@ function playAudio() {
     ? place.audiotiengviet
     : place.audiotienganh;
 
-  audio.play();
+ audio.play().catch(() => {
+  console.log("🔇 Trình duyệt chặn autoplay");
+});
 }
 
 /* AUTO PLAY */
 function autoPlayAudio() {
   const audio = document.getElementById("audio");
 
-  audio.src = lang === "vi"
-    ? place.audiotiengviet
-    : place.audiotienganh;
+  if (!audio.src) {
+    audio.src = lang === "vi"
+      ? place.audiotiengviet
+      : place.audiotienganh;
+  }
 
   setTimeout(() => {
     audio.play().catch(() => {});
@@ -151,15 +154,25 @@ new QRCode(document.getElementById("qrcode"), {
 });
 
 /* ===== LOGO CENTER ===== */
+const qrContainer = document.getElementById("qrcode");
+
+const qr = new QRCode(qrContainer, {
+  text: url,
+  width: 180,
+  height: 180
+});
+
 setTimeout(() => {
-  const qr = document.getElementById("qrcode");
+  const img = qrContainer.querySelector("img");
+
+  if (!img) return;
 
   const logo = document.createElement("img");
   logo.src = "./logo.jpg";
   logo.className = "qr-logo";
 
-  qr.appendChild(logo);
-}, 300);
+  qrContainer.appendChild(logo);
+}, 500);
 
 /* ===== DOWNLOAD ===== */
 function downloadQR() {
