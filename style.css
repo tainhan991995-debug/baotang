@@ -327,6 +327,20 @@ audio {
   max-width: 900px;
   margin: auto;
 }
+.card {
+  width: 100%;
+  max-width: 400px;
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-img img {
+  height: 240px;
+  object-fit: cover;
+}
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
