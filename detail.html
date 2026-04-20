@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Chi tiết</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- NÚT QUAY LẠI -->
+  <button class="back-btn" onclick="goHome()">← Trang chủ</button>
+
+  <div class="detail-wrapper">
+
+    <!-- LEFT -->
+    <div class="left">
+
+      <div class="title" id="title"></div>
+
+      <img id="image">
+
+      <!-- TAB -->
+      <div class="tabs">
+        <div class="tab active" id="tab-vi">Tiếng Việt</div>
+        <div class="tab" id="tab-en">English</div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content" id="content"></div>
+
+      <!-- AUDIO -->
+      <div class="audio-wrap">
+        <button class="audio-btn" onclick="playAudio()">🔊 Phát audio</button>
+        <audio id="audio" controls></audio>
+      </div>
+
+    </div>
+
+    <!-- RIGHT (QR) -->
+    <div class="right">
+      <h3>📱 Mã QR</h3>
+
+      <div class="qr-box">
+        <div id="qrcode"></div>
+      </div>
+
+      <p class="qr-text">Quét để xem</p>
+
+      <button class="download-btn" onclick="downloadQR()">⬇️ Tải QR</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- QR LIB -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+const id = new URLSearchParams(window.location.search).get("id");
+const place = JSON.parse(localStorage.getItem("place_" + id));
+
+let lang = "vi";
+
+// ===== LOAD DATA =====
+document.getElementById("title").innerText = place.tendiadiem;
+document.getElementById("image").src = place.anhdaidien;
+
+// ===== RENDER CONTENT =====
+function render() {
+  document.getElementById("content").innerHTML =
+    lang === "vi" ? place.thuyetminh : place.thuyetminhtienganh;
+}
+
+// ===== TAB SWITCH =====
+document.getElementById("tab-vi").onclick = () => {
+  lang = "vi";
+  update();
+};
+
+document.getElementById("tab-en").onclick = () => {
+  lang = "en";
+  update();
+};
+
+function update() {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + lang).classList.add("active");
+  render();
+}
+
+// ===== AUDIO =====
+function playAudio() {
+  const audio = document.getElementById("audio");
+  audio.src = lang === "vi"
+    ? place.audiotiengviet
+    : place.audiotienganh;
+
+  audio.play();
+}
+
+// ===== BACK =====
+function goHome() {
+  window.location.href = "index.html";
+}
+
+// ===== INIT =====
+render();
+
+// ===== QR CODE =====
+new QRCode(document.getElementById("qrcode"), {
+  text: window.location.href,
+  width: 180,
+  height: 180
+});
+
+// ===== LOGO CENTER QR =====
+setTimeout(() => {
+  const qr = document.getElementById("qrcode");
+
+  const logo = document.createElement("img");
+  logo.src = "logo.jpg";
+  logo.className = "qr-logo";
+
+  qr.appendChild(logo);
+}, 300);
+
+// ===== DOWNLOAD QR =====
+function downloadQR() {
+  const img = document.querySelector("#qrcode img");
+
+  const a = document.createElement("a");
+  a.href = img.src;
+  a.download = "qr.png";
+  a.click();
+}
+</script>
+
+</body>
+</html>
