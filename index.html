@@ -8,8 +8,10 @@
 
 <body>
 
+<!-- NỀN ANIMATE -->
 <div class="bg-art"></div>
 
+<!-- HEADER -->
 <div class="banner">
   <img src="./bia.jpg">
   <div class="overlay">
@@ -18,18 +20,36 @@
   </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
+
   <h2 class="section-title">Danh sách địa điểm</h2>
+
+  <!-- SEARCH -->
+  <input 
+    type="text" 
+    id="search" 
+    placeholder="🔍 Tìm địa điểm..."
+    class="search-box"
+  />
+
+  <!-- LIST -->
   <div class="grid" id="list"></div>
+
 </div>
 
 <script src="./app.js"></script>
 
 <script>
-async function load() {
-  const data = await getPlaces();
-  const list = document.getElementById("list");
+let allData = [];
 
+async function load() {
+  allData = await getPlaces();
+  renderList(allData);
+}
+
+function renderList(data) {
+  const list = document.getElementById("list");
   list.innerHTML = "";
 
   data.forEach(item => {
@@ -51,6 +71,17 @@ async function load() {
     list.appendChild(div);
   });
 }
+
+/* SEARCH */
+document.getElementById("search").oninput = (e) => {
+  const keyword = e.target.value.toLowerCase();
+
+  const filtered = allData.filter(item =>
+    item.tendiadiem.toLowerCase().includes(keyword)
+  );
+
+  renderList(filtered);
+};
 
 load();
 </script>
