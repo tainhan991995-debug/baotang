@@ -3,24 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Chi tiết</title>
-<link rel="stylesheet" href="style.css">
+
+<!-- FIX PATH -->
+<link rel="stylesheet" href="./style.css">
+
 </head>
 
 <body>
 
 <div class="container">
 
-  <!-- NÚT QUAY LẠI -->
+  <!-- BACK -->
   <button class="back-btn" onclick="goHome()">← Trang chủ</button>
 
+  <!-- GRID -->
   <div class="detail-wrapper">
 
     <!-- LEFT -->
     <div class="left">
 
-      <div class="title" id="title"></div>
+      <h1 class="title" id="title"></h1>
 
-      <img id="image">
+      <img id="image" class="main-img">
 
       <!-- TAB -->
       <div class="tabs">
@@ -39,23 +43,31 @@
 
     </div>
 
-    <!-- RIGHT (QR) -->
+    <!-- RIGHT -->
     <div class="right">
-      <h3>📱 Mã QR</h3>
 
-      <div class="qr-box">
-        <div id="qrcode"></div>
+      <div class="qr-card">
+
+        <h3>📱 Mã QR</h3>
+
+        <div class="qr-frame">
+          <div id="qrcode"></div>
+        </div>
+
+        <p class="qr-text">Quét để xem</p>
+
+        <button class="download-btn" onclick="downloadQR()">
+          ⬇️ Tải QR
+        </button>
+
       </div>
 
-      <p class="qr-text">Quét để xem</p>
-
-      <button class="download-btn" onclick="downloadQR()">⬇️ Tải QR</button>
     </div>
 
   </div>
 </div>
 
-<!-- QR LIB -->
+<!-- QR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
@@ -64,17 +76,21 @@ const place = JSON.parse(localStorage.getItem("place_" + id));
 
 let lang = "vi";
 
-// ===== LOAD DATA =====
+// ===== LOAD =====
+if (!place) {
+  document.body.innerHTML = "<h2 style='text-align:center'>Không có dữ liệu</h2>";
+}
+
 document.getElementById("title").innerText = place.tendiadiem;
 document.getElementById("image").src = place.anhdaidien;
 
-// ===== RENDER CONTENT =====
+// ===== RENDER =====
 function render() {
   document.getElementById("content").innerHTML =
     lang === "vi" ? place.thuyetminh : place.thuyetminhtienganh;
 }
 
-// ===== TAB SWITCH =====
+// ===== TAB =====
 document.getElementById("tab-vi").onclick = () => {
   lang = "vi";
   update();
@@ -109,25 +125,25 @@ function goHome() {
 // ===== INIT =====
 render();
 
-// ===== QR CODE =====
+// ===== QR =====
 new QRCode(document.getElementById("qrcode"), {
   text: window.location.href,
   width: 180,
   height: 180
 });
 
-// ===== LOGO CENTER QR =====
+// ===== LOGO CENTER =====
 setTimeout(() => {
   const qr = document.getElementById("qrcode");
 
   const logo = document.createElement("img");
-  logo.src = "logo.jpg";
+  logo.src = "./logo.jpg"; // FIX PATH
   logo.className = "qr-logo";
 
   qr.appendChild(logo);
 }, 300);
 
-// ===== DOWNLOAD QR =====
+// ===== DOWNLOAD =====
 function downloadQR() {
   const img = document.querySelector("#qrcode img");
 
