@@ -290,7 +290,43 @@ audio {
   margin-top: 10px;
   cursor: pointer;
 }
+/* HEADER */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
+  max-width: 900px;
+  margin: 30px auto 20px;
+}
+
+.section-header h2 {
+  font-size: 22px;
+  margin: 0;
+}
+
+/* SEARCH */
+.search-box {
+  width: 260px;
+  padding: 10px 14px;
+
+  border-radius: 20px;
+  border: 1px solid #ddd;
+
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+}
+
+/* GRID CENTER */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
+  justify-content: center;
+  gap: 30px;
+
+  max-width: 900px;
+  margin: auto;
+}
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
