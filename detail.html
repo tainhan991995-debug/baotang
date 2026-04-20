@@ -23,12 +23,13 @@
 
       <h1 class="title" id="title"></h1>
 
-<img id="image" class="main-img" alt="Hình địa điểm">
+      <img id="image" class="main-img" alt="Hình địa điểm">
+
       <!-- TAB -->
       <div class="tabs">
-  <button class="tab active" id="tab-vi" type="button">Tiếng Việt</button>
-  <button class="tab" id="tab-en" type="button">English</button>
-</div>
+        <button class="tab active" id="tab-vi" type="button">Tiếng Việt</button>
+        <button class="tab" id="tab-en" type="button">English</button>
+      </div>
 
       <!-- CONTENT -->
       <div class="content" id="content"></div>
@@ -65,7 +66,7 @@
   </div>
 </div>
 
-<!-- QR -->
+<!-- QR LIB -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
@@ -88,7 +89,7 @@ function render() {
   document.getElementById("content").innerHTML =
     lang === "vi" ? place.thuyetminh : place.thuyetminhtienganh;
 
-  autoPlayAudio(); // 🔥 auto play
+  autoPlayAudio();
 }
 
 /* ===== TAB ===== */
@@ -116,20 +117,18 @@ function playAudio() {
     ? place.audiotiengviet
     : place.audiotienganh;
 
- audio.play().catch(() => {
-  console.log("🔇 Trình duyệt chặn autoplay");
-});
+  audio.play().catch(() => {
+    console.log("🔇 Trình duyệt chặn autoplay");
+  });
 }
 
 /* AUTO PLAY */
 function autoPlayAudio() {
   const audio = document.getElementById("audio");
 
-  if (!audio.src) {
-    audio.src = lang === "vi"
-      ? place.audiotiengviet
-      : place.audiotienganh;
-  }
+  audio.src = lang === "vi"
+    ? place.audiotiengviet
+    : place.audiotienganh;
 
   setTimeout(() => {
     audio.play().catch(() => {});
@@ -144,35 +143,23 @@ function goHome() {
 /* ===== START ===== */
 render();
 
-/* ===== QR ===== */
-const url = window.location.href;
-
-new QRCode(document.getElementById("qrcode"), {
-  text: url,
-  width: 180,
-  height: 180
-});
-
-/* ===== LOGO CENTER ===== */
+/* ===== QR FINAL (CHỈ 1 LẦN) ===== */
 const qrContainer = document.getElementById("qrcode");
+qrContainer.innerHTML = "";
 
-const qr = new QRCode(qrContainer, {
-  text: url,
-  width: 180,
-  height: 180
+new QRCode(qrContainer, {
+  text: window.location.href,
+  width: 160,
+  height: 160
 });
 
+/* LOGO CENTER */
 setTimeout(() => {
-  const img = qrContainer.querySelector("img");
-
-  if (!img) return;
-
   const logo = document.createElement("img");
   logo.src = "./logo.jpg";
   logo.className = "qr-logo";
-
   qrContainer.appendChild(logo);
-}, 500);
+}, 300);
 
 /* ===== DOWNLOAD ===== */
 function downloadQR() {
