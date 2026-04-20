@@ -359,3 +359,36 @@ audio {
     width: 100%;
   }
 }
+/* WRAP CĂN GIỮA */
+.content-wrap {
+  max-width: 900px;
+  margin: auto;
+}
+
+/* HEADER */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 30px 0 20px;
+}
+
+/* SEARCH */
+.search-box {
+  width: 260px;
+  padding: 10px 14px;
+
+  border-radius: 20px;
+  border: 1px solid #ddd;
+
+  background: rgba(255,255,255,0.8);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
+  justify-content: center;
+  gap: 30px;
+}
