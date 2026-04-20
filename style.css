@@ -24,7 +24,7 @@ body {
   top: -200px;
   left: -200px;
   filter: blur(140px);
-  animation: moveBlob1 18s infinite alternate ease-in-out;
+  animation: blob1 18s infinite alternate ease-in-out;
 }
 
 .bg-art::after {
@@ -36,25 +36,24 @@ body {
   bottom: -200px;
   right: -200px;
   filter: blur(140px);
-  animation: moveBlob2 20s infinite alternate ease-in-out;
+  animation: blob2 20s infinite alternate ease-in-out;
 }
 
-@keyframes moveBlob1 {
+@keyframes blob1 {
   0% { transform: translate(0,0) scale(1); }
-  100% { transform: translate(120px, 80px) scale(1.2); }
+  100% { transform: translate(120px,80px) scale(1.2); }
 }
 
-@keyframes moveBlob2 {
+@keyframes blob2 {
   0% { transform: translate(0,0) scale(1); }
-  100% { transform: translate(-120px, -80px) scale(1.2); }
+  100% { transform: translate(-120px,-80px) scale(1.2); }
 }
 
 /* ===== BANNER ===== */
 .banner {
   height: 220px;
   overflow: hidden;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-radius: 0 0 30px 30px;
   position: relative;
 }
 
@@ -77,31 +76,72 @@ body {
 
 /* ===== CONTAINER ===== */
 .container {
-  max-width: 1150px;
+  max-width: 1100px;
   margin: auto;
   padding: 20px;
+}
+
+/* ===== HEADER + SEARCH ===== */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 900px;
+  margin: 30px auto 20px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* SEARCH */
+.search-box {
+  width: 260px;
+  padding: 10px 14px;
+
+  border-radius: 20px;
+  border: 1px solid #ddd;
+
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  outline: none;
 }
 
 /* ===== GRID ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
+  justify-content: center;
   gap: 30px;
+
+  max-width: 900px;
+  margin: auto;
 }
 
 /* ===== CARD ===== */
 .card {
+  width: 100%;
+  max-width: 400px;
+
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
+
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
+
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   transition: 0.3s;
 }
 
 .card:hover {
   transform: translateY(-8px);
+}
+
+.card-img {
+  position: relative;
 }
 
 .card-img img {
@@ -115,10 +155,13 @@ body {
   bottom: 10px;
   left: 10px;
   right: 10px;
+
   background: rgba(0,0,0,0.6);
   color: white;
+
   padding: 10px;
   border-radius: 10px;
+  font-weight: 600;
 }
 
 /* ===== DETAIL ===== */
@@ -156,7 +199,6 @@ body {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .back-btn:hover {
@@ -192,7 +234,6 @@ body {
   border: 1px solid #ddd;
   background: white;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .tab.active {
@@ -227,21 +268,26 @@ audio {
   flex: 1;
 }
 
-/* ===== QR FINAL PERFECT ===== */
+/* ===== QR ===== */
+.qr-card {
+  text-align: center;
+}
 
+/* FRAME */
 .qr-frame {
   width: 220px;
   height: 220px;
+
+  margin: 20px auto;
+
+  background: white;
+  border-radius: 24px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: white;
-  border-radius: 20px;
-
   position: relative;
-  overflow: hidden;
 }
 
 /* QR container */
@@ -256,20 +302,19 @@ audio {
   justify-content: center;
 }
 
-/* ép QR vuông tuyệt đối */
+/* ép QR vuông */
 #qrcode canvas,
 #qrcode img {
   width: 160px !important;
   height: 160px !important;
-  display: block;
 }
 
-/* LOGO CHUẨN TỶ LỆ */
+/* LOGO CENTER */
 .qr-logo {
   position: absolute;
 
-  width: 22px;   /* 👈 chuẩn theo guideline */
-  height: 22px;
+  width: 20px;
+  height: 20px;
 
   top: 50%;
   left: 50%;
@@ -278,7 +323,10 @@ audio {
   background: white;
   border-radius: 50%;
   padding: 3px;
+
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
 }
+
 /* BUTTON */
 .download-btn {
   width: 100%;
@@ -290,57 +338,7 @@ audio {
   margin-top: 10px;
   cursor: pointer;
 }
-/* HEADER */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  max-width: 900px;
-  margin: 30px auto 20px;
-}
-
-.section-header h2 {
-  font-size: 22px;
-  margin: 0;
-}
-
-/* SEARCH */
-.search-box {
-  width: 260px;
-  padding: 10px 14px;
-
-  border-radius: 20px;
-  border: 1px solid #ddd;
-
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(10px);
-}
-
-/* GRID CENTER */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
-  justify-content: center;
-  gap: 30px;
-
-  max-width: 900px;
-  margin: auto;
-}
-.card {
-  width: 100%;
-  max-width: 400px;
-
-  border-radius: 20px;
-  overflow: hidden;
-
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.card-img img {
-  height: 240px;
-  object-fit: cover;
-}
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
@@ -352,4 +350,12 @@ audio {
     height: 180px;
   }
 
+  .section-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
 }
