@@ -252,8 +252,8 @@ audio {
 
 /* KHUNG QR */
 .qr-frame {
-  width: 240px;
-  height: 240px;
+  width: 220px;
+  height: 220px;
   margin: 15px auto;
 
   background: white;
@@ -264,36 +264,35 @@ audio {
   justify-content: center;
 
   position: relative;
-
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden; /* 👈 QUAN TRỌNG */
 }
 
 /* container QR */
 #qrcode {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
+
+  position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  position: relative;
 }
 
 /* ép QR đúng size */
 #qrcode img,
 #qrcode canvas {
-  width: 180px !important;
-  height: 180px !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
   display: block;
 }
 
 /* LOGO CHÍNH GIỮA */
 .qr-logo {
-  position: absolute;
+  width: 28px;
+  height: 28px;
 
-  width: 44px;
-  height: 44px;
 
   top: 50%;
   left: 50%;
