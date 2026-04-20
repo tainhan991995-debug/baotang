@@ -178,6 +178,11 @@ setTimeout(() => {
 function downloadQR() {
   const img = document.querySelector("#qrcode img");
 
+  if (!img) {
+    alert("QR chưa sẵn sàng!");
+    return;
+  }
+
   const a = document.createElement("a");
   a.href = img.src;
   a.download = "qr.png";
