@@ -8,29 +8,21 @@
 
 <body>
 
-<!-- NỀN ANIMATE -->
 <div class="bg-art"></div>
 
-<!-- HEADER -->
 <div class="banner">
   <img src="./bia.jpg">
-
   <div class="overlay">
     <h1>🏛️ BẢO TÀNG</h1>
     <p>Hệ thống thuyết minh tự động</p>
   </div>
 </div>
 
-<!-- CONTENT -->
 <div class="container">
-
   <h2 class="section-title">Danh sách địa điểm</h2>
-
   <div class="grid" id="list"></div>
-
 </div>
 
-<!-- SCRIPT -->
 <script src="./app.js"></script>
 
 <script>
@@ -38,7 +30,6 @@ async function load() {
   const data = await getPlaces();
   const list = document.getElementById("list");
 
-  // clear trước (tránh load trùng)
   list.innerHTML = "";
 
   data.forEach(item => {
@@ -47,7 +38,7 @@ async function load() {
 
     div.innerHTML = `
       <div class="card-img">
-        <img src="${item.anhdaidien}" alt="">
+        <img src="${item.anhdaidien}">
         <div class="overlay-text">${item.tendiadiem}</div>
       </div>
     `;
@@ -61,7 +52,6 @@ async function load() {
   });
 }
 
-// chạy
 load();
 </script>
 
