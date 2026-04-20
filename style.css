@@ -238,28 +238,29 @@ audio {
   inset: 0;
   z-index: -1;
   overflow: hidden;
+  background: linear-gradient(135deg, #e3f2fd, #f0f9ff);
 }
 
-/* lớp gradient chính */
+/* blob 1 */
 .bg-art::before {
   content: "";
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, #4facfe, transparent 70%);
-  top: -150px;
-  left: -150px;
-  filter: blur(120px);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #2196f3, transparent 70%);
+  top: -200px;
+  left: -200px;
+  filter: blur(140px);
 }
 
-/* lớp phụ */
+/* blob 2 */
 .bg-art::after {
   content: "";
   position: absolute;
-  width: 600px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   background: radial-gradient(circle, #00c6ff, transparent 70%);
-  bottom: -150px;
-  right: -150px;
-  filter: blur(120px);
+  bottom: -200px;
+  right: -200px;
+  filter: blur(140px);
 }
