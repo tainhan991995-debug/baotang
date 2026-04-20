@@ -3,30 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Bảo tàng</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
+<!-- NỀN -->
 <div class="bg-art"></div>
 
 <!-- HEADER -->
 <div class="banner">
-  <img src="bia.jpg">
+  <img src="./bia.jpg">
   <div class="overlay">
     <h1>🏛️ BẢO TÀNG</h1>
     <p>Hệ thống thuyết minh tự động</p>
   </div>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
   <h2 class="section-title">Danh sách địa điểm</h2>
   <div class="grid" id="list"></div>
 </div>
 
-<script src="app.js"></script>
-
-</body>
+<script src="./app.js"></script>
 
 <script>
 async function load() {
@@ -38,12 +38,11 @@ async function load() {
     div.className = "card";
 
     div.innerHTML = `
-  <div class="card-img">
-    <img src="${item.anhdaidien}">
-    <div class="overlay-text">${item.tendiadiem}</div>
-  </div>
-`;
-
+      <div class="card-img">
+        <img src="${item.anhdaidien}">
+        <div class="overlay-text">${item.tendiadiem}</div>
+      </div>
+    `;
 
     div.onclick = () => {
       localStorage.setItem("place_" + item.id, JSON.stringify(item));
