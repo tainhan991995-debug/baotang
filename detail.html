@@ -147,6 +147,11 @@ render();
 const qrContainer = document.getElementById("qrcode");
 qrContainer.innerHTML = "";
 
+new QRCode(qrContainer, {
+  text: window.location.href,
+  width: 200,
+  height: 200
+});
 
 /* LOGO CENTER */
 setTimeout(() => {
