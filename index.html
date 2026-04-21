@@ -61,35 +61,45 @@ async function load() {
       window.location.href = "detail.html?id=" + item.id;
     };
 
-    // PLAY / STOP
-    let isPlaying = false;
+    // PLAY / STOP FIX
+btn.onclick = () => {
 
-    btn.onclick = () => {
-      const allAudio = document.querySelectorAll("audio");
+  // nếu đang phát chính nó → pause
+  if (currentAudio === audio) {
+    audio.pause();
+    btn.innerText = "▶";
 
-      if (!isPlaying) {
-        allAudio.forEach(a => a.pause());
+    currentAudio = null;
+    currentBtn = null;
+    return;
+  }
 
-        audio.play();
-        btn.innerText = "⏸";
-        isPlaying = true;
+  // dừng audio cũ
+  if (currentAudio) {
+    currentAudio.pause();
+    if (currentBtn) currentBtn.innerText = "▶";
+  }
 
-      } else {
-        audio.pause();
-        btn.innerText = "▶";
-        isPlaying = false;
-      }
-    };
+  // phát audio mới
+  audio.play();
+  btn.innerText = "⏸";
 
-    audio.onended = () => {
-      btn.innerText = "▶";
-      isPlaying = false;
-    };
+  currentAudio = audio;
+  currentBtn = btn;
+};
+
+   audio.onended = () => {
+  btn.innerText = "▶";
+
+  currentAudio = null;
+  currentBtn = null;
+};
 
     list.appendChild(div);
   });
 }
-
+let currentAudio = null;
+let currentBtn = null;
 load();
 </script>
 
