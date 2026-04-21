@@ -279,16 +279,22 @@ audio {
   height: 240px;
   margin: 20px auto;
 
-  background: white;
-  border-radius: 24px;
-
   display: flex;
   align-items: center;
   justify-content: center;
 
+  background: white;
+
+  border-radius: 24px;
+
+  /* 👇 VIỀN */
+  border: 2px dashed #e0e0e0;
+
+  /* 👇 bóng nhẹ */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+
   position: relative;
 }
-
 /* QR container */
 #qrcode {
   position: relative;
