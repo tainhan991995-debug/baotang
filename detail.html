@@ -103,11 +103,15 @@ const progress = document.getElementById("progress");
 const time = document.getElementById("time");
 
 playBtn.onclick = () => {
-  if (audio.paused) {
+
+  // chỉ set src nếu CHƯA có
+  if (!audio.src) {
     audio.src = lang === "vi"
       ? place.audiotiengviet
       : place.audiotienganh;
+  }
 
+  if (audio.paused) {
     audio.play();
     playBtn.innerText = "⏸";
   } else {
@@ -115,7 +119,15 @@ playBtn.onclick = () => {
     playBtn.innerText = "▶";
   }
 };
+  function update() {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + lang).classList.add("active");
 
+  audio.src = ""; // 👈 reset để load audio mới
+  playBtn.innerText = "▶";
+
+  render();
+}
 audio.ontimeupdate = () => {
   const percent = (audio.currentTime / audio.duration) * 100;
   progress.style.width = percent + "%";
