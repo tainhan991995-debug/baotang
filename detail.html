@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi tiết</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="app">
+
+<!-- HEADER -->
+<div class="app-header">
+  <button class="back-icon" onclick="goHome()">←</button>
+  <div id="headerTitle"></div>
+</div>
+<!-- CONTENT -->
+<div class="app-detail">
+
+  <h2 id="title"></h2>
+
+  <img id="image" class="app-img">
+
+  <!-- TAB -->
+  <div class="app-tabs">
+    <button class="tab active" id="tab-vi">Tiếng Việt</button>
+    <button class="tab" id="tab-en">English</button>
+  </div>
+
+  <!-- TEXT -->
+  <div id="content"></div>
+
+</div>
+
+<!-- AUDIO FIXED -->
+<div class="audio-bar">
+  <button onclick="playAudio()">🔊</button>
+<div class="audio-bar">
+  <button id="playBtn">▶</button>
+
+  <div class="progress">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <span id="time">0:00</span>
+</div>
+
+<audio id="audio"></audio></div>
+
+<script>
+const id = new URLSearchParams(window.location.search).get("id");
+const place = JSON.parse(localStorage.getItem("place_" + id));
+
+let lang = "vi";
+
+document.getElementById("title").innerText = place.tendiadiem;
+document.getElementById("image").src = place.anhdaidien;
+
+function render() {
+  document.getElementById("content").innerHTML =
+    lang === "vi" ? place.thuyetminh : place.thuyetminhtienganh;
+
+  autoPlay();
+}
+
+function playAudio() {
+  const audio = document.getElementById("audio");
+  audio.src = lang === "vi"
+    ? place.audiotiengviet
+    : place.audiotienganh;
+
+  audio.play();
+}
+
+function autoPlay() {
+  playAudio();
+}
+
+document.getElementById("tab-vi").onclick = () => {
+  lang = "vi";
+  update();
+};
+
+document.getElementById("tab-en").onclick = () => {
+  lang = "en";
+  update();
+};
+
+function update() {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + lang).classList.add("active");
+  render();
+}
+
+function goHome() {
+  window.location.href = "index.html";
+}
+
+render();
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+const time = document.getElementById("time");
+
+playBtn.onclick = () => {
+  if (audio.paused) {
+    audio.src = lang === "vi"
+      ? place.audiotiengviet
+      : place.audiotienganh;
+
+    audio.play();
+    playBtn.innerText = "⏸";
+  } else {
+    audio.pause();
+    playBtn.innerText = "▶";
+  }
+};
+
+audio.ontimeupdate = () => {
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = percent + "%";
+
+  const min = Math.floor(audio.currentTime / 60);
+  const sec = Math.floor(audio.currentTime % 60);
+  time.innerText = `${min}:${sec.toString().padStart(2,"0")}`;
+};
+
+audio.onended = () => {
+  playBtn.innerText = "▶";
+  progress.style.width = "0%";
+};
+</script>
+
+</body>
+</html>

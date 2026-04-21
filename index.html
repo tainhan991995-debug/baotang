@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảo tàng</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="app">
+
+<!-- COVER -->
+<div class="app-cover">
+  <img src="./bia.jpg">
+  <div class="cover-overlay">
+    <h1>🏛️ Bảo tàng thiên nhiên duyên hải miền Trung</h1>
+    <p>Hệ thống thuyết minh</p>
+  </div>
+</div>
+
+<!-- LIST -->
+<div class="app-list" id="list"></div>
+
+<script src="./app.js"></script>
+
+<script>
+async function load() {
+  const data = await getPlaces();
+  const list = document.getElementById("list");
+
+  list.innerHTML = "";
+
+  data.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "app-card";
+
+    const number = (index + 1).toString().padStart(2, "0");
+
+    div.innerHTML = `
+      <div class="card-left">
+        <div class="card-number">${number}</div>
+      </div>
+
+      <div class="card-content">
+        <div class="card-title">${item.tendiadiem}</div>
+      </div>
+
+      <div class="card-right">
+        <button class="play-btn">▶</button>
+        <audio src="${item.audiotiengviet}"></audio>
+      </div>
+    `;
+
+    const title = div.querySelector(".card-title");
+    const btn = div.querySelector(".play-btn");
+    const audio = div.querySelector("audio");
+
+    // CLICK VÀO TÊN
+    title.onclick = () => {
+      localStorage.setItem("place_" + item.id, JSON.stringify(item));
+      window.location.href = "detail.html?id=" + item.id;
+    };
+
+    // PLAY / STOP
+    let isPlaying = false;
+
+    btn.onclick = () => {
+      const allAudio = document.querySelectorAll("audio");
+
+      if (!isPlaying) {
+        allAudio.forEach(a => a.pause());
+
+        audio.play();
+        btn.innerText = "⏸";
+        isPlaying = true;
+
+      } else {
+        audio.pause();
+        btn.innerText = "▶";
+        isPlaying = false;
+      }
+    };
+
+    audio.onended = () => {
+      btn.innerText = "▶";
+      isPlaying = false;
+    };
+
+    list.appendChild(div);
+  });
+}
+
+load();
+</script>
+
+</body>
+</html>
