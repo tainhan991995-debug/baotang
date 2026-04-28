@@ -606,7 +606,7 @@ body.app {
 .next-wrap {
   display: flex;
   justify-content: center;
-  margin: 20px 0 80px;
+  margin: 12px 0 80px;
 }
 
 #nextBtn {
