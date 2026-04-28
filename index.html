@@ -87,9 +87,11 @@ updateHeaderLang(); // 👈 THÊM NGAY SAU updateLangUI()
 
 // ===== LOAD DATA =====
 async function load() {
+
   const data = await getPlaces();
   const list = document.getElementById("list");
   list.innerHTML = "";
+    let order = [];
 
   // ===== MAP PHÒNG =====
   const rooms = [
@@ -193,7 +195,7 @@ title.onclick = () => {
 
     // ===== ITEMS =====
     items.forEach((item, index) => {
-
+  order.push(item.id); // 👈 THÊM DÒNG NÀY
       const div = document.createElement("div");
       div.className = "app-card";
 
@@ -269,7 +271,8 @@ window.location.href = "detail.html?id=" + item.id;
 }
 
 // ===== START =====
-load();
+localStorage.setItem("order", JSON.stringify(order));
+  load();
 </script>
 
 </body>
