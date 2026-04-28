@@ -634,3 +634,148 @@ body.app {
 .category-list.open {
   display: block;
 }
+/* ===== UI OVERRIDE - FIGMA STYLE ===== */
+
+/* ===== MAIN CATEGORY (GIỚI THIỆU TỔNG QUAN) ===== */
+.category-title {
+  position: relative !important;
+
+  width: calc(100% - 24px) !important;
+  margin: 16px auto !important;
+
+  padding: 18px 24px !important;
+
+  border-radius: 32px !important;
+
+  background: linear-gradient(90deg, #1e5fa8, #2c7be5) !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important; /* 👈 giữ text center */
+
+  text-align: center !important;
+
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18) !important;
+
+  transition: 0.25s;
+}
+
+/* hover */
+.category-title:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== ARROW BUTTON ===== */
+.arrow {
+  position: absolute !important;
+  right: 14px;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.25);
+}
+
+/* ===== FLOOR TITLE (TẦNG 1) ===== */
+.floor-title {
+  width: calc(100% - 60px) !important;
+  margin: 18px auto !important;
+
+  padding: 16px 20px !important;
+
+  border-radius: 20px !important;
+
+  text-align: center;
+
+  font-size: 20px !important;
+  font-weight: 800 !important;
+
+  background: linear-gradient(90deg, #3f6fd9, #8fa4f5) !important;
+  color: white;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== SUB CATEGORY (PHÒNG TRƯNG BÀY) ===== */
+.category .category-title {
+  border-radius: 18px !important;
+
+  background: linear-gradient(90deg, #2f80ed, #56ccf2) !important;
+
+  font-size: 16px !important;
+  font-weight: 600 !important;
+
+  justify-content: center !important;
+}
+
+/* ===== CARD (ITEM LIST) ===== */
+.app-card {
+  width: calc(100% - 24px) !important;
+  margin: 10px auto !important;
+
+  padding: 12px 16px !important;
+
+  border-radius: 16px !important;
+
+  background: #f8f9fb !important;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12) !important;
+
+  display: flex;
+  align-items: center;
+}
+
+/* ===== NUMBER BOX ===== */
+.card-left {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, #2f80ed, #56ccf2);
+
+  color: white;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== TEXT ===== */
+.card-title {
+  font-size: 15px !important;
+  font-weight: 600;
+  color: #222;
+}
+
+/* ===== PLAY BUTTON ===== */
+.play-btn {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #2f80ed, #00c6ff);
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== FIX CENTER TEXT KHÔNG BỊ LỆCH ===== */
+.category-title > *:not(.arrow) {
+  margin: 0 auto;
+}
