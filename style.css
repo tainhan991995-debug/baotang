@@ -10,6 +10,76 @@ body.app {
   background: linear-gradient(180deg, #e3f2fd, #bbdefb);
 }
 
+/* ===== COVER (ẢNH BÌA) ===== */
+.app-cover {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.app-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay text */
+.cover-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  padding: 20px;
+
+  color: white;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.2),
+    transparent
+  );
+}
+
+.cover-overlay h1 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.cover-overlay p {
+  font-size: 14px;
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+/* ===== FLAG ===== */
+.lang-switch {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+
+  z-index: 10;
+}
+
+.lang-switch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ===== CATEGORY ===== */
 .category {
   margin: 18px 12px;
@@ -69,12 +139,12 @@ body.app {
   cursor: pointer;
 }
 
-/* ===== TEXT CENTER FIX ===== */
+/* center text */
 .category-title > *:not(.arrow) {
   margin: 0 auto;
 }
 
-/* ===== ARROW ===== */
+/* arrow */
 .arrow {
   position: absolute;
   right: 16px;
@@ -117,7 +187,7 @@ body.app {
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* ===== CATEGORY LIST ===== */
+/* ===== LIST ===== */
 .category-list {
   display: none;
   width: calc(100% - 24px);
@@ -152,7 +222,7 @@ body.app {
   transform: translateY(-2px);
 }
 
-/* ===== LEFT NUMBER ===== */
+/* number */
 .card-left {
   width: 42px;
   height: 42px;
@@ -169,7 +239,7 @@ body.app {
   font-weight: bold;
 }
 
-/* ===== CONTENT ===== */
+/* content */
 .card-content {
   flex: 1;
 }
@@ -186,7 +256,7 @@ body.app {
   margin-top: 3px;
 }
 
-/* ===== PLAY BUTTON ===== */
+/* play */
 .play-btn {
   width: 46px;
   height: 46px;
@@ -210,62 +280,10 @@ body.app {
 .play-btn:hover { transform: scale(1.1); }
 .play-btn:active { transform: scale(0.9); }
 
-/* ===== PLAYING STATE ===== */
+/* playing */
 .app-card.playing {
   background: linear-gradient(135deg, #e3f2fd, #bbdefb);
   box-shadow: 0 10px 25px rgba(30,136,229,0.4);
-}
-
-/* ===== LANG SWITCH ===== */
-.lang-switch {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-
-  width: 50px;
-  height: 50px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: white;
-  border-radius: 50%;
-
-  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-  z-index: 999;
-
-  cursor: pointer;
-}
-
-/* ===== DETAIL ===== */
-.app-detail {
-  padding: 16px;
-  padding-bottom: 60px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.app-detail h2 {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 800;
-  color: #0d47a1;
-}
-
-/* ===== IMAGE ===== */
-.app-img {
-  width: 85%;
-  margin: 0 auto;
-
-  border-radius: 16px;
-  max-height: 220px;
-
-  object-fit: cover;
-
-  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
 
 /* ===== AUDIO BAR ===== */
