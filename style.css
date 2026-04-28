@@ -526,27 +526,27 @@ body.app {
 
 /* ===== FLOOR TITLE ===== */
 /* ===== FLOOR TITLE STYLE MỚI ===== */
+/* ===== FIX FLOOR ALIGN ===== */
 .floor-title {
-  width: calc(100% - 24px);
-  margin: 20px auto 10px;
+  width: calc(100% - 24px); /* 👈 giống category */
 
-  padding: 0;
+  margin: 16px auto 8px; /* 👈 đồng bộ spacing */
+
+  padding: 0 20px; /* 👈 giống category-title */
+
+  font-size: 16px; /* 👈 giảm size */
+  font-weight: 700;
+
+  text-align: left;
+
+  color: #0f2a44;
 
   background: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
-
-  font-size: 22px;
-  font-weight: 800;
-
-  color: #0f2a44;
-
-  text-align: left;
-
-  position: relative;
 }
 
-/* gạch dưới */
+/* gạch dưới căn theo text */
 .floor-title::after {
   content: "";
 
@@ -555,7 +555,7 @@ body.app {
   width: 100%;
   height: 2px;
 
-  margin-top: 10px;
+  margin-top: 8px;
 
   background: rgba(0,0,0,0.15);
 }
@@ -597,7 +597,7 @@ body.app {
   display: flex;
   justify-content: center;
 
-  margin-top: 24px;   /* 👈 cách nội dung */
+  margin-top: 8px;   /* 👈 cách nội dung */
   margin-bottom: 100px; /* 👈 tránh audio bar */
 }
 
