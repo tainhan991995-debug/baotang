@@ -22,18 +22,15 @@ body.app {
 }
 
 /* ===== LEVEL 1: DANH MỤC CHÍNH ===== */
-.main-category 
-.category-title {
-color: #FFF;
-text-align: center;
-font-family: var(--Font-family-font-family-body, Inter);
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: 150%; /* 24px */
-
-  text-transform: uppercase;
+.main-category {
+  color: #fff;
+  text-align: left;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 700;
 }
+
+ 
 /* KHỐI CHÍNH */
 .category-title {
   background: linear-gradient(135deg, #1976d2, #42a5f5);
