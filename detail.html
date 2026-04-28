@@ -53,7 +53,15 @@
 
 <script>
 const id = new URLSearchParams(window.location.search).get("id");
-const place = JSON.parse(localStorage.getItem("place_" + id));
+let place = JSON.parse(localStorage.getItem("place_" + id));
+
+// 👉 nếu không có thì tìm từ list
+if (!place) {
+  const order = JSON.parse(localStorage.getItem("order")) || [];
+  const all = JSON.parse(localStorage.getItem("places")) || [];
+
+  place = all.find(p => p.id == id);
+}
 
 let lang = "vi";
 
