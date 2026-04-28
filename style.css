@@ -1,152 +1,86 @@
 /* ===== RESET ===== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* ===== BACKGROUND ===== */
-
-/* ===== GLASS BACKGROUND ===== */
 body.app {
   background: linear-gradient(180deg, #e3f2fd, #bbdefb);
 }
 
-/* ===== CATEGORY MAX ===== */
-/* ===== CATEGORY ART UI ===== */
+/* ===== CATEGORY ===== */
 .category {
   margin: 18px 12px;
 }
 
-/* ===== LEVEL 1: DANH MỤC CHÍNH ===== */
-.main-category {
-  color: #fff;
-  text-align: left;
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 700;
-}
+/* ===== MAIN CATEGORY ===== */
+.main-category .category-title {
+  position: relative;
 
- 
-/* KHỐI CHÍNH */
-.category-title {
-  background: linear-gradient(135deg, #1976d2, #42a5f5);
-  color: white;
-
-  padding: 18px 20px;
-  margin: 14px 0;
-
-  border-radius: 16px;
-
-  font-size: 18px;
-  font-weight: 700;
-
-  text-align: left;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.3);
-
-  transition: all 0.25s ease;
-}
-.floor-title {
-  width: 80%;
+  width: calc(100% - 24px);
   margin: 16px auto;
 
-  padding: 16px 20px;
+  padding: 20px 24px;
 
-  border-radius: 16px;
+  border-radius: 40px;
+
+  background: linear-gradient(90deg, #1e5fa8, #2c7be5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   text-align: center;
 
-  font-size: 20px;   /* 👈 to bằng tổng quan */
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
 
-  color: white;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
 
-  background: linear-gradient(135deg, #2c7be5, #9dabf7); /* 👈 có nền rõ */
-
-  box-shadow:
-    0 6px 18px rgba(21,101,192,0.35);
-
-  letter-spacing: 1px;
+  cursor: pointer;
 }
-.category-title {
-  width: 92%;
+
+/* ===== SUB CATEGORY ===== */
+.category:not(.main-category) .category-title {
+  position: relative;
+
+  width: calc(100% - 24px);
   margin: 10px auto;
+
+  padding: 14px 18px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(90deg, #2f80ed, #56ccf2);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 12px 18px; /* 👈 giảm chiều cao */
-
-  border-radius: 14px;
-
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-
-  background: linear-gradient(135deg, #2c7be5, #4dabf7); /* 👈 dịu hơn */
-
-  color: white;
+  color: #fff;
 
   box-shadow: 0 5px 14px rgba(0,0,0,0.12);
 
   cursor: pointer;
 }
-.category-list {
-  width: 92%;
+
+/* ===== TEXT CENTER FIX ===== */
+.category-title > *:not(.arrow) {
   margin: 0 auto;
 }
-.category-list.open {
-  display: block;
-}
-/* hover nhẹ */
-.category-title:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 12px 28px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.4);
-}
 
-.category.open .category-title {
-  background: linear-gradient(135deg, #0d47a1, #1976d2);
-}
-/* ===== TEXT ===== */
-.category-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* tiêu đề chính */
-.category-main {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.3px;
-}
-
-/* tiếng anh nhỏ */
-.category-sub {
-  font-size: 13px;
-  opacity: 0.75;
-  font-style: italic;
-}
-
-/* ===== ICON MŨI TÊN ===== */
+/* ===== ARROW ===== */
 .arrow {
-  width: 34px;
-  height: 34px;
+  position: absolute;
+  right: 16px;
+
+  width: 40px;
+  height: 40px;
 
   border-radius: 50%;
 
@@ -154,37 +88,49 @@ body.app {
   align-items: center;
   justify-content: center;
 
-  background: rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.25);
 
   transition: 0.3s;
 }
 
-/* khi mở */
 .category.open .arrow {
-  transform: rotate(180deg); /* ▼ -> ▲ */
-  background: rgba(255,255,255,0.3);
+  transform: rotate(180deg);
 }
 
-/* ===== HIỆU ỨNG VIỀN SÁNG ===== */
-.category.open .category-title::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+/* ===== FLOOR TITLE ===== */
+.floor-title {
+  width: calc(100% - 60px);
+  margin: 18px auto;
 
-  border-radius: 22px;
+  padding: 16px 20px;
 
-  box-shadow:
-    0 0 25px rgba(33,150,243,0.6);
+  border-radius: 20px;
 
-  opacity: 0.5;
+  text-align: center;
+
+  font-size: 20px;
+  font-weight: 800;
+
+  background: linear-gradient(90deg, #3f6fd9, #8fa4f5);
+  color: white;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* ===== LIST ===== */
+/* ===== CATEGORY LIST ===== */
+.category-list {
+  display: none;
+  width: calc(100% - 24px);
+  margin: 0 auto;
+}
 
+.category-list.open {
+  display: block;
+}
 
-/* ===== CARD FULL HÀNG NGANG ===== */
+/* ===== CARD ===== */
 .app-card {
-  width: 100%; /* 👈 QUAN TRỌNG */
+  width: 100%;
 
   display: flex;
   align-items: center;
@@ -193,184 +139,37 @@ body.app {
   padding: 12px 16px;
   margin: 10px 0;
 
-  border-radius: 14px;
+  border-radius: 16px;
 
-  background: white;
+  background: #f8f9fb;
 
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+
+  transition: 0.2s;
 }
-/* hover nhẹ */
+
 .app-card:hover {
   transform: translateY(-2px);
 }
 
-/* LEFT NUMBER */
-.card-left {
-  min-width: 42px;
-  height: 42px;
-
-  border-radius: 12px;
-  background: linear-gradient(135deg, #1e88e5, #42a5f5);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: white;
-  font-weight: bold;
-}
-
-/* CONTENT GIỮA */
-.card-content {
-  flex: 1;
-}
-
-/* TITLE */
-.card-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #222;
-}
-
-/* ENGLISH */
-.card-sub {
-  font-size: 13px;
-  color: #777;
-  margin-top: 3px;
-}
-
-/* RIGHT PLAY */
-.card-right {
-  display: flex;
-  align-items: center;
-}
-
-/* PLAY BUTTON */
-.play-btn {
-  width: 44px;
-  height: 44px;
-
-  border-radius: 50%;
-  border: none;
-
-  background: linear-gradient(135deg, #1e88e5, #00c6ff);
-  color: white;
-
-  font-size: 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-
-  cursor: pointer;
-}
-/* ===== NUMBER ===== */
-.card-number {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 12px;
-
-  background: linear-gradient(135deg, #1e88e5, #42a5f5);
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: bold;
-}
-
-/* ===== TITLE ===== */
-.card-title {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.card-sub {
-  font-size: 13px;
-  color: #777;
-}
-
-/* ===== PLAY BUTTON ===== */
-.play-btn {
-  width: 48px;
-  height: 48px;
-
-  border-radius: 50%;
-  border: none;
-
-  background: linear-gradient(135deg, #1e88e5, #00c6ff);
-  color: white;
-
-  font-size: 18px;
-
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-
-  transition: 0.25s;
-}
-
-.play-btn:hover {
-  transform: scale(1.1);
-}
-
-.play-btn:active {
-  transform: scale(0.9);
-}
-
-/* ===== ACTIVE AUDIO (ĐANG PHÁT) ===== */
-.app-card.playing {
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-  box-shadow: 0 10px 25px rgba(30,136,229,0.4);
-}
-
-/* glowing effect */
-.app-card.playing::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  border-radius: 16px;
-
-  box-shadow: 0 0 20px rgba(33,150,243,0.5);
-  opacity: 0.6;
-}
-
-/* ===== ANIMATION MỞ CATEGORY ===== */
-.category.open .app-card {
-  animation: fadeUp 0.4s ease;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== NUMBER ===== */
+/* ===== LEFT NUMBER ===== */
 .card-left {
   width: 42px;
   height: 42px;
 
   border-radius: 12px;
-  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+
+  background: linear-gradient(135deg, #2f80ed, #56ccf2);
+  color: white;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: white;
   font-weight: bold;
 }
 
-/* ===== TITLE ===== */
+/* ===== CONTENT ===== */
 .card-content {
   flex: 1;
 }
@@ -381,7 +180,6 @@ body.app {
   color: #222;
 }
 
-/* english */
 .card-sub {
   font-size: 13px;
   color: #777;
@@ -396,10 +194,8 @@ body.app {
   border-radius: 50%;
   border: none;
 
-  background: linear-gradient(135deg, #1e88e5, #00c6ff);
+  background: linear-gradient(135deg, #2f80ed, #00c6ff);
   color: white;
-
-  font-size: 18px;
 
   display: flex;
   align-items: center;
@@ -407,15 +203,17 @@ body.app {
 
   box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 
+  cursor: pointer;
   transition: 0.25s;
 }
 
-.play-btn:hover {
-  transform: scale(1.1);
-}
+.play-btn:hover { transform: scale(1.1); }
+.play-btn:active { transform: scale(0.9); }
 
-.play-btn:active {
-  transform: scale(0.9);
+/* ===== PLAYING STATE ===== */
+.app-card.playing {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  box-shadow: 0 10px 25px rgba(30,136,229,0.4);
 }
 
 /* ===== LANG SWITCH ===== */
@@ -435,15 +233,9 @@ body.app {
   border-radius: 50%;
 
   box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-
   z-index: 999;
-  cursor: pointer;
-}
 
-.lang-switch img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  cursor: pointer;
 }
 
 /* ===== DETAIL ===== */
@@ -460,59 +252,22 @@ body.app {
   text-align: center;
   font-size: 22px;
   font-weight: 800;
-
   color: #0d47a1;
-
-  text-shadow:
-    0 2px 6px rgba(0,0,0,0.1),
-    0 0 6px rgba(255,255,255,0.6);
 }
 
-/* IMAGE */
+/* ===== IMAGE ===== */
 .app-img {
-  display: block;
+  width: 85%;
   margin: 0 auto;
 
-  width: 85%;
+  border-radius: 16px;
   max-height: 220px;
 
   object-fit: cover;
-  border-radius: 16px;
 
   box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
-.lang-center {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
 
-  margin-top: 20px;   /* 👈 nằm dưới ảnh */
-  margin-bottom: 24px;
-}
-.lang-btn {
-  border: none;
-
-  padding: 12px 22px;
-  border-radius: 999px;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  min-width: 120px; /* 👈 đảm bảo 2 nút bằng nhau */
-
-  background: rgba(255,255,255,0.95);
-  color: #333;
-
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.lang-btn.active {
-  background: linear-gradient(135deg, #1976d2, #42a5f5);
-  color: white;
-}
 /* ===== AUDIO BAR ===== */
 .audio-bar {
   position: fixed;
@@ -532,25 +287,9 @@ body.app {
   box-shadow: 0 -4px 14px rgba(0,0,0,0.15);
 }
 
-/* play */
-.audio-bar button {
-  width: 60px;
-  height: 60px;
-
-  border-radius: 50%;
-  border: none;
-
-  background: linear-gradient(135deg, #1e88e5, #00c6ff);
-  color: white;
-
-  font-size: 22px;
-}
-
-/* progress */
 .progress {
   flex: 1;
   height: 8px;
-
   background: #ddd;
   border-radius: 10px;
 }
@@ -559,223 +298,4 @@ body.app {
   height: 100%;
   width: 0%;
   background: #1e88e5;
-}
-
-/* time */
-#time {
-  min-width: 45px;
-  font-size: 14px;
-}
-
-.app-cover {
-  position: relative;
-  height: 180px; /* 👈 giảm xuống */
-  overflow: hidden;
-}
-
-.app-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* overlay chữ */
-.cover-overlay {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  color: white;
-  text-align: center;
-
-  background: rgba(0,0,0,0.25); /* 👈 nhẹ lại */
-}
-.card-content {
-  flex: 1;
-}
-.next-wrap {
-  display: flex;
-  justify-content: center;
-  margin: 6px 0 90px;
-}
-
-#nextBtn {
-  padding: 14px 28px;
-  border: none;
-  border-radius: 999px;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  background: linear-gradient(135deg, #ff9800, #ff5722);
-  color: white;
-
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-#nextBtn:hover {
-  transform: translateY(-2px);
-}
-
-.card-right {
-  margin-left: auto;
-}
-.category-list {
-  display: none;
-}
-
-.category-list.open {
-  display: block;
-}
-/* ===== UI OVERRIDE - FIGMA STYLE ===== */
-
-/* ===== MAIN CATEGORY (GIỚI THIỆU TỔNG QUAN) ===== */
-.category-title {
-  position: relative !important;
-
-  width: calc(100% - 24px) !important;
-  margin: 16px auto !important;
-
-  padding: 18px 24px !important;
-
-  border-radius: 32px !important;
-
-  background: linear-gradient(90deg, #1e5fa8, #2c7be5) !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important; /* 👈 giữ text center */
-
-  text-align: center !important;
-
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  color: #fff !important;
-
-  box-shadow: 0 10px 24px rgba(0,0,0,0.18) !important;
-
-  transition: 0.25s;
-}
-
-/* hover */
-.category-title:hover {
-  transform: translateY(-2px);
-}
-
-/* ===== ARROW BUTTON ===== */
-.arrow {
-  position: absolute !important;
-  right: 14px;
-
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255,255,255,0.25);
-}
-
-/* ===== FLOOR TITLE (TẦNG 1) ===== */
-.floor-title {
-  width: calc(100% - 60px) !important;
-  margin: 18px auto !important;
-
-  padding: 16px 20px !important;
-
-  border-radius: 20px !important;
-
-  text-align: center;
-
-  font-size: 20px !important;
-  font-weight: 800 !important;
-
-  background: linear-gradient(90deg, #3f6fd9, #8fa4f5) !important;
-  color: white;
-
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-/* ===== SUB CATEGORY (PHÒNG TRƯNG BÀY) ===== */
-.category .category-title {
-  border-radius: 18px !important;
-
-  background: linear-gradient(90deg, #2f80ed, #56ccf2) !important;
-
-  font-size: 16px !important;
-  font-weight: 600 !important;
-
-  justify-content: center !important;
-}
-
-/* ===== CARD (ITEM LIST) ===== */
-.app-card {
-  width: calc(100% - 24px) !important;
-  margin: 10px auto !important;
-
-  padding: 12px 16px !important;
-
-  border-radius: 16px !important;
-
-  background: #f8f9fb !important;
-
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12) !important;
-
-  display: flex;
-  align-items: center;
-}
-
-/* ===== NUMBER BOX ===== */
-.card-left {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 12px;
-
-  background: linear-gradient(135deg, #2f80ed, #56ccf2);
-
-  color: white;
-  font-weight: bold;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ===== TEXT ===== */
-.card-title {
-  font-size: 15px !important;
-  font-weight: 600;
-  color: #222;
-}
-
-/* ===== PLAY BUTTON ===== */
-.play-btn {
-  width: 46px;
-  height: 46px;
-
-  border-radius: 50%;
-
-  background: linear-gradient(135deg, #2f80ed, #00c6ff);
-
-  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ===== FIX CENTER TEXT KHÔNG BỊ LỆCH ===== */
-.category-title > *:not(.arrow) {
-  margin: 0 auto;
 }
