@@ -91,6 +91,7 @@ langSwitch.onclick = () => {
 async function load() {
 
   const data = await getPlaces();
+  localStorage.setItem("places", JSON.stringify(data));
   const list = document.getElementById("list");
   list.innerHTML = "";
 
