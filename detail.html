@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi tiết</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="app">
+
+<!-- HEADER -->
+<div class="app-header">
+  <button class="back-icon" onclick="goHome()">←</button>
+  <div id="headerTitle"></div>
+</div>
+
+<!-- CONTENT -->
+<div class="app-detail">
+
+  <h2 id="title"></h2>
+
+  <img id="image" class="app-img">
+
+  <!-- LANG -->
+  <div class="lang-center">
+    <button id="btnVI" class="lang-btn active">Tiếng Việt</button>
+    <button id="btnEN" class="lang-btn">English</button>
+  </div>
+
+  <!-- TEXT -->
+  <div id="content"></div>
+
+</div>
+
+<!-- NEXT -->
+<div class="next-wrap">
+  <button id="nextBtn" class="next-btn">→ Địa điểm tiếp theo</button>
+</div>
+
+<!-- AUDIO -->
+<div class="audio-bar">
+  <button id="playBtn">▶</button>
+
+  <div class="progress">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <span id="time">0:00</span>
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+const id = new URLSearchParams(window.location.search).get("id");
+const place = JSON.parse(localStorage.getItem("place_" + id));
+
+let lang = "vi";
+
+const titleEl = document.getElementById("title");
+const contentEl = document.getElementById("content");
+const imageEl = document.getElementById("image");
+
+const btnVI = document.getElementById("btnVI");
+const btnEN = document.getElementById("btnEN");
+
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+const time = document.getElementById("time");
+
+// ================= RENDER =================
+function render() {
+  titleEl.innerText =
+    lang === "vi"
+      ? place.tendiadiem
+      : (place.tendiadiemen || place.tendiadiem);
+
+  contentEl.innerHTML =
+    lang === "vi"
+      ? place.thuyetminh
+      : place.thuyetminhtienganh;
+
+  imageEl.src = place.anhdaidien;
+
+  // reset audio
+  audio.src = "";
+  playBtn.innerText = "▶";
+
+  autoPlay();
+}
+
+// ================= AUDIO =================
+function playAudio() {
+  audio.src = lang === "vi"
+    ? place.audiotiengviet
+    : place.audiotienganh;
+
+  audio.play();
+}
+
+function autoPlay() {
+  playAudio();
+}
+
+playBtn.onclick = () => {
+  if (!audio.src) playAudio();
+
+  if (audio.paused) {
+    audio.play();
+    playBtn.innerText = "⏸";
+  } else {
+    audio.pause();
+    playBtn.innerText = "▶";
+  }
+};
+
+audio.ontimeupdate = () => {
+  if (!audio.duration) return;
+
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = percent + "%";
+
+  const min = Math.floor(audio.currentTime / 60);
+  const sec = Math.floor(audio.currentTime % 60);
+  time.innerText = `${min}:${sec.toString().padStart(2,"0")}`;
+};
+
+audio.onended = () => {
+  playBtn.innerText = "▶";
+  progress.style.width = "0%";
+};
+
+// ================= LANG =================
+btnVI.onclick = () => {
+  lang = "vi";
+  btnVI.classList.add("active");
+  btnEN.classList.remove("active");
+  render();
+};
+
+btnEN.onclick = () => {
+  lang = "en";
+  btnEN.classList.add("active");
+  btnVI.classList.remove("active");
+  render();
+};
+
+// ================= NEXT =================
+const nextBtn = document.getElementById("nextBtn");
+const order = JSON.parse(localStorage.getItem("order")) || [];
+
+nextBtn.onclick = () => {
+  const currentId = parseInt(id);
+  const index = order.indexOf(currentId);
+
+  let nextId = order[0];
+
+  if (index !== -1 && index < order.length - 1) {
+    nextId = order[index + 1];
+  }
+
+  window.location.href = "detail.html?id=" + nextId;
+};
+
+// ================= NAV =================
+function goHome() {
+  window.location.href = "index.html";
+}
+
+// INIT
+render();
+</script>
+
+</body>
+</html>

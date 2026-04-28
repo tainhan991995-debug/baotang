@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảo tàng</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="app">
+
+<!-- COVER -->
+<!-- COVER -->
+<div class="app-cover">
+  <img src="./bia.jpg">
+
+  <div class="cover-overlay">
+    <h1 id="museumTitle">
+      🏛️ Bảo tàng Thiên nhiên duyên hải miền Trung
+    </h1>
+
+    <h2 id="museumTitleEn" class="hidden">
+      🏛️ Central Coastal Nature Museum
+    </h2>
+
+    <p id="museumSub">
+      Hệ thống thuyết minh tự động
+    </p>
+
+    <p id="museumSubEn" class="hidden">
+      Automatic Audio Guide System
+    </p>
+  </div>
+</div>
+<!-- SWITCH NGÔN NGỮ -->
+<div class="lang-switch" id="langSwitch">
+  <img id="langIcon" src="./vn.jpg">
+</div>
+
+<!-- LIST -->
+<div class="app-list" id="list"></div>
+
+<script src="./app.js"></script>
+
+<script>
+// ===== GLOBAL =====
+let currentLang = localStorage.getItem("lang") || "vi";
+let currentAudio = null;
+let currentBtn = null;
+
+const langSwitch = document.getElementById("langSwitch");
+const langIcon = document.getElementById("langIcon");
+
+// ===== UPDATE FLAG =====
+function updateLangUI() {
+  langIcon.src = currentLang === "vi" ? "./vn.jpg" : "./anh.jpg";
+}
+updateLangUI();
+updateHeaderLang();
+
+function updateHeaderLang() {
+  const isVI = currentLang === "vi";
+
+  document.getElementById("museumTitle").style.display = isVI ? "block" : "none";
+  document.getElementById("museumSub").style.display = isVI ? "block" : "none";
+
+  document.getElementById("museumTitleEn").style.display = isVI ? "none" : "block";
+  document.getElementById("museumSubEn").style.display = isVI ? "none" : "block";
+}
+
+// ===== SWITCH LANGUAGE =====
+langSwitch.onclick = () => {
+  currentLang = currentLang === "vi" ? "en" : "vi";
+  localStorage.setItem("lang", currentLang);
+  updateLangUI();
+updateHeaderLang(); // 👈 THÊM NGAY SAU updateLangUI()
+
+  if (currentAudio) {
+    currentAudio.pause();
+    if (currentBtn) currentBtn.innerText = "▶";
+    currentAudio = null;
+    currentBtn = null;
+  }
+
+  load(); // reload lại danh sách
+};
+
+// ===== LOAD DATA =====
+async function load() {
+  const data = await getPlaces();
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  // ===== MAP PHÒNG =====
+  const rooms = [
+    { id: 1, key: 1 },
+    { id: 8, key: 8 },
+    { id: 9, key: 9 },
+    { id: 10, key: 10 },
+    { id: 11, key: 11 },
+    { id: 12, key: 12 },
+    { id: 13, key: 13 }
+  ];
+
+  // ===== TITLE =====
+  function getRoomTitle(id) {
+    const map = {
+      1: {
+        vi: "GIỚI THIỆU TỔNG QUAN BẢO TÀNG THIÊN NHIÊN DUYÊN HẢI MIỀN TRUNG",
+        en: "GENERAL INTRODUCTION TO THE CENTRAL COASTAL NATURE MUSEUM"
+      },
+      8: {
+        vi: "I. Phòng trưng bày Thực vật và gỗ rừng",
+        en: "I. Wood and Plant Exhibition Room"
+      },
+      9: {
+        vi: "II. Phòng trưng bày Khu hệ Thú rừng mưa nhiệt đới",
+        en: "II. Tropical Rainforest Mammal Fauna Exhibition Room"
+      },
+      10: {
+        vi: "III. Phòng trưng bày Cá, Lưỡng cư và Bò sát",
+        en: "III. Fish, Amphibians, and Reptiles Exhibition Room"
+      },
+      11: {
+        vi: "IV. Phòng trưng bày Tiến hóa sinh giới",
+        en: "IV. Evolution of Life Exhibition Room"
+      },
+      12: {
+        vi: "V. Phòng trưng bày Khu hệ chim vùng đầm phá",
+        en: "V. Lagoon Bird Fauna Exhibition Room"
+      },
+      13: {
+        vi: "VI. Phòng trưng bày Địa chất và Khoáng sản",
+        en: "VI. Geology and Mineral Resources Exhibition Room"
+      }
+    };
+    return map[id] ? map[id][currentLang] : "";
+  }
+
+  // ===== TẦNG =====
+  function getFloor(id) {
+    if (id === 1) return "";
+    if (id >= 8 && id <= 10) return currentLang === "vi" ? "TẦNG 1" : "FLOOR 1";
+    if (id === 11) return currentLang === "vi" ? "TẦNG 2" : "FLOOR 2";
+    if (id >= 12) return currentLang === "vi" ? "TẦNG 3" : "FLOOR 3";
+  }
+
+  let lastFloor = "";
+
+  rooms.forEach(room => {
+
+const items = data.filter(d => d.danhmuc == room.id);
+    if (!items.length) return;
+
+    const floor = getFloor(room.id);
+
+    // ===== HIỂN THỊ TẦNG =====
+    if (floor && floor !== lastFloor) {
+      const floorDiv = document.createElement("div");
+      floorDiv.className = "floor-title";
+
+      floorDiv.innerText = floor;
+      list.appendChild(floorDiv);
+      lastFloor = floor;
+    }
+
+    // ===== ROOM =====
+    const section = document.createElement("div");
+   // 👉 chỉ tổng quan là main
+const isMain = room.id == 1;
+
+section.className = isMain
+  ? "category main-category"
+  : "category";
+
+ section.innerHTML = `
+  <div class="category-title">
+    <span class="category-text">${getRoomTitle(room.id)}</span>
+    <span class="arrow">▼</span>
+  </div>
+  <div class="category-list"></div>
+`;
+
+    const title = section.querySelector(".category-title");
+const listWrap = section.querySelector(".category-list");
+const arrow = section.querySelector(".arrow");
+
+title.onclick = () => {
+  listWrap.classList.toggle("open");
+  section.classList.toggle("open");
+};
+
+
+    // ===== ITEMS =====
+    items.forEach((item, index) => {
+
+      const div = document.createElement("div");
+      div.className = "app-card";
+
+      const number = (index + 1).toString().padStart(2, "0");
+
+      div.innerHTML = `
+  <div class="card-left">
+    <div class="card-number">${number}</div>
+  </div>
+
+  <div class="card-content">
+    <div class="card-title">
+      ${currentLang === "vi"
+        ? item.tendiadiem
+        : (item.tendiadiemen || item.tendiadiem)
+      }
+    </div>
+  </div>
+  <div class="card-right">
+    <button class="play-btn">▶</button>
+    <audio></audio>
+  </div>
+`;
+
+      const titleEl = div.querySelector(".card-title");
+      const btn = div.querySelector(".play-btn");
+      const audio = div.querySelector("audio");
+
+      // 👉 CLICK DETAIL
+      titleEl.onclick = () => {
+     localStorage.setItem("place_" + item.id, JSON.stringify(item));
+window.location.href = "detail.html?id=" + item.id;
+      };
+
+      // 👉 PLAY AUDIO
+      btn.onclick = () => {
+
+        if (currentAudio === audio) {
+          audio.pause();
+          btn.innerText = "▶";
+          currentAudio = null;
+          currentBtn = null;
+          return;
+        }
+
+        if (currentAudio) {
+          currentAudio.pause();
+          if (currentBtn) currentBtn.innerText = "▶";
+        }
+
+        audio.src = currentLang === "vi"
+          ? item.audiotiengviet
+          : item.audiotienganh;
+
+        audio.play();
+        btn.innerText = "⏸";
+
+        currentAudio = audio;
+        currentBtn = btn;
+      };
+
+      audio.onended = () => {
+        btn.innerText = "▶";
+        currentAudio = null;
+        currentBtn = null;
+      };
+
+      listWrap.appendChild(div);
+    });
+
+    list.appendChild(section);
+  });
+}
+
+// ===== START =====
+load();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,642 @@
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* ===== BACKGROUND ===== */
+
+/* ===== GLASS BACKGROUND ===== */
+body.app {
+  background: linear-gradient(180deg, #e3f2fd, #bbdefb);
+}
+
+/* ===== CATEGORY MAX ===== */
+/* ===== CATEGORY ART UI ===== */
+.category {
+  margin: 18px 12px;
+}
+
+/* ===== LEVEL 1: DANH MỤC CHÍNH ===== */
+.main-category .category-title {
+  background: linear-gradient(135deg, #1565c0, #42a5f5);
+
+  font-size: 20px;
+  font-weight: 900;
+
+  padding: 18px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 22px rgba(21,101,192,0.35);
+
+  text-transform: uppercase;
+}
+/* KHỐI CHÍNH */
+.category-title {
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  color: white;
+
+  padding: 18px 20px;
+  margin: 14px 0;
+
+  border-radius: 16px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+
+  transition: all 0.25s ease;
+}
+.floor-title {
+  width: 91%;
+  margin: 16px auto;
+
+  padding: 16px 20px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  font-size: 20px;   /* 👈 to bằng tổng quan */
+  font-weight: 900;
+
+  color: white;
+
+  background: linear-gradient(135deg, #2c7be5, #9dabf7); /* 👈 có nền rõ */
+
+  box-shadow:
+    0 6px 18px rgba(21,101,192,0.35);
+
+  letter-spacing: 1px;
+}
+.category-title {
+  width: 92%;
+  margin: 10px auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px 18px; /* 👈 giảm chiều cao */
+
+  border-radius: 14px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg, #2c7be5, #4dabf7); /* 👈 dịu hơn */
+
+  color: white;
+
+  box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+
+  cursor: pointer;
+}
+.category-list {
+  width: 92%;
+  margin: 0 auto;
+}
+.category-list.open {
+  display: block;
+}
+/* hover nhẹ */
+.category-title:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.category.open .category-title {
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+}
+/* ===== TEXT ===== */
+.category-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* tiêu đề chính */
+.category-main {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+/* tiếng anh nhỏ */
+.category-sub {
+  font-size: 13px;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* ===== ICON MŨI TÊN ===== */
+.arrow {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.1);
+
+  transition: 0.3s;
+}
+
+/* khi mở */
+.category.open .arrow {
+  transform: rotate(180deg); /* ▼ -> ▲ */
+  background: rgba(255,255,255,0.3);
+}
+
+/* ===== HIỆU ỨNG VIỀN SÁNG ===== */
+.category.open .category-title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 0 25px rgba(33,150,243,0.6);
+
+  opacity: 0.5;
+}
+
+/* ===== LIST ===== */
+
+
+/* ===== CARD FULL HÀNG NGANG ===== */
+.app-card {
+  width: 100%; /* 👈 QUAN TRỌNG */
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 12px 16px;
+  margin: 10px 0;
+
+  border-radius: 14px;
+
+  background: white;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+/* hover nhẹ */
+.app-card:hover {
+  transform: translateY(-2px);
+}
+
+/* LEFT NUMBER */
+.card-left {
+  min-width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-weight: bold;
+}
+
+/* CONTENT GIỮA */
+.card-content {
+  flex: 1;
+}
+
+/* TITLE */
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* ENGLISH */
+.card-sub {
+  font-size: 13px;
+  color: #777;
+  margin-top: 3px;
+}
+
+/* RIGHT PLAY */
+.card-right {
+  display: flex;
+  align-items: center;
+}
+
+/* PLAY BUTTON */
+.play-btn {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(135deg, #1e88e5, #00c6ff);
+  color: white;
+
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+
+  cursor: pointer;
+}
+/* ===== NUMBER ===== */
+.card-number {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+}
+
+/* ===== TITLE ===== */
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: #777;
+}
+
+/* ===== PLAY BUTTON ===== */
+.play-btn {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(135deg, #1e88e5, #00c6ff);
+  color: white;
+
+  font-size: 18px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+  transition: 0.25s;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.play-btn:active {
+  transform: scale(0.9);
+}
+
+/* ===== ACTIVE AUDIO (ĐANG PHÁT) ===== */
+.app-card.playing {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  box-shadow: 0 10px 25px rgba(30,136,229,0.4);
+}
+
+/* glowing effect */
+.app-card.playing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border-radius: 16px;
+
+  box-shadow: 0 0 20px rgba(33,150,243,0.5);
+  opacity: 0.6;
+}
+
+/* ===== ANIMATION MỞ CATEGORY ===== */
+.category.open .app-card {
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== NUMBER ===== */
+.card-left {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-weight: bold;
+}
+
+/* ===== TITLE ===== */
+.card-content {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* english */
+.card-sub {
+  font-size: 13px;
+  color: #777;
+  margin-top: 3px;
+}
+
+/* ===== PLAY BUTTON ===== */
+.play-btn {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(135deg, #1e88e5, #00c6ff);
+  color: white;
+
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+
+  transition: 0.25s;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.play-btn:active {
+  transform: scale(0.9);
+}
+
+/* ===== LANG SWITCH ===== */
+.lang-switch {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+  border-radius: 50%;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+
+  z-index: 999;
+  cursor: pointer;
+}
+
+.lang-switch img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* ===== DETAIL ===== */
+.app-detail {
+  padding: 16px;
+  padding-bottom: 100px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-detail h2 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+
+  color: #0d47a1;
+
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.1),
+    0 0 6px rgba(255,255,255,0.6);
+}
+
+/* IMAGE */
+.app-img {
+  display: block;
+  margin: 0 auto;
+
+  width: 85%;
+  max-height: 220px;
+
+  object-fit: cover;
+  border-radius: 16px;
+
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+}
+.lang-center {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+
+  margin-top: 20px;   /* 👈 nằm dưới ảnh */
+  margin-bottom: 24px;
+}
+.lang-btn {
+  border: none;
+
+  padding: 12px 22px;
+  border-radius: 999px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  min-width: 120px; /* 👈 đảm bảo 2 nút bằng nhau */
+
+  background: rgba(255,255,255,0.95);
+  color: #333;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.lang-btn.active {
+  background: linear-gradient(135deg, #1976d2, #42a5f5);
+  color: white;
+}
+/* ===== AUDIO BAR ===== */
+.audio-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+
+  box-shadow: 0 -4px 14px rgba(0,0,0,0.15);
+}
+
+/* play */
+.audio-bar button {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: linear-gradient(135deg, #1e88e5, #00c6ff);
+  color: white;
+
+  font-size: 22px;
+}
+
+/* progress */
+.progress {
+  flex: 1;
+  height: 8px;
+
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #1e88e5;
+}
+
+/* time */
+#time {
+  min-width: 45px;
+  font-size: 14px;
+}
+
+.app-cover {
+  position: relative;
+  height: 180px; /* 👈 giảm xuống */
+  overflow: hidden;
+}
+
+.app-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay chữ */
+.cover-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  text-align: center;
+
+  background: rgba(0,0,0,0.25); /* 👈 nhẹ lại */
+}
+.card-content {
+  flex: 1;
+}
+.next-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 80px;
+}
+
+#nextBtn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: white;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+#nextBtn:hover {
+  transform: translateY(-2px);
+}
+
+.card-right {
+  margin-left: auto;
+}
+.category-list {
+  display: none;
+}
+
+.category-list.open {
+  display: block;
+}
