@@ -525,15 +525,40 @@ body.app {
 }
 
 /* ===== FLOOR TITLE ===== */
+/* ===== FLOOR TITLE STYLE MỚI ===== */
 .floor-title {
-  border-radius: 999px !important;
+  width: calc(100% - 24px);
+  margin: 20px auto 10px;
 
-  text-align: center;
+  padding: 0;
+
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  font-size: 22px;
   font-weight: 800;
 
-  background: linear-gradient(90deg, #5f7fdc, #8fa4f5);
+  color: #0f2a44;
+
+  text-align: left;
+
+  position: relative;
 }
 
+/* gạch dưới */
+.floor-title::after {
+  content: "";
+
+  display: block;
+
+  width: 100%;
+  height: 2px;
+
+  margin-top: 10px;
+
+  background: rgba(0,0,0,0.15);
+}
 /* ===== CARD FIX ===== */
 .app-card {
   border-radius: 16px;
