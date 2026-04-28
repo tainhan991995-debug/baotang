@@ -55,12 +55,16 @@
 const id = new URLSearchParams(window.location.search).get("id");
 let place = JSON.parse(localStorage.getItem("place_" + id));
 
-// 👉 nếu không có thì tìm từ list
+// fallback
 if (!place) {
-  const order = JSON.parse(localStorage.getItem("order")) || [];
   const all = JSON.parse(localStorage.getItem("places")) || [];
-
   place = all.find(p => p.id == id);
+}
+
+// 👉 CHẶN LỖI
+if (!place) {
+  alert("Không có dữ liệu!");
+  window.location.href = "index.html";
 }
 
 let lang = "vi";
