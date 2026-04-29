@@ -10,15 +10,39 @@
 <body class="app">
 
 <!-- HEADER -->
-<div class="app-header">
-  <button class="back-icon" onclick="goHome()">←</button>
-  <div id="headerTitle"></div>
+<!-- COVER -->
+<div class="app-cover small" onclick="goHome()">
+  <div class="cover-overlay">
+
+    <div class="cover-top">
+
+      <div class="cover-left">
+
+        <div class="title-row">
+          <div class="logo-wrap">
+            <img src="./logo.jpg" class="logo">
+          </div>
+
+          <div class="title-text">
+            <h1>Bảo tàng Thiên nhiên duyên hải miền Trung</h1>
+          </div>
+        </div>
+
+        <p>Hệ thống thuyết minh tự động</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 <!-- CONTENT -->
 <div class="app-detail">
 
   <h2 id="title"></h2>
+
 
   <img id="image" class="app-img">
 
@@ -27,16 +51,6 @@
     <button id="btnVI" class="lang-btn active">Tiếng Việt</button>
     <button id="btnEN" class="lang-btn">English</button>
   </div>
-
-  <!-- TEXT -->
-  <div id="content"></div>
-
-</div>
-
-<!-- NEXT -->
-<div class="next-wrap">
-  <button id="nextBtn">➡️ Tiếp theo</button>
-</div>
 
 <!-- AUDIO -->
 <div class="audio-bar">
@@ -50,6 +64,17 @@
 </div>
 
 <audio id="audio"></audio>
+
+  <!-- TEXT -->
+  <div id="content"></div>
+
+</div>
+
+<!-- NEXT -->
+<div class="next-wrap">
+  <button id="nextBtn">➡️ Tiếp theo</button>
+</div>
+
 
 <script>
 const id = new URLSearchParams(window.location.search).get("id");
@@ -88,10 +113,11 @@ function render() {
       ? place.tendiadiem
       : (place.tendiadiemen || place.tendiadiem);
 
-  contentEl.innerHTML =
-    lang === "vi"
-      ? place.thuyetminh
-      : place.thuyetminhtienganh;
+  contentEl.innerHTML = `
+  <div class="content">
+    ${lang === "vi" ? place.thuyetminh : place.thuyetminhtienganh}
+  </div>
+`;
 
   imageEl.src = place.anhdaidien;
 
@@ -128,6 +154,15 @@ playBtn.onclick = () => {
 };
 
 audio.ontimeupdate = () => {
+// 👉 HIỂN THỊ TỔNG THỜI GIAN AUDIO
+audio.onloadedmetadata = () => {
+  const min = Math.floor(audio.duration / 60);
+  const sec = Math.floor(audio.duration % 60);
+
+  time.innerText =
+    String(min).padStart(2, "0") + ":" +
+    String(sec).padStart(2, "0");
+};
   if (!audio.duration) return;
 
   const percent = (audio.currentTime / audio.duration) * 100;
