@@ -11,31 +11,44 @@
 
 <!-- COVER -->
 <div class="app-cover">
-  <img src="./bia.jpg">
 
   <div class="cover-overlay">
-    <h1 id="museumTitle">
-      🏛️ Bảo tàng Thiên nhiên duyên hải miền Trung
-    </h1>
 
-    <h2 id="museumTitleEn" class="hidden">
-      🏛️ Central Coastal Nature Museum
-    </h2>
+    <div class="cover-top">
 
-    <p id="museumSub">
-      Hệ thống thuyết minh tự động
-    </p>
+      <div class="cover-left">
 
-    <p id="museumSubEn" class="hidden">
-      Automatic Audio Guide System
-    </p>
+        <!-- HÀNG LOGO + TITLE -->
+        <div class="title-row">
+
+          <div class="logo-wrap">
+            <img src="./logo.jpg" class="logo">
+          </div>
+
+          <div class="title-text">
+            <h1 id="museumTitle">BẢO TÀNG THIÊN NHIÊN DUYÊN HẢI MIỀN TRUNG</h1>
+            <h2 id="museumTitleEn" class="hidden">CENTRAL COASTAL NATURE MUSEUM</h2>
+          </div>
+
+        </div>
+
+        <!-- SUB -->
+        <p id="museumSub">Hệ thống thuyết minh tự động</p>
+        <p id="museumSubEn" class="hidden">Automatic Audio Guide System</p>
+
+      </div>
+
+      <!-- FLAG -->
+      <div class="lang-switch" id="langSwitch">
+        <img id="langIcon" src="./vn.jpg">
+      </div>
+
+    </div>
+
   </div>
-</div>
 
-<!-- SWITCH NGÔN NGỮ -->
-<div class="lang-switch" id="langSwitch">
-  <img id="langIcon" src="./vn.jpg">
 </div>
+    
 
 <!-- LIST -->
 <div class="app-list" id="list"></div>
@@ -53,17 +66,17 @@ const langIcon = document.getElementById("langIcon");
 
 // ===== FLAG =====
 function updateLangUI() {
-  langIcon.src = currentLang === "vi" ? "./vn.jpg" : "./anh.jpg";
+langIcon.src = currentLang === "vi" ? "./vn.jpg" : "./en.jpg";
 }
 
 function updateHeaderLang() {
   const isVI = currentLang === "vi";
 
-  document.getElementById("museumTitle").style.display = isVI ? "block" : "none";
-  document.getElementById("museumSub").style.display = isVI ? "block" : "none";
+  document.getElementById("museumTitle").classList.toggle("hidden", !isVI);
+  document.getElementById("museumTitleEn").classList.toggle("hidden", isVI);
 
-  document.getElementById("museumTitleEn").style.display = isVI ? "none" : "block";
-  document.getElementById("museumSubEn").style.display = isVI ? "none" : "block";
+  document.getElementById("museumSub").classList.toggle("hidden", !isVI);
+  document.getElementById("museumSubEn").classList.toggle("hidden", isVI);
 }
 
 updateLangUI();
@@ -216,7 +229,8 @@ async function load() {
         if (currentAudio) {
           currentAudio.pause();
           if (currentBtn) currentBtn.innerText = "▶";
-        }
+  
+      }
 
         audio.src = currentLang === "vi"
           ? item.audiotiengviet
