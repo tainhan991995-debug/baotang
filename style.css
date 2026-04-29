@@ -7,7 +7,7 @@ body {
 }
 
 body.app {
-  background: linear-gradient(180deg, #e3f2fd, #bbdefb);
+  background: #f2f4f7; /* 👈 nền xám giống ảnh */
 }
 
 /* ===== COVER (ẢNH BÌA) ===== */
@@ -211,8 +211,7 @@ body.app {
 
   border-radius: 16px;
 
-  background: #f8f9fb;
-
+  background: #ffffff;
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 
   transition: 0.2s;
@@ -449,21 +448,28 @@ body.app {
 }
 /* ===== GLOBAL FIX ===== */
 .category-title {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
+  display: flex;
+  align-items: center;
 
-  text-align: left !important;
+  padding: 14px 50px 14px 20px !important; /* 👈 chừa chỗ cho icon */
 
-  border-radius: 999px !important;
-  padding: 14px 20px !important;
+  min-height: 64px; /* 👈 chiều cao cố định */
 
-  width: calc(100% - 24px);
-  margin: 10px auto;
-
-  position: relative;
+  border-radius: 999px;
 }
 
+/* ===== TEXT KHÔNG ĐÈ ICON ===== */
+.category-title .category-main {
+  flex: 1;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 👈 tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  line-height: 1.4;
+}
 /* ===== TEXT LUÔN BÊN TRÁI ===== */
 .category-title span,
 .category-title .category-text,
@@ -513,14 +519,18 @@ body.app {
 
 /* ===== MAIN CATEGORY ===== */
 .main-category .category-title {
-  background: linear-gradient(90deg, #2f6bcf, #3f8cff) !important;
+background: #1f5fa8 !important;
   font-size: 16px !important;
   font-weight: 700 !important;
 }
 
 /* ===== SUB CATEGORY ===== */
 .category:not(.main-category) .category-title {
-  background: linear-gradient(90deg, #3a7bd5, #4fb3d8) !important;
+   background: linear-gradient(
+    90deg,
+    #2f80ed,   /* xanh đậm */
+    #5aa9e6    /* xanh nhạt hơn */
+  );;
   font-size: 15px !important;
 }
 
