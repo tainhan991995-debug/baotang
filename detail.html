@@ -10,34 +10,33 @@
 <body class="app">
 
 <!-- HEADER -->
-<!-- COVER -->
 <div class="app-cover small" onclick="goHome()">
   <div class="cover-overlay">
-
     <div class="cover-top">
-
       <div class="cover-left">
 
-        <div class="title-row">
+        <div class="cover-header">
+
+          <!-- LOGO -->
           <div class="logo-wrap">
             <img src="./logo.jpg" class="logo">
           </div>
 
-          <div class="title-text">
-            <h1>Bảo tàng Thiên nhiên duyên hải miền Trung</h1>
+          <!-- TEXT -->
+          <div class="title-group">
+            <h1 id="museumTitle">BẢO TÀNG THIÊN NHIÊN DUYÊN HẢI MIỀN TRUNG</h1>
+            <h1 id="museumTitleEn" class="hidden">CENTRAL COASTAL NATURE MUSEUM</h1>
+
+            <p id="museumSub">Hệ thống thuyết minh tự động</p>
+            <p id="museumSubEn" class="hidden">Automatic Audio Guide System</p>
           </div>
+
         </div>
 
-        <p>Hệ thống thuyết minh tự động</p>
-
       </div>
-
     </div>
-
   </div>
-
 </div>
-
 <!-- CONTENT -->
 <div class="app-detail">
 
@@ -92,7 +91,7 @@ if (!place) {
   window.location.href = "index.html";
 }
 
-let lang = "vi";
+let lang = localStorage.getItem("lang") || "vi";
 
 const titleEl = document.getElementById("title");
 const contentEl = document.getElementById("content");
@@ -126,6 +125,8 @@ function render() {
   playBtn.innerText = "▶";
 
   autoPlay();
+updateHeaderLang();
+
 }
 
 // ================= AUDIO =================
@@ -181,17 +182,32 @@ audio.onended = () => {
 // ================= LANG =================
 btnVI.onclick = () => {
   lang = "vi";
+  localStorage.setItem("lang", lang);
+
   btnVI.classList.add("active");
   btnEN.classList.remove("active");
+
   render();
 };
 
 btnEN.onclick = () => {
   lang = "en";
+  localStorage.setItem("lang", lang);
+
   btnEN.classList.add("active");
   btnVI.classList.remove("active");
+
   render();
 };
+function updateHeaderLang() {
+  const isVI = lang === "vi";
+
+  document.getElementById("museumTitle").classList.toggle("hidden", !isVI);
+  document.getElementById("museumTitleEn").classList.toggle("hidden", isVI);
+
+  document.getElementById("museumSub").classList.toggle("hidden", !isVI);
+  document.getElementById("museumSubEn").classList.toggle("hidden", isVI);
+}
 
 // ================= NEXT =================
 const nextBtn = document.getElementById("nextBtn");
