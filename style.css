@@ -14,6 +14,7 @@ body.app {
 .app-cover {
   position: relative;
   width: 100%;
+  height: 220px;
 
   aspect-ratio: 900 / 400; /* 👈 chuẩn tỉ lệ */
 
@@ -45,9 +46,9 @@ body.app {
 }
 
 /* ===== ROW LOGO + TITLE ===== */
-.title-row {
-  display: flex;
-  align-items: center;
+.cover-header {
+    display: flex;
+  align-items: flex-start; /* 👈 FIX thật */
   gap: 12px;
 }
 
@@ -67,27 +68,32 @@ body.app {
 }
 
 /* ===== TITLE ===== */
-.title-text {
-  display: flex;
-  flex-direction: column;
-}
+
 
 #museumTitle,
 #museumTitleEn {
   font-size: 22px;
+text-shadow:
+    0 2px 4px rgba(0,0,0,0.6),
+    0 0 2px rgba(0,0,0,0.8);
   font-weight: 700;
   margin: 0;
   line-height: 1.25;
+  padding-right: 50px; /* 👈 CHỪA CHỖ CHO CỜ */
+
 }
 
 /* ===== SUB ===== */
 #museumSub,
 #museumSubEn {
-  font-size: 14px;
+  font-size: 19px;
+  display: inline-block;   /* 👈 để viền ôm chữ */
+
 
   margin-top: 6px;
 
   margin-left: 60px; /* 👈 QUAN TRỌNG */
+
 }
 
 /* ===== FLAG ===== */
@@ -140,7 +146,7 @@ body.app {
 
   text-align: center;
 
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: #fff;
 
@@ -166,7 +172,7 @@ body.app {
   align-items: center;
   justify-content: space-between;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   color: #fff;
 
@@ -280,13 +286,13 @@ body.app {
 }
 
 .card-title {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   color: #222;
 }
 
 .card-sub {
-  font-size: 13px;
+  font-size: 15px;
   color: #777;
   margin-top: 3px;
 }
@@ -397,7 +403,7 @@ line-height: 1.7;
   border-radius: 999px;
   border: none;
 
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
 
   background: #eee;
@@ -428,7 +434,10 @@ line-height: 1.7;
   display: flex;
   justify-content: center;
 
-  margin-top: 20px;
+  margin-top: 0px;     /* 👈 giảm nữa */
+}
+.app-detail .content {
+  margin-bottom: 8px;  /* 👈 giảm khoảng trắng dưới */
 }
 
 #nextBtn {
@@ -437,7 +446,7 @@ line-height: 1.7;
   border-radius: 999px;
   border: none;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 
   background: linear-gradient(135deg, #ff9800, #ff5722);
@@ -507,7 +516,7 @@ line-height: 1.7;
 /* time */
 #time {
   min-width: 45px;
-  font-size: 14px;
+  font-size: 16px;
   text-align: right;
 }
 /* ===== RESPONSIVE ===== */
@@ -517,7 +526,7 @@ line-height: 1.7;
   }
 
   .app-detail p {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 /* ===== GLOBAL FIX ===== */
@@ -571,7 +580,7 @@ line-height: 1.7;
 
   background: rgba(255,255,255,0.25);
 
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
 
   padding: 0;
@@ -588,13 +597,13 @@ line-height: 1.7;
 
 /* nếu dùng text ▲ */
 .arrow {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* ===== MAIN CATEGORY ===== */
 .main-category .category-title {
 background: #1f5fa8 !important;
-  font-size: 16px !important;
+  font-size: 18px !important;
   font-weight: 700 !important;
 }
 
@@ -605,7 +614,7 @@ background: #1f5fa8 !important;
     #2f80ed,   /* xanh đậm */
     #5aa9e6    /* xanh nhạt hơn */
   );;
-  font-size: 15px !important;
+  font-size: 17px !important;
 }
 
 /* ===== FLOOR TITLE ===== */
@@ -618,7 +627,7 @@ background: #1f5fa8 !important;
 
   padding: 0 20px; /* 👈 giống category-title */
 
-  font-size: 16px; /* 👈 giảm size */
+  font-size: 18px; /* 👈 giảm size */
   font-weight: 700;
 
   text-align: left;
@@ -681,8 +690,8 @@ background: #1f5fa8 !important;
   display: flex;
   justify-content: center;
 
-  margin-top: 8px;   /* 👈 cách nội dung */
-  margin-bottom: 100px; /* 👈 tránh audio bar */
+  margin-top: -80px;   /* 👈 cách nội dung */
+
 }
 
 /* button */
@@ -693,7 +702,7 @@ background: #1f5fa8 !important;
 
   background: linear-gradient(135deg, #ff9800, #ff5722);
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
@@ -752,12 +761,13 @@ background: #1f5fa8 !important;
   gap: 12px;
 }
 
+/* ===== LOGO ===== */
 .logo-wrap {
   width: 48px;
   height: 48px;
-
   border-radius: 50%;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .logo {
@@ -765,17 +775,29 @@ background: #1f5fa8 !important;
   height: 100%;
   object-fit: cover;
 }
-.app-cover.small h1 {
-  font-size: 20px; /* 👈 giống index */
+.app-cover.small #museumTitle,
+.app-cover.small #museumTitleEn {
+
+  font-size: 22px;
   font-weight: 700;
   margin: 0;
-  line-height: 1.3;
-}
-.app-cover.small p {
-  font-size: 14px;
-  margin-top: 6px;
 
-  margin-left: 60px; /* thẳng với chữ */
+  line-height: 1.3;
+
+
+  text-shadow:
+    0 2px 4px rgba(0,0,0,0.6),
+    0 0 2px rgba(0,0,0,0.8);
+}
+
+.app-cover.small #museumSub,
+.app-cover.small #museumSubEn {
+  font-size: 18px;
+  margin-top: 6px;
+  display: inline-block;   /* 👈 để viền ôm chữ */
+
+  margin-left: 0;       /* 👈 FIX */
+  text-align: left;     /* 👈 đảm bảo không bị center */
 }
 /* ===== TITLE DETAIL ===== */
 #title {
@@ -792,4 +814,10 @@ background: #1f5fa8 !important;
   padding-bottom: 8px;
 
   border-bottom: 2px solid #dbe3ec;
+}
+
+.app-cover.small .cover-header {
+  display: flex;
+  align-items: flex-start; /* 👈 FIX CHO TRANG CON */
+  gap: 12px;
 }
