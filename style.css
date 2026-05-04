@@ -690,7 +690,7 @@ background: #1f5fa8 !important;
   display: flex;
   justify-content: center;
 
-  margin-top: -80px;   /* 👈 cách nội dung */
+  margin-top: -100px;   /* 👈 cách nội dung */
 
 }
 
@@ -821,3 +821,73 @@ background: #1f5fa8 !important;
   align-items: flex-start; /* 👈 FIX CHO TRANG CON */
   gap: 12px;
 }
+
+.museum-info {
+    position: relative;
+
+  margin: 20px 0;        /* ❗ bỏ margin 2 bên */
+  border-radius: 0;      /* ❗ bỏ bo góc */
+  width: 100%;           /* ❗ full ngang */
+
+  overflow: hidden;
+background: url("./bia1.jpg") center / cover no-repeat;
+  color: white;
+}
+
+.museum-info .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.info-content {
+  position: relative;
+  padding: 20px;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.info-content h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.info-content p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+.social {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.social img {
+  width: 36px;
+  height: 36px;
+}
+
+.detail-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #ff9800;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
