@@ -57,6 +57,11 @@ body.app {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+border: 1px solid White;
+box-shadow:
+  0 0 6px rgba(90,169,230,0.8),
+  0 0 12px rgba(90,169,230,0.5);
+
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -72,7 +77,7 @@ body.app {
 
 #museumTitle,
 #museumTitleEn {
-  font-size: 22px;
+  font-size: 18px;
 text-shadow:
     0 2px 4px rgba(0,0,0,0.6),
     0 0 2px rgba(0,0,0,0.8);
@@ -86,13 +91,15 @@ text-shadow:
 /* ===== SUB ===== */
 #museumSub,
 #museumSubEn {
-  font-size: 19px;
+  font-size: 16px;
   display: inline-block;   /* 👈 để viền ôm chữ */
-
-
-  margin-top: 6px;
-
+  margin-top: 1px;
   margin-left: 60px; /* 👈 QUAN TRỌNG */
+font-weight: 500;   /* đậm */
+font-style: italic; /* nghiêng */
+text-shadow:
+    0 1px 2px rgba(0,0,0,0.6),
+    0 0 1px rgba(0,0,0,0.8);
 
 }
 
@@ -101,8 +108,8 @@ text-shadow:
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -110,7 +117,11 @@ text-shadow:
 .lang-switch img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+ border: 1px solid white;
+  border-radius: 50%; /* 👈 quan trọng */
+
+  object-fit: cover;  /* 👈 tránh méo */
+
 }
 
 /* ===== HIDDEN ===== */
@@ -823,71 +834,126 @@ background: #1f5fa8 !important;
 }
 
 .museum-info {
-    position: relative;
-
-  margin: 20px 0;        /* ❗ bỏ margin 2 bên */
-  border-radius: 0;      /* ❗ bỏ bo góc */
-  width: 100%;           /* ❗ full ngang */
-
-  overflow: hidden;
-background: url("./bia1.jpg") center / cover no-repeat;
-  color: white;
-}
-
-.museum-info .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-}
-
-.info-content {
   position: relative;
-  padding: 20px;
+  margin: 20px 0;
+  border-radius: 0;
+  width: 100%;
+  overflow: hidden;
+
+  background: url("./bia1.jpg") center / cover no-repeat;
+  color: white;
+
 }
 
+
+/* overlay xanh 80% */
+.museum-info .overlay {
+  background: rgba(15, 103, 175, 0.8);
+}
+
+/* ===== CONTAINER ===== */
+.info-content {
+  display: flex;
+  flex-direction: column;   /* ✅ xếp dọc */
+  gap: 18px;                /* khoảng cách giữa các khối */
+}
+
+/* ===== HEADER ===== */
 .info-header {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+/* logo */
 .info-logo {
-  width: 48px;
-  height: 48px;
+  width: 40px;   /* ❌ bạn ghi sai 40x */
+  height: 40px;
+
   border-radius: 50%;
+  border: 1px solid #5aa9e6;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
 }
 
+/* ===== TITLE ===== */
 .info-content h3 {
-  font-size: 16px;
+  font-size: 15px;
   margin: 0;
+
+  letter-spacing: -0.3px;
+
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.8),
+    0 0 1px rgba(0,0,0,0.9);
 }
 
+/* ===== CONTAINER ===== */
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 20px 18px; /* 👈 đúng chỗ */
+}
+
+/* ===== TEXT ===== */
 .info-content p {
   font-size: 14px;
-  line-height: 1.6;
-  margin: 8px 0;
+  line-height: 1.5;
+  margin: 6px 0;
+
+  text-align: justify;
+
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
 }
 
+/* ===== BLOCK CHIA ===== */
+.info-block {
+  width: 100%;
+  padding-bottom: 5px;
+  position: relative;
+}
+
+/* ===== LINE GIỮA KHỐI ===== */
+.info-block::after {
+  content: "";               /* ❗ thiếu cái này là không hiện */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 60%;                /* 👈 line ngắn */
+  height: 1px;
+
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0.2),
+    transparent
+  );
+}
+
+/* bỏ line cuối */
+.info-block:last-child::after {
+  display: none;
+}
+
+/* ===== SOCIAL ===== */
 .social {
   display: flex;
-  gap: 14px;
-  margin-top: 10px;
+  gap: 16px;
+  margin-top: 8px;
 }
 
+/* icon */
 .social img {
   width: 36px;
   height: 36px;
-}
 
-.detail-link {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: #ff9800;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-}
+  border-radius: 50%;
+  border: 1px solid #5aa9e6;
 
+  object-fit: cover;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
