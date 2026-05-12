@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi tiết</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="app">
+
+<!-- HEADER -->
+<div class="app-cover small" onclick="goHome()">
+  <div class="cover-overlay">
+    <div class="cover-top">
+      <div class="cover-left">
+
+        <div class="cover-header">
+
+          <!-- LOGO -->
+          <div class="logo-wrap">
+            <img src="./logo.jpg" class="logo">
+          </div>
+
+          <!-- TEXT -->
+          <div class="title-group">
+            <h1 id="museumTitle">
+  BẢO TÀNG THIÊN NHIÊN <br>
+  DUYÊN HẢI MIỀN TRUNG
+</h1>
+            <h1 id="museumTitleEn" class="hidden">CENTRAL COASTAL NATURE MUSEUM</h1>
+
+            <p id="museumSub">Hệ thống thuyết minh tự động</p>
+            <p id="museumSubEn" class="hidden">Automatic Audio Guide System</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- CONTENT -->
+<div class="app-detail">
+
+  <h2 id="title"></h2>
+
+
+<div id="gallery" class="hero-slider"></div>
+
+
+  <!-- LANG -->
+  <div class="lang-center">
+    <button id="btnVI" class="lang-btn active">Tiếng Việt</button>
+    <button id="btnEN" class="lang-btn">English</button>
+  </div>
+
+<!-- AUDIO -->
+<div class="audio-bar">
+  <button id="playBtn">▶</button>
+
+  <div class="progress">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+
+  <span id="time">0:00</span>
+</div>
+
+<audio id="audio"></audio>
+
+
+
+  <!-- TEXT -->
+  <div id="content"></div>
+
+</div>
+
+<div id="content"></div>
+
+<!-- NEXT -->
+<div class="next-wrap">
+  <button id="nextBtn">➡️ Tiếp theo</button>
+</div>
+
+<div class="museum-info">
+  <div class="overlay"></div>
+
+  <div class="info-content">
+
+    <!-- HEADER -->
+    <div class="info-header">
+      <img src="./logo.jpg" class="info-logo">
+      <h3>BẢO TÀNG THIÊN NHIÊN DUYÊN HẢI MIỀN TRUNG</h3>
+    </div> <!-- ✅ ĐÓNG Ở ĐÂY -->
+
+    <!-- BLOCK 1 -->
+    <div class="info-block desc">
+      <p>
+        Là nơi sưu tầm, trưng bày và giới thiệu đến người dân, du khách
+        một cách chân thực, chuyên sâu nhất về hệ sinh thái rừng mưa nhiệt đới tiêu biểu của Việt Nam
+      </p>
+    </div>
+
+    <!-- BLOCK 2 -->
+    <div class="info-block contact">
+      <p><b>Địa chỉ:</b> 05 Điềm Phùng Thị, Phường Vĩ Dạ, Thành phố Huế</p>
+      <p><b>Điện thoại:</b> 0706.077.949</p>
+      <p><b>Email:</b> bttndhmt@hue.gov.vn</p>
+    </div>
+
+    <!-- BLOCK 3 -->
+    <div class="info-block social-block">
+      <p><b>THEO DÕI CHÚNG TÔI TẠI</b></p>
+
+      <div class="social">
+        <a href="https://fb.com/bttndhmt" target="_blank">
+          <img src="fb.png">
+        </a>
+        <a href="https://www.tiktok.com/@bttndhmt" target="_blank">
+          <img src="tiktok.png">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+// ================= DETAIL =================
+
+const id = new URLSearchParams(window.location.search).get("id");
+
+let place = JSON.parse(localStorage.getItem("place_" + id));
+
+// fallback
+if (!place) {
+  const all = JSON.parse(localStorage.getItem("places")) || [];
+  place = all.find(p => p.id == id);
+}
+
+if (!place) {
+  alert("Không có dữ liệu!");
+  window.location.href = "index.html";
+}
+
+let lang = localStorage.getItem("lang") || "vi";
+
+const titleEl = document.getElementById("title");
+const contentEl = document.getElementById("content");
+
+const btnVI = document.getElementById("btnVI");
+const btnEN = document.getElementById("btnEN");
+
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const progress = document.getElementById("progress");
+const time = document.getElementById("time");
+
+// ================= RENDER =================
+async function render() {
+
+  titleEl.innerText =
+    lang === "vi"
+      ? place.tendiadiem
+      : (place.tendiadiemen || place.tendiadiem);
+
+  contentEl.innerHTML = `
+    <div class="content">
+      ${lang === "vi"
+        ? place.thuyetminh
+        : place.thuyetminhtienganh}
+    </div>
+  `;
+// ================= HERO SLIDER =================
+
+const galleryEl =
+  document.getElementById("gallery");
+
+// ảnh đại diện đầu tiên
+const images = [
+
+  {
+    taianh: place.anhdaidien
+  },
+
+  ...(await getImages(
+    place.id || place.autoid
+  ))
+];
+
+const hasMultiple =
+  images.length > 1;
+galleryEl.innerHTML = `
+
+${hasMultiple ? `
+<button class="nav prev" onclick="prevSlide()">
+❮
+</button>
+` : ""}
+
+<div class="slides">
+
+${images.map(img => {
+
+  const src =
+    img.taianh ||
+    img.url ||
+    "";
+
+  return `
+
+    <div class="hero-slide">
+
+      <img
+        src="${src}"
+        onclick="openImage('${src}')"
+      >
+
+    </div>
+
+  `;
+
+}).join("")}
+
+</div>
+
+${hasMultiple ? `
+<button class="nav next" onclick="nextSlideManual()">
+❯
+</button>
+` : ""}
+
+${hasMultiple ? `
+<div class="dots">
+
+${images.map((_,i)=>`
+  <span class="dot ${i===0?"active":""}"></span>
+`).join("")}
+
+</div>
+` : ""}
+`;
+
+// ================= AUTO SLIDE =================
+
+let currentSlide = 0;
+
+const slidesWrap =
+  galleryEl.querySelector(".slides");
+
+const slides =
+  galleryEl.querySelectorAll(".hero-slide");
+
+// ===== SHOW =====
+
+function showSlide(index){
+
+  slides[index].scrollIntoView({
+
+    behavior:"smooth",
+
+    inline:"center",
+
+    block:"nearest"
+
+  });
+
+  updateDots();
+}
+
+// ===== DOTS =====
+
+function updateDots(){
+
+  const dots =
+    galleryEl.querySelectorAll(".dot");
+
+  dots.forEach(dot =>
+    dot.classList.remove("active")
+  );
+
+  dots[indexSafe()]
+    ?.classList.add("active");
+}
+
+function indexSafe(){
+
+  if(currentSlide >= slides.length){
+    currentSlide = 0;
+  }
+
+  if(currentSlide < 0){
+    currentSlide = slides.length - 1;
+  }
+
+  return currentSlide;
+}
+
+// ===== NEXT =====
+
+function nextSlide(){
+
+  currentSlide++;
+
+  indexSafe();
+
+  showSlide(currentSlide);
+}
+
+// ===== PREV =====
+
+function prevSlide(){
+
+  currentSlide--;
+
+  indexSafe();
+
+  showSlide(currentSlide);
+}
+
+// ===== BUTTONS =====
+
+window.nextSlideManual = () => {
+
+  nextSlide();
+
+  resetAuto();
+};
+
+window.prevSlide = () => {
+
+  prevSlide();
+
+  resetAuto();
+};
+
+// ===== AUTO =====
+
+let autoSlide =
+  setInterval(nextSlide, 5000);
+
+function resetAuto(){
+
+  clearInterval(autoSlide);
+
+  autoSlide =
+    setInterval(nextSlide, 5000);
+}
+
+// ===== TOUCH FIX =====
+let isTouching = false;
+
+galleryEl.addEventListener("touchstart", () => {
+
+  isTouching = true;
+
+  clearInterval(autoSlide);
+});
+
+galleryEl.addEventListener("touchend", () => {
+
+  isTouching = false;
+
+  // tìm slide hiện tại
+  const slideWidth =
+    slides[0].offsetWidth;
+
+  currentSlide = Math.round(
+slidesWrap.scrollLeft / slideWidth
+  );
+
+  // chạy lại auto
+  autoSlide = setInterval(
+    nextSlide,
+    5000
+  );
+});
+  
+  // audio
+  audio.src = "";
+  playBtn.innerText = "▶";
+
+  autoPlay();
+
+  updateHeaderLang();
+}
+
+// ================= AUDIO =================
+function playAudio() {
+
+  audio.src = lang === "vi"
+    ? place.audiotiengviet
+    : place.audiotienganh;
+
+  audio.play();
+}
+
+function autoPlay() {
+  playAudio();
+}
+
+playBtn.onclick = () => {
+
+  if (!audio.src) {
+    playAudio();
+  }
+
+  if (audio.paused) {
+
+    audio.play();
+    playBtn.innerText = "⏸";
+
+  } else {
+
+    audio.pause();
+    playBtn.innerText = "▶";
+  }
+};
+
+audio.ontimeupdate = () => {
+
+  if (!audio.duration) return;
+
+  const percent =
+    (audio.currentTime / audio.duration) * 100;
+
+  progress.style.width = percent + "%";
+
+  const min = Math.floor(audio.currentTime / 60);
+  const sec = Math.floor(audio.currentTime % 60);
+
+  time.innerText =
+    `${min}:${sec.toString().padStart(2,"0")}`;
+};
+
+// ================= LANG =================
+btnVI.onclick = () => {
+
+  lang = "vi";
+
+  localStorage.setItem("lang", lang);
+
+  btnVI.classList.add("active");
+  btnEN.classList.remove("active");
+
+  render();
+};
+
+btnEN.onclick = () => {
+
+  lang = "en";
+
+  localStorage.setItem("lang", lang);
+
+  btnEN.classList.add("active");
+  btnVI.classList.remove("active");
+
+  render();
+};
+
+function updateHeaderLang() {
+
+  const isVI = lang === "vi";
+
+  document.getElementById("museumTitle")
+    .classList.toggle("hidden", !isVI);
+
+  document.getElementById("museumTitleEn")
+    .classList.toggle("hidden", isVI);
+
+  document.getElementById("museumSub")
+    .classList.toggle("hidden", !isVI);
+
+  document.getElementById("museumSubEn")
+    .classList.toggle("hidden", isVI);
+}
+
+// ================= NEXT =================
+const nextBtn = document.getElementById("nextBtn");
+
+const order =
+  JSON.parse(localStorage.getItem("order")) || [];
+
+nextBtn.onclick = () => {
+
+  const currentId = parseInt(id);
+
+  const index = order.indexOf(currentId);
+
+  let nextId = order[0];
+
+  if (index !== -1 && index < order.length - 1) {
+    nextId = order[index + 1];
+  }
+
+  window.location.href =
+    "detail.html?id=" + nextId;
+};
+
+// ================= NAV =================
+function goHome() {
+  window.location.href = "index.html";
+}
+
+// ================= IMAGE VIEWER =================
+function openImage(src) {
+
+  document.getElementById("viewer").style.display = "flex";
+
+  document.getElementById("viewerImg").src = src;
+}
+
+function closeViewer() {
+
+  document.getElementById("viewer").style.display = "none";
+}
+
+// INIT
+async function init() {
+
+  await getToken();
+
+  render();
+}
+
+init();
+
+</script>
+
+<div id="viewer" class="viewer" onclick="closeViewer()">
+  <img id="viewerImg">
+</div>
