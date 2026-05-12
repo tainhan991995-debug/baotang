@@ -382,25 +382,29 @@ galleryEl.addEventListener("touchstart", () => {
   clearInterval(autoSlide);
 });
 
-galleryEl.addEventListener("touchend", () => {
+slidesWrap.addEventListener("scroll", () => {
 
-  isTouching = false;
-
-  // tìm slide hiện tại
   const slideWidth =
     slides[0].offsetWidth;
 
   currentSlide = Math.round(
-slidesWrap.scrollLeft / slideWidth
+    slidesWrap.scrollLeft / slideWidth
   );
 
-  // chạy lại auto
-  autoSlide = setInterval(
-    nextSlide,
-    5000
-  );
+  updateDots();
 });
-  
+
+// ===== TOUCH =====
+
+galleryEl.addEventListener("touchstart", () => {
+
+  clearInterval(autoSlide);
+});
+
+galleryEl.addEventListener("touchend", () => {
+
+  resetAuto();
+});
   // audio
   audio.src = "";
   playBtn.innerText = "▶";
