@@ -216,9 +216,11 @@ ${images.map(img => {
     <div class="hero-slide">
 
       <img
-        src="${src}"
-        onclick="openImage('${src}')"
-      >
+  data-src="${src}"
+  src=""
+  class="lazy-img"
+  onclick="openImage('${src}')"
+>
 
     </div>
 
@@ -254,6 +256,25 @@ const slidesWrap =
 
 const slides =
   galleryEl.querySelectorAll(".hero-slide");
+// ===== LAZY LOAD + COMPRESS =====
+
+const lazyImages =
+  galleryEl.querySelectorAll(".lazy-img");
+
+lazyImages.forEach(async (img)=>{
+
+  const original =
+    img.dataset.src;
+
+  const compressed =
+    await compressImage(
+      original,
+      0.5,
+      1000
+    );
+
+  img.src = compressed;
+});
 
 // ===== SHOW =====
 
@@ -518,7 +539,58 @@ function closeViewer() {
 
   document.getElementById("viewer").style.display = "none";
 }
+// ================= COMPRESS IMAGE =================
 
+async function compressImage(url, quality = 0.7, maxWidth = 1200){
+
+  return new Promise((resolve) => {
+
+    const img = new Image();
+
+    img.crossOrigin = "anonymous";
+
+    img.onload = () => {
+
+      const canvas =
+        document.createElement("canvas");
+
+      let width = img.width;
+      let height = img.height;
+
+      // resize
+      if(width > maxWidth){
+
+        height =
+          height * (maxWidth / width);
+
+        width = maxWidth;
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx =
+        canvas.getContext("2d");
+
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        width,
+        height
+      );
+
+      resolve(
+        canvas.toDataURL(
+          "image/jpeg",
+          quality
+        )
+      );
+    };
+
+    img.src = url;
+  });
+}
 // INIT
 async function init() {
 
