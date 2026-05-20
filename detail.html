@@ -132,49 +132,127 @@
 
 // ================= DETAIL =================
 
-const id = new URLSearchParams(window.location.search).get("id");
+const id =
+new URLSearchParams(window.location.search)
+.get("id");
 
-let place = JSON.parse(localStorage.getItem("place_" + id));
+// cache local
+let place =
+JSON.parse(
+localStorage.getItem("place_" + id)
+);
 
-// fallback
+// fallback list
 if (!place) {
-  const all = JSON.parse(localStorage.getItem("places")) || [];
-  place = all.find(p => p.id == id);
+
+const all =
+JSON.parse(
+localStorage.getItem("places")
+) || [];
+
+place = all.find(
+p => p.id == id
+);
 }
 
-if (!place) {
-  alert("Không có dữ liệu!");
-  window.location.href = "index.html";
+let lang =
+localStorage.getItem("lang") || "vi";
+
+const titleEl =
+document.getElementById("title");
+
+const contentEl =
+document.getElementById("content");
+
+const btnVI =
+document.getElementById("btnVI");
+
+const btnEN =
+document.getElementById("btnEN");
+
+const audio =
+document.getElementById("audio");
+
+const playBtn =
+document.getElementById("playBtn");
+
+const progress =
+document.getElementById("progress");
+
+const time =
+document.getElementById("time");
+
+// ================= LOAD API =================
+
+async function loadPlaceFromAPI(id) {
+
+try {
+
+const res = await fetch(
+  API_URL + "/places/" + id
+);
+
+const data = await res.json();
+
+// hỗ trợ nhiều kiểu API
+place = data.data || data;
+
+// cache lại
+localStorage.setItem(
+  "place_" + id,
+  JSON.stringify(place)
+);
+
+render();
+
+} catch (e) {
+
+console.log(e);
+
+alert("Không tải được dữ liệu!");
+
+window.location.href =
+  "index.html";
+
 }
-
-let lang = localStorage.getItem("lang") || "vi";
-
-const titleEl = document.getElementById("title");
-const contentEl = document.getElementById("content");
-
-const btnVI = document.getElementById("btnVI");
-const btnEN = document.getElementById("btnEN");
-
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const progress = document.getElementById("progress");
-const time = document.getElementById("time");
+}
 
 // ================= RENDER =================
+
 async function render() {
 
-  titleEl.innerText =
-    lang === "vi"
-      ? place.tendiadiem
-      : (place.tendiadiemen || place.tendiadiem);
+if (!place) return;
 
-  contentEl.innerHTML = `
-    <div class="content">
-      ${lang === "vi"
+titleEl.innerText =
+lang === "vi"
+? place.tendiadiem
+: (
+place.tendiadiemen ||
+place.tendiadiem
+);
+
+contentEl.innerHTML = `
+  <div class="content">
+    ${
+      lang === "vi"
         ? place.thuyetminh
-        : place.thuyetminhtienganh}
-    </div>
-  `;
+        : place.thuyetminhtienganh
+    }
+  </div>
+`;
+// ===== AUDIO =====
+
+audio.pause();
+
+audio.src =
+lang === "vi"
+? place.audiotiengviet
+: place.audiotienganh;
+
+playBtn.innerText = "▶";
+
+updateHeaderLang()
+
 // ================= HERO SLIDER =================
 
 const galleryEl =
@@ -405,44 +483,44 @@ galleryEl.addEventListener("touchend", () => {
 
   resetAuto();
 });
-  // audio
-  audio.src = "";
-  playBtn.innerText = "▶";
+  
+    // audio
+  audio.pause();
 
-  autoPlay();
+  audio.src =
+    lang === "vi"
+      ? place.audiotiengviet
+      : place.audiotienganh;
+
+  playBtn.innerText = "▶";
 
   updateHeaderLang();
 }
 
 // ================= AUDIO =================
-function playAudio() {
 
-  audio.src = lang === "vi"
-    ? place.audiotiengviet
-    : place.audiotienganh;
+playBtn.onclick = async () => {
 
-  audio.play();
-}
+  if (!audio.src) return;
 
-function autoPlay() {
-  playAudio();
-}
+  try {
 
-playBtn.onclick = () => {
+    if (audio.paused) {
 
-  if (!audio.src) {
-    playAudio();
-  }
+      await audio.play();
 
-  if (audio.paused) {
+      playBtn.innerText = "⏸";
 
-    audio.play();
-    playBtn.innerText = "⏸";
+    } else {
 
-  } else {
+      audio.pause();
 
-    audio.pause();
-    playBtn.innerText = "▶";
+      playBtn.innerText = "▶";
+    }
+
+  } catch (e) {
+
+    console.log(e);
   }
 };
 
@@ -600,7 +678,33 @@ async function init() {
 
   await getToken();
 
-  render();
+  // chưa có cache
+  if (!place) {
+
+    await loadAllPlaces();
+
+    const all =
+      JSON.parse(
+        localStorage.getItem("places")
+      ) || [];
+
+    place = all.find(
+      p => p.id == id
+    );
+  }
+
+  // có dữ liệu
+  if (place) {
+
+    render();
+
+  } else {
+
+    alert("Không có dữ liệu!");
+
+    window.location.href =
+      "index.html";
+  }
 }
 
 init();
