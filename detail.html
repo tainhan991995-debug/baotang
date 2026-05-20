@@ -681,15 +681,13 @@ async function init() {
   // chưa có cache
   if (!place) {
 
-    await loadAllPlaces();
-
     const all =
-      JSON.parse(
-        localStorage.getItem("places")
-      ) || [];
+      await loadAllPlaces();
 
     place = all.find(
-      p => p.id == id
+      p =>
+        String(p.id) ===
+        String(id)
     );
   }
 
