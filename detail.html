@@ -182,41 +182,32 @@ document.getElementById("progress");
 const time =
 document.getElementById("time");
 
-// ================= LOAD API =================
 
-async function loadPlaceFromAPI(id) {
+// ================= LOAD ALL PLACES =================
 
-try {
+async function loadAllPlaces() {
 
-const res = await fetch(
-  API_URL + "/places/" + id
-);
+  try {
 
-const data = await res.json();
+    const places = await getPlaces();
 
-// hỗ trợ nhiều kiểu API
-place = data.data || data;
+    localStorage.setItem(
+      "places",
+      JSON.stringify(places)
+    );
 
-// cache lại
-localStorage.setItem(
-  "place_" + id,
-  JSON.stringify(place)
-);
+    return places;
 
-render();
+  } catch (e) {
 
-} catch (e) {
+    console.log(
+      "LOAD PLACES ERROR:",
+      e
+    );
 
-console.log(e);
-
-alert("Không tải được dữ liệu!");
-
-window.location.href =
-  "index.html";
-
+    return [];
+  }
 }
-}
-
 // ================= RENDER =================
 
 async function render() {
@@ -325,6 +316,7 @@ ${images.map((_,i)=>`
 ` : ""}
 `;
 
+  
 // ================= AUTO SLIDE =================
 
 let currentSlide = 0;
@@ -686,8 +678,11 @@ async function init() {
 
     place = all.find(
       p =>
-        String(p.id) ===
-        String(id)
+        String(
+          p.id ||
+          p.autoid ||
+          p.iddulieu
+        ) === String(id)
     );
   }
 
