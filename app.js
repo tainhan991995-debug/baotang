@@ -121,3 +121,26 @@ async function getImages(placeId){
 
   return images;
 }
+async function loadAllPlaces() {
+
+  try {
+
+    const res = await fetch(
+      API_URL + "/places"
+    );
+
+    const data = await res.json();
+
+    const places =
+      data.data || data;
+
+    localStorage.setItem(
+      "places",
+      JSON.stringify(places)
+    );
+
+  } catch (e) {
+
+    console.log(e);
+  }
+}
