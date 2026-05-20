@@ -125,22 +125,19 @@ async function loadAllPlaces() {
 
   try {
 
-    const res = await fetch(
-      API_URL + "/places"
-    );
-
-    const data = await res.json();
-
-    const places =
-      data.data || data;
+    const places = await getPlaces();
 
     localStorage.setItem(
       "places",
       JSON.stringify(places)
     );
 
+    return places;
+
   } catch (e) {
 
-    console.log(e);
+    console.log("LOAD PLACES ERROR:", e);
+
+    return [];
   }
 }
