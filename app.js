@@ -228,45 +228,6 @@ async function optimizeImage(url) {
   });
 }
 
-      // ===== TỐI ƯU RENDER =====
-      ctx.imageSmoothingEnabled = true;
-
-      ctx.imageSmoothingQuality =
-        "medium";
-
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        width,
-        height
-      );
-
-      // ===== WEBP NÉN MẠNH =====
-      const compressed =
-        canvas.toDataURL(
-          "image/webp",
-          0.55
-        );
-
-      // cleanup RAM
-      canvas.width = 0;
-      canvas.height = 0;
-
-      resolve(compressed);
-    };
-
-    img.onerror = () => {
-
-      resolve(url);
-    };
-
-    img.src = url;
-  });
-}
-
-
-
 // ================= LAZY LOAD =================
 
 function initLazyLoad() {
