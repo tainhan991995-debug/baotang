@@ -152,8 +152,6 @@ async function loadAllPlaces() {
 
 async function optimizeImage(url) {
 
-
-
   return new Promise(resolve => {
 
     const img = new Image();
@@ -166,22 +164,20 @@ async function optimizeImage(url) {
 
     img.onload = () => {
 
-      // ===== GIẢM KÍCH THƯỚC =====
-      const maxWidth = 900;
+      // ===== GIẢM SIZE MẠNH =====
+      const maxWidth = 480;
 
       let width = img.width;
       let height = img.height;
 
-      // resize
+      // resize nhỏ mạnh
       if (width > maxWidth) {
 
-        const ratio =
-          maxWidth / width;
+        const ratio = maxWidth / width;
 
         width = maxWidth;
 
-        height =
-          height * ratio;
+        height = height * ratio;
       }
 
       const canvas =
@@ -192,13 +188,45 @@ async function optimizeImage(url) {
       canvas.height = height;
 
       const ctx =
-        canvas.getContext(
-          "2d",
-          {
-            alpha:false,
-            willReadFrequently:false
-          }
+        canvas.getContext("2d", {
+          alpha: false
+        });
+
+      // render nhẹ
+      ctx.imageSmoothingEnabled = true;
+
+      ctx.imageSmoothingQuality = "low";
+
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        width,
+        height
+      );
+
+      // ===== NÉN RẤT MẠNH =====
+      const compressed =
+        canvas.toDataURL(
+          "image/webp",
+          0.35
         );
+
+      // cleanup
+      canvas.width = 0;
+      canvas.height = 0;
+
+      resolve(compressed);
+    };
+
+    img.onerror = () => {
+
+      resolve(url);
+    };
+
+    img.src = url;
+  });
+}
 
       // ===== TỐI ƯU RENDER =====
       ctx.imageSmoothingEnabled = true;
@@ -247,43 +275,113 @@ function initLazyLoad() {
     document.querySelectorAll(".lazy-img");
 
   const observer =
-    new IntersectionObserver(async entries => {
+    new IntersectionObserver(
 
-      for (const entry of entries) {
+      async entries => {
 
-        if (entry.isIntersecting) {
+        for (const entry of entries) {
 
-          const img = entry.target;
+          if (entry.isIntersecting) {
 
-          const optimized =
-            await optimizeImage(
-              img.dataset.src
-            );
+            const img = entry.target;
 
-          img.src = optimized;
+            // tránh load lại
+            if (!img.dataset.src) {
+              continue;
+            }
 
-          img.onload = () => {
+            // ===== optimize ảnh =====
+            const optimized =
+              await optimizeImage(
+                img.dataset.src
+              );
 
-            img.classList.add(
-              "loaded"
-            );
+            // ===== render nhẹ =====
+            img.loading = "lazy";
 
-            img.removeAttribute(
-              "data-src"
-            );
-          };
+            img.decoding = "async";
 
-          observer.unobserve(img);
+            img.draggable = false;
+
+            // ===== FIX iPHONE =====
+            img.style.pointerEvents =
+              "none";
+
+            img.style.userSelect =
+              "none";
+
+            img.style.webkitUserDrag =
+              "none";
+
+            img.style.webkitTouchCallout =
+              "none";
+
+            // ===== FIX KHUNG ẢNH =====
+            img.style.width = "100%";
+
+            img.style.height = "220px";
+
+            img.style.maxHeight =
+              "220px";
+
+            img.style.objectFit =
+              "cover";
+
+            img.style.display =
+              "block";
+
+            img.style.flexShrink = "0";
+
+            // ===== set src =====
+            img.src = optimized;
+
+            img.onload = () => {
+
+              img.classList.add(
+                "loaded"
+              );
+
+              img.removeAttribute(
+                "data-src"
+              );
+            };
+
+            observer.unobserve(img);
+          }
         }
-      }
 
-    }, {
-      rootMargin: "200px"
-    });
+      },
+
+      {
+        rootMargin: "100px"
+      }
+    );
 
   lazyImages.forEach(img => {
 
     observer.observe(img);
+  });
+}
+
+// ================= FIX SLIDER =================
+
+function fixSlider() {
+
+  const sliders =
+    document.querySelectorAll(
+      ".slides"
+    );
+
+  sliders.forEach(slide => {
+
+    slide.style.overflow =
+      "hidden";
+
+    slide.style.height =
+      "220px";
+
+    slide.style.maxHeight =
+      "220px";
   });
 }
 
@@ -294,13 +392,37 @@ window.addEventListener(
   () => {
 
     const audio =
-      document.getElementById("audio");
+      document.getElementById(
+        "audio"
+      );
 
     if (audio) {
 
       audio.pause();
 
       audio.src = "";
+
+      audio.load();
     }
+  }
+);
+
+// ================= FIX IOS SCROLL =================
+
+document.body.style.overflowX =
+  "hidden";
+
+document.documentElement.style
+  .overflowX = "hidden";
+
+// ================= INIT =================
+
+window.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    initLazyLoad();
+
+    fixSlider();
   }
 );
