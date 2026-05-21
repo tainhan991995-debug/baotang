@@ -128,7 +128,8 @@ async function loadAllPlaces() {
 
   try {
 
-    const places = await getPlaces();
+    const places =
+      await getPlaces();
 
     localStorage.setItem(
       "places",
