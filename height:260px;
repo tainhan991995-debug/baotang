@@ -161,7 +161,7 @@ text-shadow:
   font-weight: 700;
   color: #fff;
 
-  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 
   cursor: pointer;
 }
@@ -351,7 +351,7 @@ text-shadow:
   padding: 12px;
 
 background: #d1d5db; /* 👈 xám đậm hơn */
-  backdrop-filter: blur(12px);
+background: rgba(255,255,255,0.92);
   border-radius: 10px; /* 👈 bo cong nhẹ */
 
 
@@ -1010,7 +1010,9 @@ font-style: italic; /* nghiêng */
 
   width:100%;
 
-  height:260px;
+  .hero-slide img{
+  height: 220px;
+}
 
   object-fit:cover;
 
@@ -1105,4 +1107,86 @@ font-style: italic; /* nghiêng */
   border-radius:999px;
 
   background:#fff;
+}
+
+
+/* ===== MOBILE OPTIMIZE ===== */
+
+html,
+body{
+
+  overflow-x:hidden;
+
+  -webkit-overflow-scrolling:touch;
+
+  scroll-behavior:smooth;
+}
+
+/* giảm lag safari */
+*{
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+/* GPU optimize */
+.hero-slide,
+.app-card,
+.category-title,
+.app-img{
+
+  transform: translateZ(0);
+
+  will-change: transform;
+}
+
+/* lazy render */
+.category,
+.app-card,
+.app-detail,
+.museum-info{
+
+  content-visibility:auto;
+
+  contain-intrinsic-size:300px;
+}
+
+/* mobile image */
+.hero-slide img{
+
+  height:220px;
+}
+
+/* text mobile */
+.app-detail p{
+
+  font-size:15px;
+
+  line-height:1.6;
+}
+
+/* shadow nhẹ hơn */
+.app-card,
+.category-title,
+.play-btn,
+#nextBtn{
+
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.12);
+}
+
+/* audio bar nhẹ */
+.audio-bar{
+
+  background:
+    rgba(255,255,255,0.92);
+}
+
+/* mobile không hover */
+@media (hover:hover){
+
+  .app-card:hover{
+
+    transform:
+      translateY(-2px);
+  }
 }
