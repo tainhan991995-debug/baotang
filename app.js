@@ -319,8 +319,7 @@ function initLazyLoad() {
             // ===== FIX KHUNG ẢNH =====
             img.style.width = "100%";
 
-            img.style.height = "220px";
-
+img.style.height = "100%";
             img.style.maxHeight =
               "220px";
 
@@ -367,21 +366,15 @@ function initLazyLoad() {
 
 function fixSlider() {
 
-  const sliders =
-    document.querySelectorAll(
-      ".slides"
-    );
+  document.querySelectorAll(
+    ".hero-slider, .slides, .hero-slide"
+  ).forEach(el => {
 
-  sliders.forEach(slide => {
+    el.style.height = "220px";
 
-    slide.style.overflow =
-      "hidden";
+    el.style.maxHeight = "220px";
 
-    slide.style.height =
-      "220px";
-
-    slide.style.maxHeight =
-      "220px";
+    el.style.overflow = "hidden";
   });
 }
 
