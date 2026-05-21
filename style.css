@@ -128,10 +128,7 @@ text-shadow:
 .hidden {
   display: none !important;
 }
-/* ===== HIDDEN ===== */
-.hidden {
-  display: none !important;
-}
+
 
 /* ===== CATEGORY ===== */
 .category {
@@ -716,7 +713,7 @@ background: #1f5fa8 !important;
   font-size: 18px;
   font-weight: 600;
 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 }
 
 
@@ -980,8 +977,8 @@ font-style: italic; /* nghiêng */
 
   scroll-snap-stop:always;
 
-  scroll-behavior:smooth;
 
+  
   border-radius:22px;
 
   -webkit-overflow-scrolling:touch;
@@ -991,6 +988,9 @@ font-style: italic; /* nghiêng */
   display:none;
 }
 
+html{
+  scroll-behavior:auto;
+}
 /* ===== EACH SLIDE ===== */
 
 .hero-slide{
@@ -1010,9 +1010,7 @@ font-style: italic; /* nghiêng */
 
   width:100%;
 
-  .hero-slide img{
-  height: 220px;
-}
+  height:220px;
 
   object-fit:cover;
 
@@ -1118,8 +1116,6 @@ body{
   overflow-x:hidden;
 
   -webkit-overflow-scrolling:touch;
-
-  scroll-behavior:smooth;
 }
 
 /* giảm lag safari */
@@ -1129,14 +1125,8 @@ body{
 }
 
 /* GPU optimize */
-.hero-slide,
-.app-card,
-.category-title,
-.app-img{
-
-  transform: translateZ(0);
-
-  will-change: transform;
+.hero-slide{
+  transform:translateZ(0);
 }
 
 /* lazy render */
@@ -1145,9 +1135,6 @@ body{
 .app-detail,
 .museum-info{
 
-  content-visibility:auto;
-
-  contain-intrinsic-size:300px;
 }
 
 /* mobile image */
