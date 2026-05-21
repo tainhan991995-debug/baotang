@@ -950,6 +950,7 @@ font-style: italic; /* nghiêng */
 /* ===== WRAP ===== */
 
 .hero-slider{
+
   position: relative;
 
   width: 100%;
@@ -958,7 +959,9 @@ font-style: italic; /* nghiêng */
 
   overflow: hidden;
 
-  border-radius: 22px;
+  border-radius: 16px;
+
+  background: #000;
 }
 
 /* ===== SLIDES ===== */
@@ -966,15 +969,16 @@ font-style: italic; /* nghiêng */
 .slides{
 
   width: 100%;
-  height: 220px;
+
+  height: 100%;
 
   display: flex;
 
-  overflow: hidden; /* 👈 FIX */
+  overflow: hidden;
 
   position: relative;
 
-  border-radius: 22px;
+  border-radius: 16px;
 }
 
 .slides::-webkit-scrollbar{
@@ -986,15 +990,16 @@ font-style: italic; /* nghiêng */
 .hero-slide{
 
   min-width: 100%;
+
   width: 100%;
-  height: 220px;
+
+  height: 100%;
 
   flex: 0 0 100%;
 
   position: relative;
 
   overflow: hidden;
-
 }
 
 
@@ -1101,22 +1106,39 @@ body{
 
 /* GPU optimize */
 .hero-slide{
-  transform:translateZ(0);
-}
 
+  min-width: 100%;
+
+  width: 100%;
+
+  height: 100%;
+
+  flex: 0 0 100%;
+
+  position: relative;
+
+  overflow: hidden;
+}
 
 
 /* ===== IMAGE ===== */
 .hero-slide img{
 
   width: 100%;
+
   height: 100%;
 
   object-fit: cover;
 
   display: block;
 
-  border-radius: 22px;
+  border-radius: 16px;
+
+  pointer-events: none;
+
+  -webkit-user-drag: none;
+
+  user-select: none;
 }
 
 /* text mobile */
@@ -1201,19 +1223,35 @@ body::after{
 .slides,
 .hero-slide{
 
-  max-height: 220px !important;
+  min-width: 100%;
 
-  overflow: hidden !important;
+  width: 100%;
+
+  height: 100%;
+
+  flex: 0 0 100%;
+
+  position: relative;
+
+  overflow: hidden;
 }
-
 .hero-slide img{
 
   width: 100%;
+
   height: 100%;
 
   object-fit: cover;
 
   display: block;
+
+  border-radius: 16px;
+
+  pointer-events: none;
+
+  -webkit-user-drag: none;
+
+  user-select: none;
 }
 .hero-slide img,
 .app-img{
