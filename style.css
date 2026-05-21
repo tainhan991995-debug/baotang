@@ -995,7 +995,6 @@ font-style: italic; /* nghiêng */
 
   overflow: hidden;
 
-  scroll-snap-align: center;
 }
 
 
@@ -1224,4 +1223,8 @@ body::after{
   transform: translateZ(0);
 
   backface-visibility: hidden;
+
+  contain: paint;
+
+  image-rendering: auto;
 }
