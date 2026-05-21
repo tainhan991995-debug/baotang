@@ -8,21 +8,21 @@ let token = "";
 
 // ================= TOKEN =================
 
-async function getToken(){
+async function getToken() {
 
   const res = await fetch(API_TOKEN, {
 
-    method:"POST",
+    method: "POST",
 
-    headers:{
-      "Content-Type":"application/json"
+    headers: {
+      "Content-Type": "application/json"
     },
 
-    body:JSON.stringify({
+    body: JSON.stringify({
 
-      username:"Baotang1",
+      username: "Baotang1",
 
-      password:"Baotang123"
+      password: "Baotang123"
 
     })
   });
@@ -36,30 +36,30 @@ async function getToken(){
 
 // ================= PLACES =================
 
-async function getPlaces(){
+async function getPlaces() {
 
-  if(!token){
+  if (!token) {
     await getToken();
   }
 
   const res = await fetch(API_DATA, {
 
-    method:"POST",
+    method: "POST",
 
-    headers:{
-      "Content-Type":"application/json",
-      token:token
+    headers: {
+      "Content-Type": "application/json",
+      token: token
     },
 
-    body:JSON.stringify({
+    body: JSON.stringify({
 
-      serviceid:"kNLicdSB8f5wyIpDGXIHwg==",
+      serviceid: "kNLicdSB8f5wyIpDGXIHwg==",
 
-      thamso:{},
+      thamso: {},
 
-      page:1,
+      page: 1,
 
-      perpage:50
+      perpage: 50
     })
   });
 
@@ -72,9 +72,9 @@ async function getPlaces(){
 
 // ================= IMAGES =================
 
-async function getImages(placeId){
+async function getImages(placeId) {
 
-  if(!token){
+  if (!token) {
     await getToken();
   }
 
@@ -82,26 +82,26 @@ async function getImages(placeId){
     "https://cqs.hue.gov.vn/data/danhsach",
     {
 
-      method:"POST",
+      method: "POST",
 
-      headers:{
-        "Content-Type":"application/json",
-        token:token
+      headers: {
+        "Content-Type": "application/json",
+        token: token
       },
 
-      body:JSON.stringify({
+      body: JSON.stringify({
 
         serviceid:
           "Eurka/RmTXuwLAMXDe5fGA==",
 
-        thamso:{
-          tukhoa:"",
-          eformid:"0"
+        thamso: {
+          tukhoa: "",
+          eformid: "0"
         },
 
-        page:"1",
+        page: "1",
 
-        perpage:"50"
+        perpage: "50"
       })
     }
   );
@@ -114,13 +114,16 @@ async function getImages(placeId){
     (result.data || []).filter(item => {
 
       return String(item.teneformid) ===
-             String(placeId);
+        String(placeId);
     });
 
   console.log("ẢNH:", images);
 
   return images;
 }
+
+// ================= LOAD ALL PLACES =================
+
 async function loadAllPlaces() {
 
   try {
@@ -136,8 +139,139 @@ async function loadAllPlaces() {
 
   } catch (e) {
 
-    console.log("LOAD PLACES ERROR:", e);
+    console.log(
+      "LOAD PLACES ERROR:",
+      e
+    );
 
     return [];
   }
 }
+
+// ================= OPTIMIZE IMAGE =================
+
+async function optimizeImage(url) {
+
+  return new Promise(resolve => {
+
+    const img = new Image();
+
+    img.crossOrigin = "anonymous";
+
+    img.onload = () => {
+
+      const maxWidth = 1200;
+
+      let width = img.width;
+      let height = img.height;
+
+      // resize
+      if (width > maxWidth) {
+
+        height *= maxWidth / width;
+
+        width = maxWidth;
+      }
+
+      const canvas =
+        document.createElement("canvas");
+
+      canvas.width = width;
+
+      canvas.height = height;
+
+      const ctx =
+        canvas.getContext("2d");
+
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        width,
+        height
+      );
+
+      // compress webp
+      const compressed =
+        canvas.toDataURL(
+          "image/webp",
+          0.65
+        );
+
+      resolve(compressed);
+    };
+
+    img.onerror = () => {
+
+      resolve(url);
+    };
+
+    img.src = url;
+  });
+}
+
+// ================= LAZY LOAD =================
+
+function initLazyLoad() {
+
+  const lazyImages =
+    document.querySelectorAll(".lazy-img");
+
+  const observer =
+    new IntersectionObserver(async entries => {
+
+      for (const entry of entries) {
+
+        if (entry.isIntersecting) {
+
+          const img = entry.target;
+
+          const optimized =
+            await optimizeImage(
+              img.dataset.src
+            );
+
+          img.src = optimized;
+
+          img.onload = () => {
+
+            img.classList.add(
+              "loaded"
+            );
+
+            img.removeAttribute(
+              "data-src"
+            );
+          };
+
+          observer.unobserve(img);
+        }
+      }
+
+    }, {
+      rootMargin: "200px"
+    });
+
+  lazyImages.forEach(img => {
+
+    observer.observe(img);
+  });
+}
+
+// ================= AUDIO CLEANUP =================
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+
+    const audio =
+      document.getElementById("audio");
+
+    if (audio) {
+
+      audio.pause();
+
+      audio.src = "";
+    }
+  }
+);
