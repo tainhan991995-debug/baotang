@@ -575,23 +575,85 @@ function updateHeaderLang() {
 }
 
 // ================= NEXT =================
-const nextBtn = document.getElementById("nextBtn");
 
-const order =
-  JSON.parse(localStorage.getItem("order")) || [];
+const nextBtn =
+  document.getElementById("nextBtn");
 
-nextBtn.onclick = () => {
+nextBtn.onclick = async () => {
 
-  const currentId = parseInt(id);
+  // lấy toàn bộ place
+  let all =
+    JSON.parse(
+      localStorage.getItem("places")
+    ) || [];
 
-  const index = order.indexOf(currentId);
+  // chưa có cache
+  if (!all.length) {
 
-  let nextId = order[0];
-
-  if (index !== -1 && index < order.length - 1) {
-    nextId = order[index + 1];
+    all = await loadAllPlaces();
   }
 
+  // sort theo id
+  all.sort((a,b)=>{
+
+    const idA =
+      parseInt(
+        a.id ||
+        a.autoid ||
+        a.iddulieu
+      );
+
+    const idB =
+      parseInt(
+        b.id ||
+        b.autoid ||
+        b.iddulieu
+      );
+
+    return idA - idB;
+  });
+
+  // id hiện tại
+  const currentId =
+    parseInt(id);
+
+  // index hiện tại
+  const index =
+    all.findIndex(p =>
+
+      parseInt(
+        p.id ||
+        p.autoid ||
+        p.iddulieu
+      ) === currentId
+    );
+
+  // mặc định vòng về đầu
+  let nextPlace = all[0];
+
+  // có phần tử tiếp theo
+  if (
+    index !== -1 &&
+    index < all.length - 1
+  ) {
+
+    nextPlace =
+      all[index + 1];
+  }
+
+  // id tiếp theo
+  const nextId =
+    nextPlace.id ||
+    nextPlace.autoid ||
+    nextPlace.iddulieu;
+
+  // cache trước
+  localStorage.setItem(
+    "place_" + nextId,
+    JSON.stringify(nextPlace)
+  );
+
+  // chuyển trang
   window.location.href =
     "detail.html?id=" + nextId;
 };
