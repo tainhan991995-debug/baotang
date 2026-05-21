@@ -152,15 +152,22 @@ async function loadAllPlaces() {
 
 async function optimizeImage(url) {
 
+
+
   return new Promise(resolve => {
 
     const img = new Image();
 
     img.crossOrigin = "anonymous";
 
+    img.decoding = "async";
+
+    img.loading = "lazy";
+
     img.onload = () => {
 
-      const maxWidth = 1200;
+      // ===== GIẢM KÍCH THƯỚC =====
+      const maxWidth = 900;
 
       let width = img.width;
       let height = img.height;
@@ -168,9 +175,13 @@ async function optimizeImage(url) {
       // resize
       if (width > maxWidth) {
 
-        height *= maxWidth / width;
+        const ratio =
+          maxWidth / width;
 
         width = maxWidth;
+
+        height =
+          height * ratio;
       }
 
       const canvas =
@@ -181,7 +192,19 @@ async function optimizeImage(url) {
       canvas.height = height;
 
       const ctx =
-        canvas.getContext("2d");
+        canvas.getContext(
+          "2d",
+          {
+            alpha:false,
+            willReadFrequently:false
+          }
+        );
+
+      // ===== TỐI ƯU RENDER =====
+      ctx.imageSmoothingEnabled = true;
+
+      ctx.imageSmoothingQuality =
+        "medium";
 
       ctx.drawImage(
         img,
@@ -191,12 +214,16 @@ async function optimizeImage(url) {
         height
       );
 
-      // compress webp
+      // ===== WEBP NÉN MẠNH =====
       const compressed =
         canvas.toDataURL(
           "image/webp",
-          0.65
+          0.55
         );
+
+      // cleanup RAM
+      canvas.width = 0;
+      canvas.height = 0;
 
       resolve(compressed);
     };
@@ -209,6 +236,8 @@ async function optimizeImage(url) {
     img.src = url;
   });
 }
+
+
 
 // ================= LAZY LOAD =================
 
