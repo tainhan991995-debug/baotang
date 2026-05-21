@@ -1,705 +1,1005 @@
-```css
-/* =====================================================
-   RESET + MOBILE FIX
-===================================================== */
+/* ===== RESET ===== */
+* { box-sizing: border-box; }
 
-*{
-  box-sizing:border-box;
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-html,
-body{
-
-  margin:0;
-  padding:0;
-
-  overflow-x:hidden;
-
-  overscroll-behavior:none;
-
-  -webkit-overflow-scrolling:touch;
-
-  -webkit-text-size-adjust:100%;
+body.app {
+  background: #f2f4f7; /* 👈 nền xám giống ảnh */
 }
 
-/* safari */
-*{
-  -webkit-tap-highlight-color:
-    transparent;
+/* ===== COVER (FIX CHUẨN 400x900) ===== */
+.app-cover {
+  position: relative;
+  width: 100%;
+  height: 220px;
+
+  aspect-ratio: 900 / 400; /* 👈 chuẩn tỉ lệ */
+
+  background: url("./bia.jpg") center / cover no-repeat;
+
+  overflow: hidden;
 }
 
-body.app{
-  background:#f2f4f7;
+/* ===== OVERLAY ===== */
+.cover-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+  color: white;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.45),
+    transparent
+  );
 }
 
-/* =====================================================
-   COVER
-===================================================== */
-
-.app-cover{
-
-  position:relative;
-
-  width:100%;
-
-  height:220px;
-
-  aspect-ratio:900/400;
-
-  background:
-    url("./bia.jpg")
-    center/cover no-repeat;
-
-  overflow:hidden;
+/* ===== POSITION ===== */
+.cover-left {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  right: 70px;
 }
 
-/* overlay */
-
-.cover-overlay{
-
-  position:absolute;
-
-  inset:0;
-
-  padding:16px;
-
-  color:white;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.45),
-      transparent
-    );
+/* ===== ROW LOGO + TITLE ===== */
+.cover-header {
+    display: flex;
+  align-items: flex-start; /* 👈 FIX thật */
+  gap: 12px;
 }
 
-/* left */
+/* ===== LOGO ===== */
+.logo-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+border: 1px solid White;
+box-shadow:
+    0 0 4px rgba(90,169,230,0.5);
 
-.cover-left{
-
-  position:absolute;
-
-  top:20px;
-
-  left:16px;
-
-  right:70px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-/* row */
-
-.cover-header{
-
-  display:flex;
-
-  align-items:flex-start;
-
-  gap:12px;
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* ===== TITLE ===== */
 
-.logo-wrap{
-
-  width:48px;
-  height:48px;
-
-  border-radius:50%;
-
-  border:1px solid white;
-
-  box-shadow:
-    0 0 12px rgba(90,169,230,.6);
-
-  overflow:hidden;
-
-  flex-shrink:0;
-}
-
-.logo{
-
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-}
-
-/* =====================================================
-   TITLE
-===================================================== */
 
 #museumTitle,
-#museumTitleEn{
+#museumTitleEn {
+  font-size: 18px;
+text-shadow:
+    0 2px 4px rgba(0,0,0,0.6),
+    0 0 2px rgba(0,0,0,0.8);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+  padding-right: 50px; /* 👈 CHỪA CHỖ CHO CỜ */
 
-  font-size:18px;
-
-  font-weight:700;
-
-  margin:0;
-
-  line-height:1.25;
-
-  padding-right:50px;
-
-  text-shadow:
-    0 2px 4px rgba(0,0,0,.6),
-    0 0 2px rgba(0,0,0,.8);
 }
 
+/* ===== SUB ===== */
 #museumSub,
-#museumSubEn{
+#museumSubEn {
+  font-size: 15px;
+  display: inline-block;   /* 👈 để viền ôm chữ */
+  margin-top: 1px;
+  margin-left: 60px; /* 👈 QUAN TRỌNG */
+font-weight: 500;   /* đậm */
+font-style: italic; /* nghiêng */
+text-shadow:
+    0 1px 2px rgba(0,0,0,0.6),
+    0 0 1px rgba(0,0,0,0.8);
 
-  font-size:15px;
-
-  display:inline-block;
-
-  margin-top:2px;
-
-  margin-left:60px;
-
-  font-weight:500;
-
-  font-style:italic;
-
-  text-shadow:
-    0 1px 2px rgba(0,0,0,.6),
-    0 0 1px rgba(0,0,0,.8);
 }
 
-/* =====================================================
-   FLAG
-===================================================== */
-
-.lang-switch{
-
-  position:absolute;
-
-  top:12px;
-  right:12px;
-
-  width:32px;
-  height:32px;
-
-  border-radius:50%;
-
-  overflow:hidden;
+/* ===== FLAG ===== */
+.lang-switch {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
-.lang-switch img{
+.lang-switch img {
+  width: 100%;
+  height: 100%;
+ border: 1px solid white;
+  border-radius: 50%; /* 👈 quan trọng */
 
-  width:100%;
-  height:100%;
+  object-fit: cover;  /* 👈 tránh méo */
 
-  border:1px solid white;
-
-  border-radius:50%;
-
-  object-fit:cover;
 }
 
-/* =====================================================
-   CATEGORY
-===================================================== */
-
-.category{
-  margin:18px 12px;
+/* ===== HIDDEN ===== */
+.hidden {
+  display: none !important;
 }
 
-/* main */
 
-.main-category .category-title{
-
-  position:relative;
-
-  width:calc(100% - 24px);
-
-  margin:16px auto;
-
-  padding:20px 24px;
-
-  border-radius:40px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #1e5fa8,
-      #2c7be5
-    );
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-  font-size:20px;
-
-  font-weight:700;
-
-  color:#fff;
-
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.25);
-
-  cursor:pointer;
+/* ===== CATEGORY ===== */
+.category {
+  margin: 18px 12px;
 }
 
-/* sub */
+/* ===== MAIN CATEGORY ===== */
+.main-category .category-title {
+  position: relative;
 
-.category:not(.main-category)
-.category-title{
+  width: calc(100% - 24px);
+  margin: 16px auto;
 
-  position:relative;
+  padding: 20px 24px;
 
-  width:calc(100% - 24px);
+  border-radius: 40px;
 
-  margin:10px auto;
+  background: linear-gradient(90deg, #1e5fa8, #2c7be5);
 
-  padding:14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  border-radius:18px;
+  text-align: center;
 
-  background:
-    linear-gradient(
-      90deg,
-      #2f80ed,
-      #56ccf2
-    );
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
 
-  display:flex;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
 
-  align-items:center;
+  cursor: pointer;
+}
 
-  justify-content:space-between;
+/* ===== SUB CATEGORY ===== */
+.category:not(.main-category) .category-title {
+  position: relative;
 
-  font-size:18px;
+  width: calc(100% - 24px);
+  margin: 10px auto;
 
-  font-weight:600;
+  padding: 14px 18px;
 
-  color:#fff;
+  border-radius: 18px;
 
-  box-shadow:
-    0 5px 14px rgba(0,0,0,.12);
+  background: linear-gradient(90deg, #2f80ed, #56ccf2);
 
-  cursor:pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+
+  box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+
+  cursor: pointer;
+}
+
+/* center text */
+.category-title > *:not(.arrow) {
+  margin: 0 auto;
 }
 
 /* arrow */
+.arrow {
+  position: absolute;
+  right: 16px;
 
-.arrow{
+  width: 40px;
+  height: 40px;
 
-  position:absolute;
+  border-radius: 50%;
 
-  right:16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  width:40px;
-  height:40px;
+  background: rgba(255,255,255,0.25);
 
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:
-    rgba(255,255,255,.25);
-
-  transition:.3s;
+  transition: 0.3s;
 }
 
-.category.open .arrow{
-  transform:rotate(180deg);
+.category.open .arrow {
+  transform: rotate(180deg);
 }
 
-/* =====================================================
-   LIST
-===================================================== */
+/* ===== FLOOR TITLE ===== */
+.floor-title {
+  width: calc(100% - 60px);
+  margin: 18px auto;
 
-.category-list{
+  padding: 16px 20px;
 
-  display:none;
+  border-radius: 20px;
 
-  width:calc(100% - 24px);
+  text-align: center;
 
-  margin:0 auto;
+  font-size: 20px;
+  font-weight: 800;
+
+  background: linear-gradient(90deg, #3f6fd9, #8fa4f5);
+  color: white;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-.category-list.open{
-  display:block;
+/* ===== LIST ===== */
+.category-list {
+  display: none;
+  width: calc(100% - 24px);
+  margin: 0 auto;
 }
 
-/* =====================================================
-   CARD
-===================================================== */
-
-.app-card{
-
-  width:100%;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:14px;
-
-  padding:12px 16px;
-
-  margin:10px 0;
-
-  border-radius:16px;
-
-  background:#fff;
-
-  box-shadow:
-    0 6px 16px rgba(0,0,0,.12);
-
-  transition:.2s;
+.category-list.open {
+  display: block;
 }
 
-.app-card:hover{
-  transform:translateY(-2px);
+/* ===== CARD ===== */
+.app-card {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 12px 16px;
+  margin: 10px 0;
+
+  border-radius: 16px;
+
+  background: #ffffff;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+
+  transition: 0.2s;
 }
 
-/* left */
+.app-card:hover {
+  transform: translateY(-2px);
+}
 
-.card-left{
+/* number */
+.card-left {
+  width: 42px;
+  height: 42px;
 
-  width:42px;
-  height:42px;
+  border-radius: 12px;
 
-  border-radius:12px;
+  background: linear-gradient(135deg, #2f80ed, #56ccf2);
+  color: white;
 
-  background:
-    linear-gradient(
-      135deg,
-      #2f80ed,
-      #56ccf2
-    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  color:white;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-weight:bold;
+  font-weight: bold;
 }
 
 /* content */
-
-.card-content{
-  flex:1;
+.card-content {
+  flex: 1;
 }
 
-.card-title{
-
-  font-size:17px;
-
-  font-weight:600;
-
-  color:#222;
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #222;
 }
 
-.card-sub{
-
-  font-size:15px;
-
-  color:#777;
-
-  margin-top:3px;
+.card-sub {
+  font-size: 15px;
+  color: #777;
+  margin-top: 3px;
 }
 
 /* play */
+.play-btn {
+  width: 46px;
+  height: 46px;
 
-.play-btn{
+  border-radius: 50%;
+  border: none;
 
-  width:46px;
-  height:46px;
+  background: linear-gradient(135deg, #2f80ed, #00c6ff);
+  color: white;
 
-  border-radius:50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  border:none;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 
-  background:
-    linear-gradient(
-      135deg,
-      #2f80ed,
-      #00c6ff
-    );
+  cursor: pointer;
+  transition: 0.25s;
+}
 
-  color:white;
+.play-btn:hover { transform: scale(1.1); }
+.play-btn:active { transform: scale(0.9); }
+
+/* playing */
+.app-card.playing {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  box-shadow: 0 10px 25px rgba(30,136,229,0.4);
+}
+
+/* ===== AUDIO BAR ===== */
+.audio-bar {
+  position: relative !important;  /* 👈 bỏ fixed */
+  bottom: auto !important;
+ 
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+
+background: #d1d5db; /* 👈 xám đậm hơn */
+background: rgba(255,255,255,0.92);
+  border-radius: 10px; /* 👈 bo cong nhẹ */
+
+
+  box-shadow: 0 -4px 14px rgba(0,0,0,0.15);
+}
+
+.progress {
+  flex: 1;
+  height: 8px;
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #1e88e5;
+}
+/* ===== DETAIL PAGE FIX ===== */
+.app-detail {
+  max-width: 900px;
+  margin: 0 auto;
+
+  padding: 20px 16px 0;
 
   display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  box-shadow:
-    0 6px 14px rgba(0,0,0,.25);
-
-  cursor:pointer;
-
-  transition:.25s;
-}
-
-.play-btn:hover{
-  transform:scale(1.1);
-}
-
-.play-btn:active{
-  transform:scale(.9);
-}
-```
-```css id="2htra9"
-/* =====================================================
-   AUDIO BAR
-===================================================== */
-
-.audio-bar{
-
-  position:relative !important;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  padding:12px;
-
-  background:
-    rgba(255,255,255,.92);
-
-  border-radius:10px;
-
-  box-shadow:
-    0 -4px 14px rgba(0,0,0,.15);
-
-  z-index:999;
-}
-
-/* progress */
-
-.progress{
-
-  flex:1;
-
-  height:8px;
-
-  background:#ddd;
-
-  border-radius:10px;
-}
-
-.progress-fill{
-
-  height:100%;
-
-  width:0%;
-
-  background:#1e88e5;
-}
-
-/* =====================================================
-   DETAIL PAGE
-===================================================== */
-
-.app-detail{
-
-  max-width:900px;
-
-  margin:0 auto;
-
-  padding:20px 16px 0;
-
-  display:flex;
-
   flex-direction:column;
-
   gap:16px;
 }
 
-/* title */
+/* ===== TEXT CONTENT ===== */
+.app-detail .content {
+  background: rgba(255,255,255,0.95);
 
-#title{
+  padding: 16px;
 
-  text-align:center;
+  border-radius: 16px;
+  text-align: justify;
+  
+line-height: 1.7;
 
-  color:#0f2a44;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+/* áp cho mọi thẻ bên trong */
+.app-detail .content * {
+  text-align: justify;
+}
+/* ===== LANGUAGE BUTTON ===== */
+.lang-center {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
 
-  font-size:22px;
-
-  font-weight:700;
-
-  line-height:1.4;
-
-  margin:16px 16px 12px;
-
-  padding-bottom:8px;
-
-  border-bottom:
-    2px solid #dbe3ec;
+  margin-top: 10px;
 }
 
-/* content */
+.lang-btn {
+  padding: 10px 18px;
 
-.app-detail .content{
+  border-radius: 999px;
+  border: none;
 
-  background:
-    rgba(255,255,255,.95);
+  font-size: 16px;
+  font-weight: 600;
 
-  padding:18px;
+  background: #eee;
+  cursor: pointer;
 
-  border-radius:16px;
-
-  line-height:1.7;
-
-  text-align:justify;
-
-  box-shadow:
-    0 4px 12px rgba(0,0,0,.08);
-
-  margin-bottom:8px;
+  transition: 0.25s;
 }
 
-.app-detail p{
-
-  margin:0 0 12px;
-
-  font-size:15px;
-
-  line-height:1.6;
-
-  text-align:justify;
+.lang-btn.active {
+  background: linear-gradient(135deg, #2f80ed, #56ccf2);
+  color: white;
 }
 
-/* =====================================================
-   DETAIL IMAGE
-===================================================== */
+/* ===== IMAGE IN DETAIL ===== */
+.app-img {
+  width: 100%;
 
-.app-img{
+  max-height: 240px;
 
-  width:100%;
+  object-fit: cover;
 
-  max-height:240px;
-
-  object-fit:cover;
-
-  border-radius:14px;
+  border-radius: 14px;
 
   display:block;
-
-  /* optimize */
-
-  will-change:transform;
-
-  transform:translateZ(0);
-
-  backface-visibility:hidden;
 }
 
-/* =====================================================
-   HERO SLIDER
-===================================================== */
+/* ===== NEXT BUTTON ===== */
+.next-wrap {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 0px;     /* 👈 giảm nữa */
+}
+.app-detail .content {
+  margin-bottom: 8px;  /* 👈 giảm khoảng trắng dưới */
+}
+
+#nextBtn {
+  padding: 14px 26px;
+
+  border-radius: 999px;
+  border: none;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: white;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+#nextBtn:hover {
+  transform: translateY(-2px);
+}
+
+#nextBtn:active {
+  transform: scale(0.95);
+}
+
+/* ===== AUDIO INLINE ===== */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: #e6e9ee;
+
+  padding: 12px 16px;
+  margin: 12px 0 16px;
+
+  border-radius: 14px;
+}
+
+/* play */
+.audio-player button {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: #5f6b7a;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+/* progress */
+.audio-player .progress {
+  flex: 1;
+  height: 4px;
+
+  background: #cfd6dd;
+  border-radius: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #3b82f6;
+}
+
+/* time */
+#time {
+  min-width: 45px;
+  font-size: 16px;
+  text-align: right;
+}
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .app-detail {
+    padding: 16px 12px 100px;
+  }
+
+  .app-detail p {
+    font-size: 16px;
+  }
+}
+/* ===== GLOBAL FIX ===== */
+.category-title {
+  display: flex;
+  align-items: center;
+
+  padding: 14px 50px 14px 20px !important; /* 👈 chừa chỗ cho icon */
+
+  min-height: 64px; /* 👈 chiều cao cố định */
+
+  border-radius: 999px;
+}
+
+/* ===== TEXT KHÔNG ĐÈ ICON ===== */
+.category-title .category-main {
+  flex: 1;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 👈 tối đa 2 dòng */
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+
+  line-height: 1.4;
+}
+/* ===== TEXT LUÔN BÊN TRÁI ===== */
+.category-title span,
+.category-title .category-text,
+.category-title .category-main {
+  margin: 0 !important;
+  flex: 1;
+}
+
+/* ===== ICON LUÔN BÊN PHẢI ===== */
+/* ===== FIX ICON KHÔNG MÉO ===== */
+.arrow {
+  flex: 0 0 36px; /* 👈 khóa kích thước */
+
+  width: 36px;
+  height: 36px;
+
+  min-width: 36px;
+  min-height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.25);
+
+  font-size: 16px;
+  line-height: 1;
+
+  padding: 0;
+}
+
+/* icon bên trong */
+.arrow i,
+.arrow svg {
+  width: 14px;
+  height: 14px;
+
+  display: block;
+}
+
+/* nếu dùng text ▲ */
+.arrow {
+  font-size: 16px;
+}
+
+/* ===== MAIN CATEGORY ===== */
+.main-category .category-title {
+background: #1f5fa8 !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+
+/* ===== SUB CATEGORY ===== */
+.category:not(.main-category) .category-title {
+   background: linear-gradient(
+    90deg,
+    #2f80ed,   /* xanh đậm */
+    #5aa9e6    /* xanh nhạt hơn */
+  );;
+  font-size: 17px !important;
+}
+
+/* ===== FLOOR TITLE ===== */
+/* ===== FLOOR TITLE STYLE MỚI ===== */
+/* ===== FIX FLOOR ALIGN ===== */
+.floor-title {
+  width: calc(100% - 24px); /* 👈 giống category */
+
+  margin: 16px auto 8px; /* 👈 đồng bộ spacing */
+
+  padding: 0 20px; /* 👈 giống category-title */
+
+  font-size: 18px; /* 👈 giảm size */
+  font-weight: 700;
+
+  text-align: left;
+
+  color: #0f2a44;
+
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* gạch dưới căn theo text */
+.floor-title::after {
+  content: "";
+
+  display: block;
+
+  width: 100%;
+  height: 2px;
+
+  margin-top: 8px;
+
+  background: rgba(0,0,0,0.15);
+}
+/* ===== CARD FIX ===== */
+.app-card {
+  border-radius: 16px;
+}
+
+
+/* nội dung */
+.app-detail .content {
+  background: rgba(255,255,255,0.95);
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  line-height: 1.7;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* BỎ background từng đoạn */
+.app-detail p {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 0 12px;
+}
+
+/* ===== NEXT BUTTON (FIX KHÔNG HIỆN) ===== */
+.next-wrap {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 12px;
+}
+
+/* button */
+#nextBtn {
+  padding: 14px 26px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+
+  font-size: 18px;
+  font-weight: 600;
+
+box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+
+/* ===== AUDIO BAR KHÔNG CHE NÚT ===== */
+.audio-bar {
+  z-index: 999;
+}
+
+/* ===== FIX SPACING ===== */
+.category,
+.category-list {
+  margin-bottom: 6px;
+}
+/* ===== COVER CHUẨN ===== */
+.app-cover.small {
+  position: relative;
+  width: 100%;
+
+  aspect-ratio: 900 / 400; /* 👈 CHUẨN 400x900 */
+
+  background: url("./bia.jpg") center / cover no-repeat;
+
+  overflow: hidden;
+}
+.cover-overlay {
+  position: absolute;
+  inset: 0;
+
+  padding: 16px;
+
+  color: white;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.45),
+    transparent
+  );
+}
+.cover-left {
+  position: absolute;
+
+  left: 16px;
+  right: 16px;
+
+  top: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ===== LOGO ===== */
+.logo-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.app-cover.small #museumTitle,
+.app-cover.small #museumTitleEn {
+
+   font-size: 18px;
+text-shadow:
+    0 2px 4px rgba(0,0,0,0.6),
+    0 0 2px rgba(0,0,0,0.8);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+
+}
+
+.app-cover.small #museumSub,
+.app-cover.small #museumSubEn {
+  font-size: 15px;
+  margin-top: 6px;
+  display: inline-block;   /* 👈 để viền ôm chữ */
+font-weight: 500;   /* đậm */
+font-style: italic; /* nghiêng */
+
+  margin-left: 0;       /* 👈 FIX */
+  text-align: left;     /* 👈 đảm bảo không bị center */
+}
+/* ===== TITLE DETAIL ===== */
+#title {
+  text-align: center;              /* canh giữa */
+  color: #0f2a44;                  /* xanh đậm */
+
+  font-size: 22px;
+  font-weight: 700;
+
+  line-height: 1.4;
+
+  margin: 16px 16px 12px;
+
+  padding-bottom: 8px;
+
+  border-bottom: 2px solid #dbe3ec;
+}
+
+.app-cover.small .cover-header {
+  display: flex;
+  align-items: flex-start; /* 👈 FIX CHO TRANG CON */
+  gap: 12px;
+}
+
+.museum-info {
+  position: relative;
+  margin: 20px 0;
+  border-radius: 0;
+  width: 100%;
+  overflow: hidden;
+
+  background: url("./bia1.jpg") center / cover no-repeat;
+  color: white;
+
+}
+
+
+/* overlay xanh 80% */
+.museum-info .overlay {
+  background: rgba(15, 103, 175, 0.8);
+}
+
+/* ===== CONTAINER ===== */
+.info-content {
+  display: flex;
+  flex-direction: column;   /* ✅ xếp dọc */
+  gap: 18px;                /* khoảng cách giữa các khối */
+}
+
+/* ===== HEADER ===== */
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* logo */
+.info-logo {
+  width: 40px;   /* ❌ bạn ghi sai 40x */
+  height: 40px;
+
+  border-radius: 50%;
+  border: 1px solid #5aa9e6;
+
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+}
+
+/* ===== TITLE ===== */
+.info-content h3 {
+  font-size: 15px;
+  margin: 0;
+
+  letter-spacing: -0.3px;
+
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.8),
+    0 0 1px rgba(0,0,0,0.9);
+}
+
+/* ===== CONTAINER ===== */
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 20px 18px; /* 👈 đúng chỗ */
+}
+
+/* ===== TEXT ===== */
+.info-content p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 6px 0;
+
+  text-align: justify;
+
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+}
+
+/* ===== BLOCK CHIA ===== */
+.info-block {
+  width: 100%;
+  padding-bottom: 5px;
+  position: relative;
+}
+
+/* ===== LINE GIỮA KHỐI ===== */
+.info-block::after {
+  content: "";               /* ❗ thiếu cái này là không hiện */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 60%;                /* 👈 line ngắn */
+  height: 1px;
+
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0.7),
+    rgba(255,255,255,0.2),
+    transparent
+  );
+}
+
+/* bỏ line cuối */
+.info-block:last-child::after {
+  display: none;
+}
+
+/* ===== SOCIAL ===== */
+.social {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+/* icon */
+.social img {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+  border: 1px solid #5aa9e6;
+
+  object-fit: cover;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+/* ===== WRAP ===== */
 
 .hero-slider{
+  position: relative;
 
-  position:relative;
+  width: 100%;
 
-  width:100%;
+  height: 220px;
 
-  height:220px;
+  overflow: hidden;
 
-  overflow:hidden;
-
-  border-radius:22px;
-
-  background:#000;
+  border-radius: 22px;
 }
 
-/* slides */
+/* ===== SLIDES ===== */
 
 .slides{
 
-  width:100%;
-  height:220px;
+  width: 100%;
+  height: 220px;
 
-  display:flex;
+  display: flex;
 
-  overflow:hidden; /* FIX */
+  overflow: hidden; /* 👈 FIX */
 
-  position:relative;
+  position: relative;
 
-  scroll-snap-type:x mandatory;
-
-  border-radius:22px;
+  border-radius: 22px;
 }
 
 .slides::-webkit-scrollbar{
   display:none;
 }
 
-/* each */
+/* ===== EACH SLIDE ===== */
 
 .hero-slide{
 
-  min-width:100%;
+  min-width: 100%;
+  width: 100%;
+  height: 220px;
 
-  width:100%;
+  flex: 0 0 100%;
 
-  height:220px;
+  position: relative;
 
-  flex:0 0 100%;
+  overflow: hidden;
 
-  position:relative;
-
-  overflow:hidden;
-
-  scroll-snap-align:center;
-
-  touch-action:pan-y;
+  scroll-snap-align: center;
 }
 
-/* image */
 
-.hero-slide img{
-
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  display:block;
-
-  border-radius:22px;
-
-  /* FIX iPHONE */
-
-  -webkit-user-drag:none;
-
-  user-select:none;
-
-  pointer-events:none;
-
-  /* optimize */
-
-  will-change:transform;
-
-  transform:translateZ(0);
-
-  backface-visibility:hidden;
-}
-
-/* arrows */
+/* ===== ARROWS ===== */
 
 .nav{
 
@@ -710,14 +1010,14 @@ body.app{
   transform:translateY(-50%);
 
   width:40px;
+
   height:40px;
 
   border:none;
 
   border-radius:50%;
 
-  background:
-    rgba(0,0,0,.45);
+  background:rgba(0,0,0,.45);
 
   color:#fff;
 
@@ -742,7 +1042,7 @@ body.app{
   right:10px;
 }
 
-/* dots */
+/* ===== DOTS ===== */
 
 .dots{
 
@@ -764,12 +1064,12 @@ body.app{
 .dot{
 
   width:8px;
+
   height:8px;
 
   border-radius:50%;
 
-  background:
-    rgba(255,255,255,.5);
+  background:rgba(255,255,255,.5);
 
   transition:.3s;
 }
@@ -783,277 +1083,145 @@ body.app{
   background:#fff;
 }
 
-/* =====================================================
-   NEXT BUTTON
-===================================================== */
 
-.next-wrap{
+/* ===== MOBILE OPTIMIZE ===== */
 
-  display:flex;
+html,
+body{
 
-  justify-content:center;
+  overflow-x:hidden;
 
-  margin-top:12px; /* FIX */
+  -webkit-overflow-scrolling:touch;
 }
 
-#nextBtn{
-
-  padding:14px 26px;
-
-  border-radius:999px;
-
-  border:none;
-
-  font-size:18px;
-
-  font-weight:600;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff9800,
-      #ff5722
-    );
-
-  color:white;
-
-  box-shadow:
-    0 6px 16px rgba(0,0,0,.25);
-
-  cursor:pointer;
-
-  transition:.25s;
+/* giảm lag safari */
+*{
+  -webkit-tap-highlight-color:
+    transparent;
 }
 
-/* =====================================================
-   MUSEUM INFO
-===================================================== */
-
-.museum-info{
-
-  position:relative;
-
-  margin:20px 0 0;
-
-  width:100%;
-
-  overflow:hidden;
-
-  background:
-    url("./bia1.jpg")
-    center/cover no-repeat;
-
-  color:white;
+/* GPU optimize */
+.hero-slide{
+  transform:translateZ(0);
 }
 
-/* overlay */
 
-.museum-info .overlay{
 
-  background:
-    rgba(15,103,175,.8);
+/* ===== IMAGE ===== */
+.hero-slide img{
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  border-radius: 22px;
 }
 
-/* content */
-
-.info-content{
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:5px;
-
-  padding:20px 18px;
-}
-
-/* header */
-
-.info-header{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-}
-
-/* logo */
-
-.info-logo{
-
-  width:40px;
-  height:40px;
-
-  border-radius:50%;
-
-  border:1px solid #5aa9e6;
-
-  box-shadow:
-    0 4px 10px rgba(0,0,0,.6);
-}
-
-/* title */
-
-.info-content h3{
+/* text mobile */
+.app-detail p{
 
   font-size:15px;
 
-  margin:0;
-
-  letter-spacing:-.3px;
-
-  text-shadow:
-    0 1px 2px rgba(0,0,0,.8),
-    0 0 1px rgba(0,0,0,.9);
+  line-height:1.6;
 }
 
-/* text */
-
-.info-content p{
-
-  font-size:14px;
-
-  line-height:1.5;
-
-  margin:6px 0;
-
-  text-align:justify;
-
-  text-shadow:
-    0 1px 3px rgba(0,0,0,.7);
-}
-
-/* block */
-
-.info-block{
-
-  width:100%;
-
-  padding-bottom:5px;
-
-  position:relative;
-}
-
-/* line */
-
-.info-block::after{
-
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  bottom:0;
-
-  width:60%;
-
-  height:1px;
-
-  background:
-    linear-gradient(
-      to right,
-      rgba(255,255,255,.7),
-      rgba(255,255,255,.2),
-      transparent
-    );
-}
-
-.info-block:last-child::after{
-  display:none;
-}
-
-/* social */
-
-.social{
-
-  display:flex;
-
-  gap:16px;
-
-  margin-top:8px;
-}
-
-/* icon */
-
-.social img{
-
-  width:36px;
-  height:36px;
-
-  border-radius:50%;
-
-  border:1px solid #5aa9e6;
-
-  object-fit:cover;
+/* shadow nhẹ hơn */
+.app-card,
+.category-title,
+.play-btn,
+#nextBtn{
 
   box-shadow:
-    0 4px 10px rgba(0,0,0,.6);
-}
-```
-```css id="5qtra1"
-/* =====================================================
-   HIDDEN
-===================================================== */
-
-.hidden{
-  display:none !important;
+    0 3px 10px rgba(0,0,0,0.12);
 }
 
-/* =====================================================
-   FLOOR TITLE
-===================================================== */
-
-.floor-title{
-
-  width:calc(100% - 24px);
-
-  margin:16px auto 8px;
-
-  padding:0 20px;
-
-  font-size:18px;
-
-  font-weight:700;
-
-  text-align:left;
-
-  color:#0f2a44;
-
-  background:none !important;
-
-  box-shadow:none !important;
-
-  border-radius:0 !important;
-}
-
-.floor-title::after{
-
-  content:"";
-
-  display:block;
-
-  width:100%;
-  height:2px;
-
-  margin-top:8px;
+/* audio bar nhẹ */
+.audio-bar{
 
   background:
-    rgba(0,0,0,.15);
+    rgba(255,255,255,0.92);
 }
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* mobile không hover */
+@media (hover:hover){
 
-@media (max-width:600px){
+  .app-card:hover{
 
-  .app-detail{
-    padding:16px 12px 0;
-  }
-
-  .app-detail p{
-    font-size:16px;
+    transform:
+      translateY(-2px);
   }
 }
-```
+/* ===== MOBILE FIX ===== */
+
+.hero-slider,
+.slides,
+.hero-slide{
+  touch-action: pan-y;
+}
+/* ===== FIX END PAGE ===== */
+
+html,
+body{
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow-x: hidden;
+
+  overscroll-behavior: none;
+}
+
+/* KHÔNG cho dư khoảng trắng cuối */
+body{
+  display: flex;
+  flex-direction: column;
+}
+
+/* footer cuối */
+.museum-info{
+
+  margin-bottom: 0 !important;
+  padding-bottom: 12px !important;
+
+  flex-shrink: 0;
+}
+
+
+/* xóa khoảng dư safari */
+body::after{
+  display:none !important;
+  content:none !important;
+}
+/* ===== FINAL FIX ===== */
+
+#gallery,
+.hero-slider,
+.slides,
+.hero-slide{
+
+  max-height: 220px !important;
+
+  overflow: hidden !important;
+}
+
+.hero-slide img{
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+.hero-slide img,
+.app-img{
+
+  will-change: transform;
+
+  transform: translateZ(0);
+
+  backface-visibility: hidden;
+}
