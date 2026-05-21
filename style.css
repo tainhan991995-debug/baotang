@@ -1,6 +1,6 @@
 ```css
 /* =====================================================
-   RESET
+   RESET + MOBILE FIX
 ===================================================== */
 
 *{
@@ -22,22 +22,14 @@ body{
   -webkit-text-size-adjust:100%;
 }
 
-body{
-
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-}
-
-body.app{
-  background:#f2f4f7;
-}
-
 /* safari */
 *{
   -webkit-tap-highlight-color:
     transparent;
+}
+
+body.app{
+  background:#f2f4f7;
 }
 
 /* =====================================================
@@ -81,7 +73,7 @@ body.app{
     );
 }
 
-/* position */
+/* left */
 
 .cover-left{
 
@@ -119,7 +111,7 @@ body.app{
   border:1px solid white;
 
   box-shadow:
-    0 0 4px rgba(90,169,230,.5);
+    0 0 12px rgba(90,169,230,.6);
 
   overflow:hidden;
 
@@ -208,14 +200,6 @@ body.app{
 }
 
 /* =====================================================
-   HIDDEN
-===================================================== */
-
-.hidden{
-  display:none !important;
-}
-
-/* =====================================================
    CATEGORY
 ===================================================== */
 
@@ -223,7 +207,7 @@ body.app{
   margin:18px 12px;
 }
 
-/* MAIN */
+/* main */
 
 .main-category .category-title{
 
@@ -259,12 +243,12 @@ body.app{
   color:#fff;
 
   box-shadow:
-    0 3px 10px rgba(0,0,0,.12);
+    0 8px 20px rgba(0,0,0,.25);
 
   cursor:pointer;
 }
 
-/* SUB */
+/* sub */
 
 .category:not(.main-category)
 .category-title{
@@ -304,12 +288,6 @@ body.app{
   cursor:pointer;
 }
 
-/* text */
-
-.category-title > *:not(.arrow){
-  margin:0 auto;
-}
-
 /* arrow */
 
 .arrow{
@@ -337,48 +315,6 @@ body.app{
 
 .category.open .arrow{
   transform:rotate(180deg);
-}
-
-/* =====================================================
-   FLOOR TITLE
-===================================================== */
-
-.floor-title{
-
-  width:calc(100% - 24px);
-
-  margin:16px auto 8px;
-
-  padding:0 20px;
-
-  font-size:18px;
-
-  font-weight:700;
-
-  text-align:left;
-
-  color:#0f2a44;
-
-  background:none !important;
-
-  box-shadow:none !important;
-
-  border-radius:0 !important;
-}
-
-.floor-title::after{
-
-  content:"";
-
-  display:block;
-
-  width:100%;
-  height:2px;
-
-  margin-top:8px;
-
-  background:
-    rgba(0,0,0,.15);
 }
 
 /* =====================================================
@@ -430,7 +366,7 @@ body.app{
   transform:translateY(-2px);
 }
 
-/* number */
+/* left */
 
 .card-left{
 
@@ -522,23 +458,8 @@ body.app{
 .play-btn:active{
   transform:scale(.9);
 }
-
-/* playing */
-
-.app-card.playing{
-
-  background:
-    linear-gradient(
-      135deg,
-      #e3f2fd,
-      #bbdefb
-    );
-
-  box-shadow:
-    0 10px 25px rgba(30,136,229,.4);
-}
 ```
-```css id="ekd5n0"
+```css id="2htra9"
 /* =====================================================
    AUDIO BAR
 ===================================================== */
@@ -644,77 +565,21 @@ body.app{
 
   text-align:justify;
 
-  word-break:break-word;
-
   box-shadow:
     0 4px 12px rgba(0,0,0,.08);
 
   margin-bottom:8px;
 }
 
-.app-detail .content *{
-  text-align:justify;
-}
-
-/* paragraph */
-
 .app-detail p{
-
-  background:none !important;
-
-  padding:0 !important;
 
   margin:0 0 12px;
 
   font-size:15px;
 
   line-height:1.6;
-}
 
-/* =====================================================
-   LANGUAGE BUTTON
-===================================================== */
-
-.lang-center{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:12px;
-
-  margin-top:10px;
-}
-
-.lang-btn{
-
-  padding:10px 18px;
-
-  border-radius:999px;
-
-  border:none;
-
-  font-size:16px;
-
-  font-weight:600;
-
-  background:#eee;
-
-  cursor:pointer;
-
-  transition:.25s;
-}
-
-.lang-btn.active{
-
-  background:
-    linear-gradient(
-      135deg,
-      #2f80ed,
-      #56ccf2
-    );
-
-  color:white;
+  text-align:justify;
 }
 
 /* =====================================================
@@ -733,139 +598,13 @@ body.app{
 
   display:block;
 
+  /* optimize */
+
   will-change:transform;
 
   transform:translateZ(0);
 
   backface-visibility:hidden;
-}
-
-/* =====================================================
-   NEXT BUTTON
-===================================================== */
-
-.next-wrap{
-
-  display:flex;
-
-  justify-content:center;
-
-  margin-top:12px;
-}
-
-#nextBtn{
-
-  padding:14px 26px;
-
-  border-radius:999px;
-
-  border:none;
-
-  font-size:18px;
-
-  font-weight:600;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff9800,
-      #ff5722
-    );
-
-  color:white;
-
-  box-shadow:
-    0 6px 16px rgba(0,0,0,.25);
-
-  cursor:pointer;
-
-  transition:.25s;
-}
-
-#nextBtn:hover{
-  transform:translateY(-2px);
-}
-
-#nextBtn:active{
-  transform:scale(.95);
-}
-
-/* =====================================================
-   AUDIO INLINE
-===================================================== */
-
-.audio-player{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  background:#e6e9ee;
-
-  padding:12px 16px;
-
-  margin:12px 0 16px;
-
-  border-radius:14px;
-}
-
-/* play */
-
-.audio-player button{
-
-  width:40px;
-  height:40px;
-
-  border-radius:50%;
-
-  border:none;
-
-  background:#5f6b7a;
-
-  color:white;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  cursor:pointer;
-}
-
-/* progress */
-
-.audio-player .progress{
-
-  flex:1;
-
-  height:4px;
-
-  background:#cfd6dd;
-
-  border-radius:10px;
-}
-
-.progress-fill{
-
-  height:100%;
-
-  width:0%;
-
-  background:#3b82f6;
-}
-
-/* time */
-
-#time{
-
-  min-width:45px;
-
-  font-size:16px;
-
-  text-align:right;
 }
 
 /* =====================================================
@@ -896,9 +635,11 @@ body.app{
 
   display:flex;
 
-  overflow:hidden;
+  overflow:hidden; /* FIX */
 
   position:relative;
+
+  scroll-snap-type:x mandatory;
 
   border-radius:22px;
 }
@@ -907,7 +648,7 @@ body.app{
   display:none;
 }
 
-/* each slide */
+/* each */
 
 .hero-slide{
 
@@ -924,6 +665,8 @@ body.app{
   overflow:hidden;
 
   scroll-snap-align:center;
+
+  touch-action:pan-y;
 }
 
 /* image */
@@ -939,17 +682,21 @@ body.app{
 
   border-radius:22px;
 
-  will-change:transform;
-
-  transform:translateZ(0);
-
-  backface-visibility:hidden;
+  /* FIX iPHONE */
 
   -webkit-user-drag:none;
 
   user-select:none;
 
   pointer-events:none;
+
+  /* optimize */
+
+  will-change:transform;
+
+  transform:translateZ(0);
+
+  backface-visibility:hidden;
 }
 
 /* arrows */
@@ -1037,6 +784,48 @@ body.app{
 }
 
 /* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-wrap{
+
+  display:flex;
+
+  justify-content:center;
+
+  margin-top:12px; /* FIX */
+}
+
+#nextBtn{
+
+  padding:14px 26px;
+
+  border-radius:999px;
+
+  border:none;
+
+  font-size:18px;
+
+  font-weight:600;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff9800,
+      #ff5722
+    );
+
+  color:white;
+
+  box-shadow:
+    0 6px 16px rgba(0,0,0,.25);
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+/* =====================================================
    MUSEUM INFO
 ===================================================== */
 
@@ -1055,8 +844,6 @@ body.app{
     center/cover no-repeat;
 
   color:white;
-
-  flex-shrink:0;
 }
 
 /* overlay */
@@ -1067,7 +854,7 @@ body.app{
     rgba(15,103,175,.8);
 }
 
-/* container */
+/* content */
 
 .info-content{
 
@@ -1103,7 +890,7 @@ body.app{
   border:1px solid #5aa9e6;
 
   box-shadow:
-    0 3px 8px rgba(0,0,0,.5);
+    0 4px 10px rgba(0,0,0,.6);
 }
 
 /* title */
@@ -1172,8 +959,6 @@ body.app{
     );
 }
 
-/* remove last */
-
 .info-block:last-child::after{
   display:none;
 }
@@ -1205,38 +990,61 @@ body.app{
   box-shadow:
     0 4px 10px rgba(0,0,0,.6);
 }
-
+```
+```css id="5qtra1"
 /* =====================================================
-   PERFORMANCE FIX
+   HIDDEN
 ===================================================== */
 
-/* fix iphone drag */
-
-.hero-slider,
-.slides,
-.hero-slide{
-
-  overflow:hidden !important;
-
-  touch-action:pan-y;
+.hidden{
+  display:none !important;
 }
 
-/* gpu */
+/* =====================================================
+   FLOOR TITLE
+===================================================== */
 
-.hero-slide{
-  transform:translateZ(0);
+.floor-title{
+
+  width:calc(100% - 24px);
+
+  margin:16px auto 8px;
+
+  padding:0 20px;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  text-align:left;
+
+  color:#0f2a44;
+
+  background:none !important;
+
+  box-shadow:none !important;
+
+  border-radius:0 !important;
 }
 
-/* no hover mobile */
+.floor-title::after{
 
-@media (hover:hover){
+  content:"";
 
-  .app-card:hover{
-    transform:translateY(-2px);
-  }
+  display:block;
+
+  width:100%;
+  height:2px;
+
+  margin-top:8px;
+
+  background:
+    rgba(0,0,0,.15);
 }
 
-/* responsive */
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media (max-width:600px){
 
