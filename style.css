@@ -439,13 +439,25 @@ line-height: 1.7;
 
 /* ===== NEXT BUTTON ===== */
 .next-wrap {
+
   display: flex;
+
   justify-content: center;
 
-  margin-top: 0px;     /* 👈 giảm nữa */
+  align-items: center;
+
+  margin: 4px 0 !important;
+
+  padding: 0 !important;
+
+  min-height: auto !important;
 }
+
 .app-detail .content {
-  margin-bottom: 8px;  /* 👈 giảm khoảng trắng dưới */
+
+  margin-bottom: 0 !important;
+
+  padding-bottom: 0 !important;
 }
 
 #nextBtn {
@@ -530,7 +542,7 @@ line-height: 1.7;
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
   .app-detail {
-    padding: 16px 12px 100px;
+    padding: 16px 12px 30;
   }
 
   .app-detail p {
